@@ -137,7 +137,7 @@ public class CommonUtil {
 		return attachDir;
 	   }	
 //	Review 첨부파일 경로 리턴
-	public static String getProductDir(HttpServletRequest request) {
+	public static String getReviewDir(HttpServletRequest request) {
 		String attachDir = request.getServletContext().getRealPath("/attach/review/");
 		System.out.println(attachDir);
 		return attachDir;
