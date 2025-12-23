@@ -29,8 +29,23 @@ public class Index extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		request.setCharacterEncoding("utf-8");
+
+		String view = "";
+		String gubun = request.getParameter("t_gubun");
 		
-		String view = "index.jsp";
+		//gubun 값 null/공백 처리
+		if(gubun == null) {
+			gubun = "";
+		}
+		if(gubun.equals("")) {
+			gubun = "index";
+		}
+		
+		//여기서부터 페이지로 보내는 용도
+		if(gubun.equals("index")) {
+
+			view = "index.jsp";
+		}
 		
 		RequestDispatcher rd = request.getRequestDispatcher(view);
 		rd.forward(request, response);

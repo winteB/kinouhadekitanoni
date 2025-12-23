@@ -1,6 +1,8 @@
 package command;
 
 import java.io.IOException;
+
+import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -26,8 +28,31 @@ public class Notice extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
-		response.getWriter().append("Served at: ").append(request.getContextPath());
+		request.setCharacterEncoding("utf-8");
+
+		String view = "";
+		String gubun = request.getParameter("t_gubun");
+		
+		//gubun 값 null/공백 처리
+		if(gubun == null) {
+			gubun = "";
+		}
+		if(gubun.equals("")) {
+			gubun = "list";
+		}
+		
+		//여기서부터 페이지로 보내는 용도
+		if(gubun.equals("list")) {
+
+			view = "";
+		}
+		else if(gubun.equals("write")) {
+
+			view = "";
+		}
+		
+		RequestDispatcher rd = request.getRequestDispatcher(view);
+		rd.forward(request, response);
 	}
 
 	/**

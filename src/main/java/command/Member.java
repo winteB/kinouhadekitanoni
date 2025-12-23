@@ -29,8 +29,27 @@ public class Member extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		request.setCharacterEncoding("utf-8");
+
+		String view = "";
+		String gubun = request.getParameter("t_gubun");
 		
-		String view = "member/member_join.jsp";
+		//gubun 값 null/공백 처리
+		if(gubun == null) {
+			gubun = "";
+		}
+		if(gubun.equals("")) {
+			gubun = "login";
+		}
+		
+		//여기서부터 페이지로 보내는 용도
+		if(gubun.equals("login")) {
+
+			view = "member/member_login.jsp";
+		}
+		else if(gubun.equals("join")) {
+
+			view = "member/member_join.jsp";
+		}
 		
 		RequestDispatcher rd = request.getRequestDispatcher(view);
 		rd.forward(request, response);

@@ -53,7 +53,7 @@
                         <p>낚시 구역을를 확인하세요.</p>
                     </div>
                     <div class="map-container">
-                        <div class="map-placeholder" style="background-image:url('images/예약캠핑.png'); background-size:cover; background-position:center;">
+                        <div class="map-placeholder" style="background-image:url('images/예약좌대.png'); background-size:cover; background-position:center;">
                         </div>
                     </div>
                 </section>

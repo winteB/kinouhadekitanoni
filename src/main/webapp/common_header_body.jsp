@@ -1,4 +1,7 @@
 <%@ page pageEncoding="UTF-8"%>
+<form name = "work">
+	<input type="hidden" name="t_gubun">
+</form>
 <header class="main-header" id="mainHeader">
         <div class="brand-wrapper">
             <div class="brand-text">niwacan</div>

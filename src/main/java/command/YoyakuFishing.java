@@ -29,11 +29,28 @@ public class YoyakuFishing extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		request.setCharacterEncoding("utf-8");
+
+		String view = "";
+		String gubun = request.getParameter("t_gubun");
 		
-//		CommonExecute cam = ;
-//		cam.execute(request);
+		//gubun 값 null/공백 처리
+		if(gubun == null) {
+			gubun = "";
+		}
+		if(gubun.equals("")) {
+			gubun = "main";
+		}
 		
-		String view = "yoyaku_fishing/yoyaku_fishing_main.jsp";
+		//여기서부터 페이지로 보내는 용도
+		if(gubun.equals("main")) {
+
+			view = "yoyaku_fishing/yoyaku_fishing_main.jsp";
+		}
+		else if(gubun.equals("")) {
+
+			view = "";
+		}
+		
 		
 		RequestDispatcher rd = request.getRequestDispatcher(view);
 		rd.forward(request, response);
