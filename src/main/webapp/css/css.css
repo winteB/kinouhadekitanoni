@@ -528,6 +528,13 @@ body {
     text-align: center;
 }
 
+.calendar-grid .date.disabled {
+    color: #cbd5e1;
+    cursor: not-allowed;
+    pointer-events: none;
+    background: transparent;
+}
+
 .day-label {
     font-size: 0.75rem;
     font-weight: 600;
@@ -573,13 +580,46 @@ body {
     height: 100%;
     min-height: 400px;
 }
-
+.site-tags-container {
+    display: flex;
+    gap: 16px;
+    justify-content: center;
+    margin: 3px 0 3px;
+}
+	.site-tag {
+	    display: flex;
+	    align-items: center;
+	    gap: 8px;
+	
+	    padding: 12px 20px;
+	    border-radius: 999px;
+	    border: 1px solid #e5e7eb;
+	    background: #fff;
+	
+	    cursor: pointer;
+	    font-weight: 600;
+	    transition: all 0.2s ease;
+	}
+	
+	.site-tag:hover {
+	    background: #f1f5f9;
+	}
+	
+	.site-tag.selected {
+	    background: #0f172a;
+	    color: #fff;
+	    border-color: #0f172a;
+	}
 .map-placeholder {
-    width: 100%;
+    width: 95%;
     aspect-ratio: 16 / 9;   /* ⭐ 핵심 */
     border-radius: 16px;
     position: relative;
     overflow: hidden;
+}
+.map-placeholder img {
+	display: block; /* 이미지 아래 불필요한 공백 제거 */
+	max-width: 100%;
 }
 
 
@@ -999,6 +1039,53 @@ body {
 }
 
 
+
+
+/* 지도에서 영역 선택용 */
+
+			.area-highlight {
+			    position: absolute;
+			    background: rgba(255, 140, 0, 0.45);
+			    border: 2px solid #ff8c00;
+			    pointer-events: none;
+			    display: none;
+			}
+
+			
+			/* 이름표 선택 시 */
+			.map-placeholder.show-caA #caA,
+			.map-placeholder.show-caB #caB,
+			.map-placeholder.show-caC #caC {
+			    display: block;
+			}
+
+
+		
+		/* 각 하이라이트 영역의 위치와 크기 설정 */
+		/* 이 값들은 HTML의 area 태그 coords 값과 일치해야 합니다. */
+		/* #A { top: y1; left: x1; width: (x2-x1); height: (y2-y1); } */
+		#caA {
+		   top: 12px;
+		   left: 20px;
+		   width: 380px;  /* max_x(400) - min_x(20) */
+		   height: 422px; /* max_y(434) - min_y(12) */
+		}
+			
+		/*#caB 영역에 대한 사각형 하이라이트 */
+		#caB {
+		   top: 90px;
+		   left: 402px;
+		   width: 260px;  /* max_x(662) - min_x(402) */
+		   height: 257px; /* max_y(347) - min_y(90) */
+		}
+			
+		/*#caC 영역에 대한 사각형 하이라이트 */
+		#caC {
+		   top: 22px;
+		   left: 528px;
+		   width: 481px;  /* max_x(1009) - min_x(528) */
+		   height: 408px; /* max_y(430) - min_y(22) */
+		}
 
 
 
