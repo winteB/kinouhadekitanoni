@@ -27,6 +27,6 @@
         </div>
     </header>
 
-       <div style="height: 400px;  background-color: blue; color: white; display: flex; justify-content: center; align-items: center; font-size: 20px;">
+       <div style="height: 400px; background-color: blue; color: white; display: flex; justify-content: center; align-items: center; font-size: 20px;">
             여기는 높이 400px 파란 블록입니다.
         </div>
