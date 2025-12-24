@@ -9,6 +9,11 @@
 	</script>
 </head>
 <body>
+<form name="reservForm" action="YoyakuFishing" method="post">
+    <input type="hidden" name="t_gubun" value="detail">
+    <input type="hidden" name="reserveDate" id="hiddenDate">
+    <input type="hidden" name="siteName" id="hiddenSite" value=""> 
+</form>
     <div class="wrapper">
         <%@ include file = "../common_header_body.jsp" %>
         
@@ -53,7 +58,7 @@
                         <p>낚시 구역을를 확인하세요.</p>
                     </div>
                     <div class="map-container">
-                        <div class="map-placeholder" style="background-image:url('images/예약캠핑.png'); background-size:cover; background-position:center;">
+                        <div class="map-placeholder" style="background-image:url('images/예약좌대.png'); background-size:cover; background-position:center;">
                         </div>
                     </div>
                 </section>
@@ -72,7 +77,7 @@
                     <span class="value">선택안함</span>
                 </div>
             </div>
-            <button class="reserve-btn" disabled>예약하기</button>
+             <button class="reserve-btn" id="btnReserve" disabled onclick="goDetail()">예약하기</button>
         </div>
         </div>
         </main>
@@ -82,9 +87,40 @@
     	<%@ include file= "../common_footer.jsp"%>
     </footer>
     
-    
+
 <script>
-document.addEventListener("DOMContentLoaded", () => {
+	
+	function goDetail() {
+	    const dateVal = document.getElementById('selectedDate').value;
+	    const siteVal = "A구역"; // 지도에서 선택 기능이 아직 없다면 임의로 설정하거나 로직 추가 필요
+	    
+	    if(!dateVal) {
+	        alert("날짜를 선택해주세요.");
+	        return;
+	    }
+	
+	    // 폼에 값 세팅
+	    document.getElementById('hiddenDate').value = dateVal;
+	    document.getElementById('hiddenSite').value = siteVal; // 필요 시 동적 할당
+	
+	    // 폼 제출 (서블릿으로 이동)
+	    document.reservForm.submit();
+	}
+	
+	// [수정] 날짜 클릭 이벤트 내부에서 버튼 활성화 로직
+	grid.addEventListener('click', (e) => {
+	    // ... 기존 날짜 선택 로직 ...
+	    
+	    if (cell && !cell.classList.contains('empty') /* ... */) {
+	        // ... 값 적용 로직 ...
+	        
+	        // 버튼 활성화
+	        document.getElementById('btnReserve').disabled = false; 
+	    }
+	});
+	
+	
+	document.addEventListener("DOMContentLoaded", () => {
     let currentDate = new Date(); // 초기값: 오늘
     
     // 1. 필요한 요소들을 먼저 선택합니다.
