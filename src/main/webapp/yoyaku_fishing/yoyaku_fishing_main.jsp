@@ -89,38 +89,10 @@
     
 
 <script>
-	
-	function goDetail() {
-	    const dateVal = document.getElementById('selectedDate').value;
-	    const siteVal = "A구역"; // 지도에서 선택 기능이 아직 없다면 임의로 설정하거나 로직 추가 필요
-	    
-	    if(!dateVal) {
-	        alert("날짜를 선택해주세요.");
-	        return;
-	    }
-	
-	    // 폼에 값 세팅
-	    document.getElementById('hiddenDate').value = dateVal;
-	    document.getElementById('hiddenSite').value = siteVal; // 필요 시 동적 할당
-	
-	    // 폼 제출 (서블릿으로 이동)
-	    document.reservForm.submit();
-	}
-	
-	// [수정] 날짜 클릭 이벤트 내부에서 버튼 활성화 로직
-	grid.addEventListener('click', (e) => {
-	    // ... 기존 날짜 선택 로직 ...
-	    
-	    if (cell && !cell.classList.contains('empty') /* ... */) {
-	        // ... 값 적용 로직 ...
-	        
-	        // 버튼 활성화
-	        document.getElementById('btnReserve').disabled = false; 
-	    }
-	});
-	
-	
-	document.addEventListener("DOMContentLoaded", () => {
+document.addEventListener("DOMContentLoaded", () => {
+	const today = new Date();
+	today.setHours(0, 0, 0, 0); // 시간 제거 (날짜 비교용)
+
     let currentDate = new Date(); // 초기값: 오늘
     
     // 1. 필요한 요소들을 먼저 선택합니다.
@@ -171,10 +143,21 @@
         for (let d = 1; d <= lastDate; d++) {
             const isSunday = ((firstDay + d - 1) % 7 === 0);
             const dateDiv = document.createElement('div');
+
+            const cellDate = new Date(year, month, d);
+            cellDate.setHours(0, 0, 0, 0);
+
             dateDiv.className = `date ${isSunday ? 'red' : ''}`;
             dateDiv.textContent = d;
+
+            // ✅ 오늘 이전 날짜면 비활성화
+            if (cellDate < today) {
+                dateDiv.classList.add('disabled');
+            }
+
             grid.appendChild(dateDiv);
         }
+
     }
 
     // 3. 이전/다음 달 버튼 이벤트
@@ -193,7 +176,13 @@
         const cell = e.target.closest('.date');
         
         // 유효한 날짜 셀을 클릭했을 때만 실행
-        if (cell && !cell.classList.contains('empty') && !cell.classList.contains('day-label')) {
+        if (
+			    cell &&
+			    !cell.classList.contains('empty') &&
+			    !cell.classList.contains('day-label') &&
+			    !cell.classList.contains('disabled')
+			) {
+
             // 기존 선택된 스타일 제거
             document.querySelectorAll('.calendar-grid .date.selected')
                     .forEach(el => el.classList.remove('selected'));
