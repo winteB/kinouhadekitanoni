@@ -99,8 +99,9 @@ document.addEventListener('DOMContentLoaded', () => {
 	    mapPlaceholder.classList.add(`show-ca${siteId}`);
 
 	    hiddenInput.value = siteName;
-	    siteValue.textContent = siteName;
-	    siteValue.style.color = '#0f172a';
+		siteValue.textContent = siteName;
+		siteValue.classList.add('selected');
+
 		
 		updateReserveButton();
 		

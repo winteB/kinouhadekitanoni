@@ -4,6 +4,8 @@
 <html lang="ko">
 <head>
 	<%@ include file = "../common_header_head.jsp" %>
+	<script type="text/javascript" src="common/fishing-map.js"></script>
+		
 	<script type="text/javascript">
 	
 	</script>
@@ -57,10 +59,36 @@
                         <h2>구역 배치도</h2>
                         <p>낚시 구역을를 확인하세요.</p>
                     </div>
-                    <div class="map-container">
-                        <div class="map-placeholder" style="background-image:url('images/예약좌대.png'); background-size:cover; background-position:center;">
-                        </div>
-                    </div>
+                   <div class="map-container">
+					   <div class="map-placeholder">
+					        <img
+					            id="fishing-image"
+					            src="images/예약좌대.png"
+					            usemap="#fishing-map"
+					            alt="낚시터 배치도"
+					        >
+					
+					        <!-- 하이라이트 -->
+					        <div id="fiA" class="area-highlight"></div>
+					        <div id="fiB" class="area-highlight"></div>
+					    </div>
+					    <map name="fishing-map">
+					        <area
+					            data-area-id="fiA"
+					            shape="rect"
+					            coords="22,118,998,285"
+					            href="#"
+					            alt="얕은 곳"
+					        >
+					        <area
+					            data-area-id="fiB"
+					            shape="rect"
+					            coords="23,304,998,506"
+					            href="#"
+					            alt="깊은 곳"
+					        >
+					    </map>
+					</div>
                 </section>
             </div>
         
@@ -72,7 +100,7 @@
                     <span class="value">선택안함</span>
                 </div>
                 <div class="divider"></div>
-                <div class="info-group">
+                <div class="info-group site-info">
                     <label>SELECTED SITE</label>
                     <span class="value">선택안함</span>
                 </div>

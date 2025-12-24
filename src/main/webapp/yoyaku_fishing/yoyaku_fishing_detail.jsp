@@ -51,7 +51,7 @@
 								<div class="form-group">
 									<label>퇴실일 (Check-out)</label>
 									<!-- 퇴실일은 선택 가능하도록 date 타입 사용 -->
-									<input type="date" class="form-input" id="checkOutDate" name="r_checkout_date" required>
+									<input type="date" class="form-input" id="checkOutDate" name="r_checkout_date" min="${start_date}" required>
 								</div>
 							</div>
 

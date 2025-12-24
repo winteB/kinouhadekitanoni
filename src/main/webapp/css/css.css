@@ -705,6 +705,11 @@ body {
     color: #cbd5e1;
 }
 
+.info-group .value.selected {
+    color: #0f172a;
+    font-weight: 600;
+}
+
 .divider {
     width: 1px;
     background: #f1f5f9;
@@ -1265,7 +1270,10 @@ body {
 			.map-placeholder.show-caC #caC {
 			    display: block;
 			}
-
+			.map-placeholder.show-fiA #fiA,
+			.map-placeholder.show-fiB #fiB {
+			    display: block;
+			}
 
 		
 		/* 각 하이라이트 영역의 위치와 크기 설정 */

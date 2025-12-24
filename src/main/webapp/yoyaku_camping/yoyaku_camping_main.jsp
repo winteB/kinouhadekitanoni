@@ -4,7 +4,6 @@
 <html lang="ko">
 <head>
 	<%@ include file = "../common_header_head.jsp" %>
-	<script type="text/javascript" src="common/common.js"></script>
 	<script type="text/javascript" src="common/map_script.js"></script>
 	
 </head>
@@ -115,7 +114,7 @@
                     <span class="value">선택안함</span>
                 </div>
                 <div class="divider"></div>
-                <div class="info-group site-info">
+                <div class="info-group">
 				    <label>SELECTED SITE</label>
 				    <span class="value">선택안함</span>
 				</div>
