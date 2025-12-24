@@ -77,7 +77,7 @@
                     <span class="value">선택안함</span>
                 </div>
             </div>
-            <button class="reserve-btn" id="btnReserve" disabled onclick="goPage()">예약하기</button>
+            <button class="reserve-btn" id="btnReserve" disabled onclick="goPage('YoyakuFishing','detail')">예약하기</button>
         </div>
         </div>
         </main>
