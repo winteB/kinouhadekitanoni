@@ -19,64 +19,77 @@
         </aside>
 
         <!-- 본문 -->
-        <div id="b_right" class="qna-list">
+        <div id="b_right" class="qna-list faq-list">
 
-            <h2 class="n_title">Q & A</h2>
-
+            <h2 class="n_title">자주 묻는 질문 (FAQ)</h2>
             <p class="qna-desc">
-                궁금한 점을 남겨주시면 관리자 답변을 드립니다.
+                캠핑 · 낚시 예약과 관련된 자주 묻는 질문을 모았습니다.
             </p>
 
-            <!-- QNA 리스트 -->
+            <!-- FAQ 리스트 -->
             <table class="boardList">
                 <colgroup>
-                    <col width="8%">
-                    <col width="45%">
-                    <col width="12%">
-                    <col width="15%">
                     <col width="10%">
+                    <col width="65%">
+                    <col width="15%">
                     <col width="10%">
                 </colgroup>
                 <thead>
                     <tr>
                         <th>No</th>
-                        <th>제목</th>
-                        <th>작성자</th>
+                        <th>질문</th>
                         <th>작성일</th>
                         <th>조회수</th>
-                        <th>상태</th>
                     </tr>
                 </thead>
                 <tbody>
                     <tr>
+                        <td>6</td>
+                        <td class="t_left">
+                            <a href="#">캠핑장 예약은 어떻게 진행하나요?</a>
+                        </td>
+                        <td>2025-01-05</td>
+                        <td>512</td>
+                    </tr>
+                    <tr>
+                        <td>5</td>
+                        <td class="t_left">
+                            <a href="#">낚시 구역은 현장에서 변경할 수 있나요?</a>
+                        </td>
+                        <td>2025-01-03</td>
+                        <td>284</td>
+                    </tr>
+                    <tr>
+                        <td>4</td>
+                        <td class="t_left">
+                            <a href="#">비 오는 날에도 캠핑 이용이 가능한가요?</a>
+                        </td>
+                        <td>2024-12-30</td>
+                        <td>198</td>
+                    </tr>
+                    <tr>
                         <td>3</td>
                         <td class="t_left">
-                            <a href="#">캠핑장 예약은 어떻게 하나요?</a>
+                            <a href="#">예약 취소 및 환불 규정이 궁금합니다</a>
                         </td>
-                        <td>hong</td>
-                        <td>2025-01-01</td>
-                        <td>123</td>
-                        <td><span class="status done">답변완료</span></td>
+                        <td>2024-12-28</td>
+                        <td>402</td>
                     </tr>
                     <tr>
                         <td>2</td>
                         <td class="t_left">
-                            <a href="#">비 오는 날에도 이용 가능한가요?</a>
+                            <a href="#">반려동물과 함께 캠핑이 가능한가요?</a>
                         </td>
-                        <td>kim</td>
-                        <td>2024-12-28</td>
-                        <td>45</td>
-                        <td><span class="status wait">답변대기</span></td>
+                        <td>2024-12-22</td>
+                        <td>167</td>
                     </tr>
                     <tr>
                         <td>1</td>
                         <td class="t_left">
-                            <a href="#">환불 규정이 궁금합니다</a>
+                            <a href="#">낚시 장비는 대여할 수 있나요?</a>
                         </td>
-                        <td>lee</td>
                         <td>2024-12-20</td>
-                        <td>98</td>
-                        <td><span class="status done">답변완료</span></td>
+                        <td>231</td>
                     </tr>
                 </tbody>
             </table>
@@ -86,7 +99,6 @@
                 <div class="page-center">
                     <a class="active">1</a>
                     <a>2</a>
-                    <a>3</a>
                 </div>
                 <a href="#" class="write">문의하기</a>
             </div>

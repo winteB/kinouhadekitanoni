@@ -44,11 +44,17 @@ public class Notice extends HttpServlet {
 		//여기서부터 페이지로 보내는 용도
 		if(gubun.equals("list")) {
 
-			view = "";
+			view = "notice/notice_list.jsp";
 		}
-		else if(gubun.equals("write")) {
+		else if(gubun.equals("update")) {
 
-			view = "";
+			view = "notice/notice_update.jsp";
+		}else if(gubun.equals("view")) {
+
+			view = "notice/notice_view.jsp";
+		}else if(gubun.equals("write")) {
+
+			view = "notice/notice_write.jsp";
 		}
 		
 		RequestDispatcher rd = request.getRequestDispatcher(view);
