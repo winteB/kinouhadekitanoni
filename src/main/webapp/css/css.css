@@ -710,13 +710,21 @@ body {
     background: #f1f5f9;
 }
 
+/* 기본(활성) 상태 */
 .reserve-btn {
-    background: #cbd5e1;
+    background: #2563eb;
     color: white;
     border: none;
     padding: 12px 35px;
     border-radius: 10px;
     font-weight: 700;
+    cursor: pointer;
+    transition: background 0.2s ease;
+}
+
+/* 비활성 상태 */
+.reserve-btn:disabled {
+    background: #cbd5e1;
     cursor: not-allowed;
 }
 

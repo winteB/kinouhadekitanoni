@@ -101,7 +101,9 @@ document.addEventListener('DOMContentLoaded', () => {
 	    hiddenInput.value = siteName;
 	    siteValue.textContent = siteName;
 	    siteValue.style.color = '#0f172a';
-
+		
+		updateReserveButton();
+		
 		console.log(siteValue);
 	});
 	

@@ -77,7 +77,7 @@
                     <span class="value">선택안함</span>
                 </div>
             </div>
-             <button class="reserve-btn" id="btnReserve" disabled onclick="goDetail()">예약하기</button>
+            <button class="reserve-btn" id="btnReserve" disabled onclick="goPage()">예약하기</button>
         </div>
         </div>
         </main>
@@ -202,6 +202,8 @@ document.addEventListener("DOMContentLoaded", () => {
             inputBox.value = resultValue;           // input
             checkInValue.textContent = resultValue; // 하단 바
             checkInValue.style.color = "#0f172a";
+
+            updateReserveButton(); // ✅ 추가
         }
     });
 
@@ -210,6 +212,23 @@ document.addEventListener("DOMContentLoaded", () => {
 
 }); // <--- DOMContentLoaded가 여기서 닫혀야 합니다!
 
+function updateReserveButton() {
+    const checkInText = document.querySelector(
+        '.non-floating-bar .info-group:first-child .value'
+    ).textContent.trim();
+
+    const siteText = document.querySelector(
+        '.non-floating-bar .info-group:last-child .value'
+    ).textContent.trim();
+
+    const btn = document.getElementById('btnReserve');
+
+    if (checkInText !== '선택안함' && siteText !== '선택안함') {
+        btn.disabled = false;
+    } else {
+        btn.disabled = true;
+    }
+}
 </script>
 
 </body>
