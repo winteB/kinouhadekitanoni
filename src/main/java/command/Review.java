@@ -38,7 +38,7 @@ public class Review extends HttpServlet {
          gubun = "";
       }
       if(gubun.equals("")) {
-         gubun = "view";
+         gubun = "list";
       }
       
       //여기서부터 페이지로 보내는 용도

@@ -38,13 +38,13 @@ public class Qna extends HttpServlet {
 			gubun = "";
 		}
 		if(gubun.equals("")) {
-			gubun = "list";
+			gubun = "view";
 		}
 		
 		//여기서부터 페이지로 보내는 용도
-		if(gubun.equals("list")) {
+		if(gubun.equals("view")) {
 
-			view = "";
+			view = "qna/faq_view.jsp";
 		}
 		else if(gubun.equals("list")) {
 

@@ -38,13 +38,13 @@ public class Notice extends HttpServlet {
 			gubun = "";
 		}
 		if(gubun.equals("")) {
-			gubun = "list";
+			gubun = "update";
 		}
 		
 		//여기서부터 페이지로 보내는 용도
-		if(gubun.equals("list")) {
+		if(gubun.equals("update")) {
 
-			view = "";
+			view = "notice/notice_update.jsp";
 		}
 		else if(gubun.equals("write")) {
 
