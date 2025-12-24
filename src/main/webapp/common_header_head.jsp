@@ -8,7 +8,7 @@
 	<script type="text/javascript" src="common/common.js"></script>
 	
 <script type="text/javascript">
-	function goPage(gubun,servlet){
+	function goPage(servlet,gubun){
 		work.t_gubun.value=gubun;
 		work.method="post";
 		work.action=servlet;
