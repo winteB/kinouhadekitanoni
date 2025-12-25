@@ -12,13 +12,13 @@
             </svg>
         </div>
         <nav class="main-nav">
-            <a href="#" class="nav-item">시설안내</a>
-            <a href="#" class="nav-item">예약하기</a>
-            <a href="#" class="nav-item">후기/포토</a>
-            <a href="#" class="nav-item">공지사항</a>
-            <a href="#" class="nav-item">Login</a>
-            <a href="#" class="nav-item">Join</a>
-            <a href="#" class="nav-item">내 정보</a>
+            <a href="javascript:goPage('show')" class="nav-item">시설안내</a>
+            <a href="javascript:goPage('YoyakuCamping','main')" class="nav-item">예약하기</a>
+            <a href="javascript:goPage('Review','list')" class="nav-item">후기/포토</a>
+            <a href="javascript:goPage('Notice','list')" class="nav-item">공지사항</a>
+            <a href="javascript:goPage('Member','login')" class="nav-item">Login</a>
+            <a href="javascript:goPage('Member','join')" class="nav-item">Join</a>
+            <a href="javascript:goPage('Member','myinfo')" class="nav-item">내 정보</a>
         </nav>
     </header>
     <header id="main-header">

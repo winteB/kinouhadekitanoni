@@ -8,7 +8,19 @@
     <title>niwacan - Lifestyle & Garden (Integrated)</title>
     <link rel="stylesheet" href="css/css.css"/>
 </head>
-<body class="main-page"> <header class="main-header" id="mainHeader">
+<script type="text/javascript">
+	function goPage(servlet,gubun){
+		work.t_gubun.value=gubun;
+		work.method="post";
+		work.action=servlet;
+		work.submit();
+	}
+</script>
+<body class="main-page">
+	<form name = "work">
+		<input type="hidden" name="t_gubun">
+	</form>
+	<header class="main-header" id="mainHeader">
         <div class="brand-wrapper">
             <div class="brand-text">niwacan</div>
             <svg class="brand-logo-svg" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
@@ -18,16 +30,20 @@
             </svg>
         </div>
         <nav class="main-nav">
-            <a href="#" class="nav-item">CONCEPT</a>
-            <a href="#" class="nav-item">PRODUCTS</a>
-            <a href="#" class="nav-item">GALLERY</a>
+            <a href="javascript:goPage('show')" class="nav-item">시설안내</a>
+            <a href="javascript:goPage('YoyakuCamping','main')" class="nav-item">예약하기</a>
+            <a href="javascript:goPage('Review','list')" class="nav-item">후기/포토</a>
+            <a href="javascript:goPage('Notice','list')" class="nav-item">공지사항</a>
+            <a href="javascript:goPage('Member','login')" class="nav-item">Login</a>
+            <a href="javascript:goPage('Member','join')" class="nav-item">Join</a>
+            <a href="javascript:goPage('Member','myinfo')" class="nav-item">내 정보</a>
         </nav>
     </header>
 
     <section class="hero-section">
         <div class="floating-button-layer">
-            <a href="#" class="btn-titan btn-camp">예약 바로가기 캠프</a>
-            <a href="#" class="btn-titan btn-fish">예약 바로가기 낚시</a>
+            <a href="javascript:goPage('YoyakuCamping','main')" class="btn-titan btn-camp">예약 바로가기 캠프</a>
+            <a href="javascript:goPage('YoyakuFishing','main')" class="btn-titan btn-fish">예약 바로가기 낚시</a>
         </div>
     </section>
 
