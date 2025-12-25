@@ -2,9 +2,9 @@
 <nav class="side-nav">
     <h3 class="menu-title">메뉴</h3>
     <ul>
-        <li class="active">공지사항</li>
-        <li>FAQ</li>
-        <li>Q & A</li>
-        <li>리뷰</li>
+        <li class="active"><a href="javascript:goPage('Notice','list')">공지사항</a></li>
+        <li><a href="javascript:goPage('Qna','faq_list')">FAQ</a></li>
+        <li><a href="javascript:goPage('Qna','qna_list')">Q & A</a></li>
+        <li><a href="javascript:goPage('Member','login')">리뷰</a></li>
     </ul>
 </nav>

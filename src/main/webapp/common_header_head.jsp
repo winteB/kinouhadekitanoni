@@ -14,4 +14,10 @@
 		work.action=servlet;
 		work.submit();
 	}
+	function goPage(servlet,gubun){
+		work.t_gubun.value=gubun;
+		work.method="post";
+		work.action=servlet;
+		work.submit();
+	}
 </script>

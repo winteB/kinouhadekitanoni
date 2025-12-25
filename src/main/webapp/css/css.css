@@ -1003,6 +1003,7 @@ body {
     padding: 0 10px;
     border-radius: 8px;
     border: 1px solid #ddd;
+    vertical-align: middle;
 }
 
 /* 로그인 페이지 전용 버튼 배치 */

@@ -38,7 +38,7 @@ public class Member extends HttpServlet {
          gubun = "";
       }
       if(gubun.equals("")) {
-         gubun = "list";
+         gubun = "login";
       }
       
       //여기서부터 페이지로 보내는 용도
@@ -55,7 +55,10 @@ public class Member extends HttpServlet {
       }else if(gubun.equals("myinfo")) {
 
          view = "member/member_myinfo.jsp";
-      }
+      }else if(gubun.equals("myyoyaku")) {
+
+          view = "member/member_myyoyaku.jsp";
+       }
       
       RequestDispatcher rd = request.getRequestDispatcher(view);
       rd.forward(request, response);
