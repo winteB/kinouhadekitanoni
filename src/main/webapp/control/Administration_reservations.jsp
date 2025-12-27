@@ -73,15 +73,15 @@
     
     <div class="list-top-bar">
         <div class="tab-container">
-            <button class="tab-btn active">Projects</button>
-            <button class="tab-btn">Team</button>
-            <button class="tab-btn">My vacations</button>
+            <button class="tab-btn active">종합</button>
+            <button class="tab-btn">캠핑</button>
+            <button class="tab-btn">낚시</button>
         </div>
 
         <div class="filter-container">
             <button class="btn-icon-only"><i class="fa-solid fa-filter"></i></button>
             <div class="dropdown-trigger">
-                <span>Current Projects</span>
+                <span>종합</span>
                 <i class="fa-solid fa-chevron-down"></i>
             </div>
         </div>
@@ -95,7 +95,7 @@
                     <i class="fa-brands fa-figma"></i>
                 </div>
                 <div class="p-info">
-                    <div class="p-title">Medical App (iOS native)</div>
+                    <div class="p-title">캠핑 10-1 지역</div>
                     <div class="p-meta">
                         <span class="date"><i class="fa-regular fa-calendar"></i> Created Sep 12, 2023</span>
                         <span class="badge medium"><i class="dot"></i> Medium</span>
@@ -104,7 +104,7 @@
             </div>
 
             <div class="p-middle">
-                <div class="data-label">Project Data</div>
+                <div class="data-label">예약 데이터</div>
                 <div class="data-row">
                     <div class="data-col">
                         <span class="lbl">All tasks</span>
@@ -118,7 +118,7 @@
             </div>
 
             <div class="p-right">
-                <div class="data-label">Assignees</div>
+                <div class="data-label">예약자  </div>
                 <div class="avatar-group">
                     <img src="https://i.pravatar.cc/150?img=33" alt="">
                     <img src="https://i.pravatar.cc/150?img=47" alt="">
