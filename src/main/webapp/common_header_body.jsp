@@ -12,6 +12,7 @@
                 <path d="M50 20 L80 80 L20 80 Z" fill="#e6ff00" stroke="#1a1a1a" stroke-width="3" stroke-linejoin="round"/>
                 <text x="50" y="72" font-family="Outfit, sans-serif" font-weight="900" font-size="36" text-anchor="middle" fill="#1a1a1a">nc</text>
             </svg>
+            </a>
         </div>
         <nav class="main-nav">
             <a href="javascript:goPage('Show','list')" class="nav-item">시설안내</a>
