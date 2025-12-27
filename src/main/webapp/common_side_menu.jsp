@@ -2,8 +2,9 @@
 <nav class="side-nav">
     <h3 class="menu-title">메뉴</h3>
     <ul>
-        <li class="active">시설 소개</li>
-        <li>예약하기</li>
-        <li>후기/포토</li>
+        <li class="active"><a href="javascript:goPage('Notice','list')">공지사항</a></li>
+        <li><a href="javascript:goPage('Qna','faq_list')">FAQ</a></li>
+        <li><a href="javascript:goPage('Qna','qna_list')">Q & A</a></li>
+        <li><a href="javascript:goPage('Review','list')">리뷰</a></li>
     </ul>
 </nav>

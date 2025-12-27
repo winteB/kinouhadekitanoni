@@ -49,7 +49,7 @@
                 <section class="section-map">
                     <div class="section-header">
                         <h2>구역 배치도</h2>
-                        
+                        <p>캠핑 구역을를 확인하세요.</p>
                     
                     <div class="site-tags-container">
 				        <div class="site-tag" data-site-id="A">
@@ -66,7 +66,6 @@
 				        </div>
 				    </div>
 				    
-                        <p>캠핑 구역을를 확인하세요.</p>
                     </div>
 				    
 				    

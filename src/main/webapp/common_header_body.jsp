@@ -4,8 +4,9 @@
 </form>
 <header class="main-header" id="mainHeader">
         <div class="brand-wrapper">
-            <a>
-            <div class="brand-text">niwacan</div>
+            <div class="brand-wrapper">
+			    <img src="images/F5.png" alt="company 로고" class="brand-logo" />
+			</div>
             <svg class="brand-logo-svg" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
                 <circle cx="50" cy="50" r="48" fill="#00ffcc" stroke="#1a1a1a" stroke-width="4"/>
                 <path d="M50 20 L80 80 L20 80 Z" fill="#e6ff00" stroke="#1a1a1a" stroke-width="3" stroke-linejoin="round"/>
@@ -14,13 +15,13 @@
             </a>
         </div>
         <nav class="main-nav">
-            <a href="#" class="nav-item">시설안내</a>
-            <a href="#" class="nav-item">예약하기</a>
-            <a href="#" class="nav-item">후기/포토</a>
-            <a href="#" class="nav-item">공지사항</a>
-            <a href="#" class="nav-item">Login</a>
-            <a href="#" class="nav-item">Join</a>
-            <a href="#" class="nav-item">내 정보</a>
+            <a href="javascript:goPage('Show','list')" class="nav-item">시설안내</a>
+            <a href="javascript:goPage('YoyakuCamping','main')" class="nav-item">예약하기</a>
+            <a href="javascript:goPage('Review','list')" class="nav-item">후기/포토</a>
+            <a href="javascript:goPage('Notice','list')" class="nav-item">공지사항</a>
+            <a href="javascript:goPage('Member','login')" class="nav-item">Login</a>
+            <a href="javascript:goPage('Member','join')" class="nav-item">Join</a>
+            <a href="javascript:goPage('Member','myinfo')" class="nav-item">내 정보</a>
         </nav>
     </header>
     <header id="main-header">

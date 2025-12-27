@@ -49,7 +49,7 @@ public class YoyakuCamping extends HttpServlet {
 			view = "yoyaku_camping/yoyaku_camping_main.jsp";
 		}
 		else if(gubun.equals("detail")) {
-
+			
 			view = "yoyaku_camping/yoyaku_camping_detail.jsp";
 		}
 		

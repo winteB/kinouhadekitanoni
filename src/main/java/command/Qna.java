@@ -38,17 +38,29 @@ public class Qna extends HttpServlet {
 			gubun = "";
 		}
 		if(gubun.equals("")) {
-			gubun = "list";
+			gubun = "faq_list";
 		}
 		
 		//여기서부터 페이지로 보내는 용도
-		if(gubun.equals("list")) {
+		if(gubun.equals("faq_list")) {
 
-			view = "";
+			view = "qna/faq_list.jsp";
 		}
-		else if(gubun.equals("list")) {
+		else if(gubun.equals("faq_view")) {
 
-			view = "";
+			view = "qna/faq_view.jsp";
+		}else if(gubun.equals("qna_list")) {
+
+			view = "qna/qna_list.jsp";
+		}else if(gubun.equals("qna_view")) {
+
+			view = "qna/qna_view.jsp";
+		}else if(gubun.equals("qna_write")) {
+
+			view = "qna/qna_write.jsp";
+		}else if(gubun.equals("qna_update")) {
+
+			view = "qna/qna_update.jsp";
 		}
 		
 		RequestDispatcher rd = request.getRequestDispatcher(view);
