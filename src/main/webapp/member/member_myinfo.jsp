@@ -14,7 +14,7 @@
 
         <!-- 사이드바 -->
         <aside class="side-menu">
-            <%@ include file="member_update_side_menu.jsp" %>
+            <%@ include file="member_side_menu.jsp" %>
         </aside>
 
         <!-- 메인 영역 -->
