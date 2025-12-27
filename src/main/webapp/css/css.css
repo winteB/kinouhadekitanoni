@@ -215,6 +215,7 @@ body.main-page {
 .hot-section-header {
     display: flex; align-items: center; gap: 15px; margin-bottom: 30px;
     max-width: 1200px; margin-left: auto; margin-right: auto;
+
 }
 .hot-title-badge {
     background-color: var(--color-hot); color: #fff; font-size: 14px; font-weight: 700;
@@ -311,7 +312,7 @@ body.main-page {
 
 /* 상품 섹션 */
 .product-section-wrapper { padding: 80px 60px; position: relative; overflow: hidden; background-color: var(--bg-base); }
-.section-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 40px; }
+.section-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 10px;     flex-direction: column;}
 .header-title-group {
     display: flex; align-items: center; font-family: 'Outfit', sans-serif;
     font-size: 36px; font-weight: 800; letter-spacing: 1px;
@@ -489,7 +490,7 @@ body {
 .section-header p {
     font-size: 0.85rem;
     color: #94a3b8;
-    margin-bottom: 20px;
+    margin-bottom: 10px;
 }
 
 /* 달력 스타일 */
@@ -1633,7 +1634,7 @@ body {
 
 /* [사이드 메뉴 고정 설정] */
 .side-menu {
-    width: 240px;            /* 너비 고정 */
+    width: 140px;            /* 너비 고정 */
     flex-shrink: 0;          /* 너비가 줄어들지 않음 */
     position: -webkit-sticky; /* 사파리 브라우저 지원 */
     position: sticky;        /* 스크롤 따라다니기 핵심 속성 */
@@ -1646,6 +1647,7 @@ body {
 .main-content {
     flex-grow: 1;            /* 남은 공간 모두 차지 */
     width: calc(100% - 240px - 2rem); /* 전체 - 사이드바너비 - 간격 */
+	min-width: 1000px;
 }
 
 /* ------------------------------------------------ */

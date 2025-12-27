@@ -130,6 +130,7 @@
          </div>
       </div>
    </div>   
+   </div>
    <footer>
     <%@ include file="../common_footer.jsp" %>
 	</footer>
