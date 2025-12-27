@@ -97,12 +97,12 @@
                         <thead>
                             <tr>
                                 <th width="5%"><input type="checkbox"></th>
-                                <th width="15%">NAME</th>
-                                <th width="15%">SURNAME</th>
-                                <th width="20%">PHONE NUMBER</th>
-                                <th width="25%">EMAIL</th>
-                                <th width="5%">LISTS</th>
-                                <th width="15%">TAGS</th>
+                                <th width="15%">이름</th>
+                                <th width="15%">닉네임</th>
+                                <th width="20%">전화 번호</th>
+                                <th width="25%">이메일</th>
+                                <th width="5%">나이</th>
+                                <th width="15%">태그</th>
                                 <th></th> </tr>
                         </thead>
                         <tbody>

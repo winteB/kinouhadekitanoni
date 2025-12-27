@@ -75,7 +75,7 @@
                                 <div class="icon-circle"><i class="fa-solid fa-wallet"></i></div>
                                 <span class="badge-pill">+17%</span>
                             </div>
-                            <div class="card-info"><span class="label">Balance</span><h2 class="amount">$ 56,874</h2></div>
+                            <div class="card-info"><span class="label">캠핑 매출</span><h2 class="amount">$ 56,874</h2></div>
                             <div class="wave-bg"></div>
                         </div>
                         <div class="stat-card card-yellow">
@@ -83,20 +83,15 @@
                                 <div class="icon-circle"><i class="fa-solid fa-bag-shopping"></i></div>
                                 <span class="badge-pill">+23%</span>
                             </div>
-                            <div class="card-info"><span class="label">Sales</span><h2 class="amount">$ 24,575</h2></div>
+                            <div class="card-info"><span class="label">낚시 매출</span><h2 class="amount">$ 24,575</h2></div>
                             <div class="wave-bg"></div>
                         </div>
-                        <div class="stat-card card-dark">
-                            <div class="upgrade-content">
-                                <h3>Upgrade PRO</h3>
-                                <button class="btn-glow">Go Pro</button>
-                            </div>
-                        </div>
+                        
                     </div>
 
                     <div class="chart-section">
                         <div class="section-header">
-                            <h2>User In The Last Week</h2>
+                            <h2>매출 추이</h2>
                             <span class="big-percent">+ 3,2%</span>
                         </div>
                         <div class="bar-chart-visual">
@@ -113,22 +108,12 @@
                         </div>
                     </div>
 
-                    <div class="orders-section">
-                        <div class="section-header"><h2>Last Orders</h2><a href="#" class="link-more">View All</a></div>
-                        <div class="order-row">
-                            <div class="user-info"><img src="https://i.pravatar.cc/150?img=12" alt=""><span>David Astee</span></div>
-                            <span class="price">$1,456</span><span class="status st-red">Chargeback</span>
-                        </div>
-                        <div class="order-row">
-                            <div class="user-info"><img src="https://i.pravatar.cc/150?img=5" alt=""><span>Maria Hulama</span></div>
-                            <span class="price">$42,378</span><span class="status st-mint">Completed</span>
-                        </div>
-                    </div>
+                   
                 </section>
 
                 <aside class="right-panel">
                     <div class="widget donut-widget">
-                        <h3>Monthly Profits</h3>
+                        <h3>총매출</h3>
                         <div class="donut-visual">
                              <div class="inner-circle"><span class="total-val">$76k</span></div>
                         </div>
@@ -140,7 +125,7 @@
                     </div>
                     
                     <div class="widget recent-sales-widget">
-                        <h3>Recent Sales</h3>
+                        <h3>최근판매</h3>
                         <ul class="sales-list-vertical">
                             <li><img src="https://i.pravatar.cc/150?img=33" alt=""><div class="text"><strong>Steven</strong><span>2m ago</span></div><div class="money">+$52</div></li>
                             <li><img src="https://i.pravatar.cc/150?img=47" alt=""><div class="text"><strong>Jordan</strong><span>5m ago</span></div><div class="money">+$83</div></li>
