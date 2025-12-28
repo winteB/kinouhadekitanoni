@@ -44,7 +44,7 @@ public class Control extends HttpServlet {
 		//여기서부터 페이지로 보내는 용도
 		if(gubun.equals("main")) {
 
-			view = "control/Administration_main";
+			view = "control/Administration_main.jsp";
 		}
 		else if(gubun.equals("")) {
 

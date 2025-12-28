@@ -5,16 +5,18 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>niwacan - Lifestyle & Garden (Integrated)</title>
+    <title>昨日はできたのに</title>
     <link rel="stylesheet" href="css/css.css"/>
 </head>
 <script type="text/javascript">
-	function goPage(servlet,gubun){
+function goPage(servlet,gubun){
+	if(gubun!=null){
 		work.t_gubun.value=gubun;
-		work.method="post";
-		work.action=servlet;
-		work.submit();
 	}
+	work.method="post";
+	work.action=servlet;
+	work.submit();
+}
 </script>
 <body class="main-page">
 	<form name = "work">
@@ -22,12 +24,9 @@
 	</form>
 	<header class="main-header" id="mainHeader">
         <div class="brand-wrapper">
-            <div class="brand-text">niwacan</div>
-            <svg class="brand-logo-svg" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
-                <circle cx="50" cy="50" r="48" fill="#00ffcc" stroke="#1a1a1a" stroke-width="4"/>
-                <path d="M50 20 L80 80 L20 80 Z" fill="#e6ff00" stroke="#1a1a1a" stroke-width="3" stroke-linejoin="round"/>
-                <text x="50" y="72" font-family="Outfit, sans-serif" font-weight="900" font-size="36" text-anchor="middle" fill="#1a1a1a">nc</text>
-            </svg>
+        	<a href="javascript:goPage('Index')">
+			    <img src="images/F5.png" alt="company 로고" class="brand-logo" />
+            </a>
         </div>
         <nav class="main-nav">
             <a href="javascript:goPage('show')" class="nav-item">시설안내</a>
@@ -49,46 +48,46 @@
 
     <section class="hot-section">
         <div class="hot-section-header">
-            <span class="hot-title-badge">よく読まれている記事 (인기글)</span>
+            <span class="hot-title-badge">최신 이용 후기</span>
             <span class="hot-flame-label">
-                <span class="flame-icon">🔥</span>HOT! <span class="flame-icon">🔥</span>HOT! <span class="flame-icon">🔥</span>HOT!
+                <span class="flame-icon">🔥</span>NEW!
             </span>
         </div>
         <div class="hot-grid-container">
             <a href="#" class="hot-card">
                 <div class="card-thumb-box">
-                    <img src="https://niwacan.jp/wp-content/uploads/2025/04/AdobeStock_1470761120-のコピー.webp" alt="fence">
-                    <span class="category-label">お役立ち情報</span>
+                    <img src="" alt="후기 첨부 사진">
+                    <span class="category-label">글램핑</span>
                 </div>
                 <div class="card-text-chunk">
-                    <h3 class="card-title">目隠しフェンスの種類と選び方<br>(가림막 펜스의 종류와 선택법)</h3>
+                    <h3 class="card-title">제목</h3>
                 </div>
             </a>
             <a href="#" class="hot-card">
                 <div class="card-thumb-box">
                     <img src="https://niwacan.jp/wp-content/uploads/2025/08/ポスト写真.webp" alt="post">
-                    <span class="category-label">お役立ち情報</span>
+                    <span class="category-label"낚시</span>
                 </div>
                 <div class="card-text-chunk">
-                    <h3 class="card-title">ポストの種類と選び方<br>(우편함의 종류와 선택법)</h3>
+                    <h3 class="card-title">제목</h3>
                 </div>
             </a>
             <a href="#" class="hot-card">
                 <div class="card-thumb-box">
                     <img src="https://niwacan.jp/wp-content/uploads/2025/10/0930-2224.webp" alt="raised bed">
-                    <span class="category-label">施工方法</span>
+                    <span class="category-label">오토캠핑</span>
                 </div>
                 <div class="card-text-chunk">
-                    <h3 class="card-title">「レイズドベッド」組み立て方法<br>(레이즈드 베드 조립 방법)</h3>
+                    <h3 class="card-title">제목</h3>
                 </div>
             </a>
             <a href="#" class="hot-card">
                 <div class="card-thumb-box">
                     <img src="https://niwacan.jp/wp-content/uploads/2025/05/131A1120.webp" alt="niwacan brand">
-                    <span class="category-label">庭でできること</span>
+                    <span class="category-label">카라반</span>
                 </div>
                 <div class="card-text-chunk">
-                    <h3 class="card-title">niwacan (にわきゃん) ーソト遊びをもっと日常にー<br>(niwacan -소토아소비를 일상으로-)</h3>
+                    <h3 class="card-title">제목</h3>
                 </div>
             </a>
         </div>
@@ -98,27 +97,22 @@
         <img src="https://niwacan.jp/wp-content/uploads/2025/04/nc_top_gallery_illust2_mb.webp" class="illust-obj illust-left" alt="skater">
         <img src="https://niwacan.jp/wp-content/uploads/2025/04/nc_top_gallery_illust1_mb.webp" class="illust-obj illust-right" alt="biker" style="opacity:0;"> 
         
+        
+            <span class="deco-line"></span>
         <div class="tag-header">
-            <span class="deco-line"></span>
-            <h2 class="section-title">NIWA DE CAN</h2>
-            <span class="section-label-box">庭でできること一覧 (정원 활동 목록)</span>
-            <span class="deco-line"></span>
+            <h2 class="section-title">/ 주요 키워드 리뷰 /</h2>
+            <span class="section-label-box">실제 이용 후기를 확인해보세요</span>
         </div>
-
+			<span class="deco-line"></span>
+       
         <div class="tag-container">
-            <a href="#" class="tag-pill"><span class="tag-icon-circle">#</span>ベランダを楽しむ</a>
-            <a href="#" class="tag-pill"><span class="tag-icon-circle">#</span>便利にする</a>
-            <a href="#" class="tag-pill"><span class="tag-icon-circle">#</span>デザインする</a>
-            <a href="#" class="tag-pill"><span class="tag-icon-circle">#</span>コーディネートする</a>
-            <a href="#" class="tag-pill"><span class="tag-icon-circle">#</span>こどもとあそぶ</a>
-            <a href="#" class="tag-pill"><span class="tag-icon-circle">#</span>ペットとあそぶ</a>
-            <a href="#" class="tag-pill"><span class="tag-icon-circle">#</span>キャンプする</a>
-            <a href="#" class="tag-pill"><span class="tag-icon-circle">#</span>作る</a>
-            <a href="#" class="tag-pill"><span class="tag-icon-circle">#</span>育てる</a>
-            <a href="#" class="tag-pill"><span class="tag-icon-circle">#</span>あそぶ</a>
-            <a href="#" class="tag-pill"><span class="tag-icon-circle">#</span>くつろぐ</a>
-            <a href="#" class="tag-pill"><span class="tag-icon-circle">#</span>寝る</a>
-            <a href="#" class="tag-pill"><span class="tag-icon-circle">#</span>たべる</a>
+            <a href="#" class="tag-pill"><span class="tag-icon-circle">#</span>바베큐</a>
+            <a href="#" class="tag-pill"><span class="tag-icon-circle">#</span>낚시</a>
+            <a href="#" class="tag-pill"><span class="tag-icon-circle">#</span>영화</a>
+            <a href="#" class="tag-pill"><span class="tag-icon-circle">#</span>밤하늘</a>
+            <a href="#" class="tag-pill"><span class="tag-icon-circle">#</span>월척</a>
+            <a href="#" class="tag-pill"><span class="tag-icon-circle">#</span>뒷정리</a>
+            <a href="#" class="tag-pill"><span class="tag-icon-circle">#</span>2박 3일</a>
         </div>
     </div>
 

@@ -4,8 +4,8 @@
 <!DOCTYPE html>
 <html lang="ko">
 <head>
-    <%@ include file="../common_header_head.jsp" %>
     <link rel="stylesheet" href="${pageContext.request.contextPath}/css/css.css">
+    <%@ include file="../common_header_head.jsp" %>
 </head>
 <body class="main-page">
 

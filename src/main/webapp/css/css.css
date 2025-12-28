@@ -249,10 +249,10 @@ body.main-page {
 
 /* 태그 섹션 */
 .tag-section-wrapper {
-    position: relative; max-width: 1200px; margin: 0 auto; padding: 80px 20px;
+    position: relative; margin: 0 auto; padding: 80px 20px;
     background-color: var(--bg-section); text-align: center;
 }
-.tag-header { display: flex; justify-content: center; align-items: center; gap: 20px; margin-bottom: 50px; }
+.tag-header { display: flex; flex-direction: column; justify-content: center; align-items: center; gap: 10px; margin-bottom: 40px; }
 .deco-line { width: 2px; height: 30px; background-color: #aaa; transform: rotate(15deg); }
 .section-title {
     font-family: 'Outfit', sans-serif; font-size: 42px; font-weight: 800;
@@ -263,13 +263,13 @@ body.main-page {
     font-size: 14px; font-weight: 700; border: 2px dashed #999; color: var(--text-black);
 }
 .tag-container {
-    display: flex; flex-wrap: wrap; justify-content: center; gap: 15px 20px;
-    max-width: 900px; margin: 0 auto; position: relative; z-index: 2;
+    display: flex; flex-wrap: wrap; justify-content: center; gap: 15px 40px;
+    max-width: 700px; margin: 0 auto; position: relative; z-index: 2;
 }
 .tag-pill {
     display: flex; align-items: center; background-color: #fff;
     border: 1px solid var(--text-black); border-radius: 50px;
-    padding: 6px 8px 6px 6px; color: var(--text-black); font-size: 15px; font-weight: 700;
+    padding: 6px 24px 6px 6px; color: var(--text-black); font-size: 15px; font-weight: 700;
     transition: transform 0.2s, box-shadow 0.2s;
 }
 .tag-pill:hover { transform: translateY(-3px); box-shadow: 0 5px 10px rgba(0,0,0,0.1); }
@@ -1533,8 +1533,7 @@ body {
     font-size: 1.5rem;
     font-weight: 700;
     color: #0f172a;
-    margin-bottom: 1.5rem;
-    border-left: 5px solid #2563eb;
+    margin-bottom: 0.5rem;
     padding-left: 1rem;
 }
 
@@ -1754,8 +1753,7 @@ body {
     font-size: 1.5rem;
     font-weight: 700;
     color: #0f172a;
-    margin-bottom: 1.5rem;
-    border-left: 5px solid #2563eb;
+    margin-bottom: 0.5rem;
     padding-left: 1rem;
 }
 
