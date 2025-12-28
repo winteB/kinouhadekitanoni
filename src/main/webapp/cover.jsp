@@ -6,10 +6,46 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>NIWACAN - Intro</title>
-    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="css/css.css">
+	<script type="text/javascript">
+		function goPage(servlet,gubun){
+			work.t_gubun.value=gubun;
+			work.method="post";
+			work.action=servlet;
+			work.submit();
+		}
+	</script>
 </head>
 <body class="intro">
-
+    <form name = "work">
+	<input type="hidden" name="t_gubun">
+	</form>
+	<header class="main-header" id="mainHeader">
+        <div class="brand-wrapper">
+            <div class="brand-wrapper">
+			    <img src="images/F5.png" alt="company 로고" class="brand-logo" />
+			</div>
+            <svg class="brand-logo-svg" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+                <circle cx="50" cy="50" r="48" fill="#00ffcc" stroke="#1a1a1a" stroke-width="4"/>
+                <path d="M50 20 L80 80 L20 80 Z" fill="#e6ff00" stroke="#1a1a1a" stroke-width="3" stroke-linejoin="round"/>
+                <text x="50" y="72" font-family="Outfit, sans-serif" font-weight="900" font-size="36" text-anchor="middle" fill="#1a1a1a">nc</text>
+            </svg>
+        </div>
+        <nav class="main-nav">
+            <a href="javascript:goPage('Show','list')" class="nav-item">시설안내</a>
+            <a href="javascript:goPage('YoyakuCamping','main')" class="nav-item">예약하기</a>
+            <a href="javascript:goPage('Review','list')" class="nav-item">후기/포토</a>
+            <a href="javascript:goPage('Notice','list')" class="nav-item">공지사항</a>
+            <a href="javascript:goPage('Member','login')" class="nav-item">Login</a>
+            <a href="javascript:goPage('Member','join')" class="nav-item">Join</a>
+            <a href="javascript:goPage('Member','myinfo')" class="nav-item">내 정보</a>
+        </nav>
+    </header>
+    <header id="main-header">
+        <div id="logo-box">
+            <span>LOGO</span> 
+        </div>
+    </header>
     <section class="intro-top">
         <div class="top-content">
             <div class="brand-subtitle">The Hybrid Life</div>
@@ -24,7 +60,7 @@
                 <path d="M50 30 Q 60 55 70 65 Q 70 80 50 80 Q 30 80 30 65 Q 40 55 50 30 Z" fill="#ffcc00" stroke="#1a1a1a" stroke-width="3"/>
             </svg>
             <h2 class="section-title">CAMP</h2>
-            <a href="test6.html" class="enter-pill">입장하기</a>
+            <a href="javascript:goPage('YoyakuCamping','main')" class="enter-pill">입장하기</a>
         </div>
         <div class="split-section fish-section" onclick="location.href='test6.html#fish'">
             <svg class="section-icon" viewBox="0 0 100 100">
@@ -34,7 +70,7 @@
                 <path d="M90 50 L 100 30 M 90 50 L 100 70" stroke="#1a1a1a" stroke-width="4" fill="none"/>
             </svg>
             <h2 class="section-title">FISH</h2>
-            <a href="test6.html" class="enter-pill">입장하기</a>
+            <a href="javascript:goPage('YoyakuFishing','main')" class="enter-pill">입장하기</a>
         </div>
     </section>
 

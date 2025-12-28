@@ -14,7 +14,7 @@
 		<div class="layout">
 			<!-- 사이드 메뉴: 시설소개용 사이드 메뉴 파일이 있다면 변경, 없다면 기존것 사용 -->
 			<aside class="side-menu">
-	            <%@ include file="../yoyaku_side_menu.jsp" %>
+	            <%@ include file="../common_side_menu.jsp" %>
 	        </aside>
 	        
 	        <main class="main-content">

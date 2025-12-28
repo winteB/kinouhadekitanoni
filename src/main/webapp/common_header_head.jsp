@@ -9,7 +9,9 @@
 	
 <script type="text/javascript">
 	function goPage(servlet,gubun){
-		work.t_gubun.value=gubun;
+		if(!gubun==null){
+			work.t_gubun.value=gubun;
+		}
 		work.method="post";
 		work.action=servlet;
 		work.submit();

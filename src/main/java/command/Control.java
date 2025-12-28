@@ -38,13 +38,13 @@ public class Control extends HttpServlet {
 			gubun = "";
 		}
 		if(gubun.equals("")) {
-			gubun = "";
+			gubun = "main";
 		}
 		
 		//여기서부터 페이지로 보내는 용도
-		if(gubun.equals("")) {
+		if(gubun.equals("main")) {
 
-			view = "";
+			view = "control/Administration_main";
 		}
 		else if(gubun.equals("")) {
 

@@ -21,6 +21,7 @@
             <a href="javascript:goPage('Member','login')" class="nav-item">Login</a>
             <a href="javascript:goPage('Member','join')" class="nav-item">Join</a>
             <a href="javascript:goPage('Member','myinfo')" class="nav-item">내 정보</a>
+            <a href="javascript:goPage('Control','main')" class="nav-item">관리자</a>
         </nav>
     </header>
     <header id="main-header">
