@@ -6,7 +6,7 @@
     <link rel="stylesheet" href="css/css.css"/>
 	<script type="text/javascript" src="js/jquery-1.8.1.min.js"></script>
 	<script type="text/javascript" src="common/common.js"></script>
-	
+
 <script type="text/javascript">
 	function goPage(servlet,gubun){
 		if(!gubun==null){
