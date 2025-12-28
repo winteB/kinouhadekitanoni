@@ -29,7 +29,7 @@ function goPage(servlet,gubun){
             </a>
         </div>
         <nav class="main-nav">
-            <a href="javascript:goPage('show')" class="nav-item">시설안내</a>
+            <a href="javascript:goPage('Show')" class="nav-item">시설안내</a>
             <a href="javascript:goPage('YoyakuCamping','main')" class="nav-item">예약하기</a>
             <a href="javascript:goPage('Review','list')" class="nav-item">후기/포토</a>
             <a href="javascript:goPage('Notice','list')" class="nav-item">공지사항</a>
