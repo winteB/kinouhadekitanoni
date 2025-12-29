@@ -113,7 +113,7 @@
                     <span class="value">선택안함</span>
                 </div>
                 <div class="divider"></div>
-                <div class="info-group">
+                <div class="info-group2">
 				    <label>SELECTED SITE</label>
 				    <span class="value">선택안함</span>
 				</div>
