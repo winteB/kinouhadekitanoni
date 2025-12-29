@@ -66,7 +66,7 @@ function goPage(servlet,gubun){
             <a href="#" class="hot-card">
                 <div class="card-thumb-box">
                     <img src="https://niwacan.jp/wp-content/uploads/2025/08/ポスト写真.webp" alt="post">
-                    <span class="category-label"낚시</span>
+                    <span class="category-label">낚시</span>
                 </div>
                 <div class="card-text-chunk">
                     <h3 class="card-title">제목</h3>
