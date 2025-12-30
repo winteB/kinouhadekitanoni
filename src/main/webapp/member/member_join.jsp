@@ -14,7 +14,7 @@
 
         <!-- 사이드바 -->
         <aside class="side-menu">
-            <%@ include file="../common_side_menu.jsp" %>
+            <%@ include file="member_side_menu.jsp" %>
         </aside>
 
         <!-- 메인 영역 -->
@@ -56,6 +56,11 @@
                             <th>비밀번호 확인</th>
                             <td><input type="password" name="t_password_confirm"></td>
                         </tr>
+                        
+                        <tr>
+                            <th>나이</th>
+                            <td><input type="text" name="t_age"></td>
+                        </tr>
 
                         <tr>
                             <th>주소</th>
@@ -79,7 +84,7 @@
                                 <select name="t_email_2">
                                     <option value="naver.com">naver.com</option>
                                     <option value="gmail.com">gmail.com</option>
-                                    <option value="kakao.com">kakao.com</option>
+                                    <option value="daum.net">daum.net</option>
                                 </select>
                             </td>
                         </tr>

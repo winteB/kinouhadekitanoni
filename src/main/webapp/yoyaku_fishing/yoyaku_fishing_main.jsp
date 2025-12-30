@@ -4,11 +4,18 @@
 <html lang="ko">
 <head>
 	<%@ include file = "../common_header_head.jsp" %>
+	<script type="text/javascript" src="common/fishing-map.js"></script>
+		
 	<script type="text/javascript">
 	
 	</script>
 </head>
 <body>
+<form name="reservForm" action="YoyakuFishing" method="post">
+    <input type="hidden" name="t_gubun" value="detail">
+    <input type="hidden" name="reserveDate" id="hiddenDate">
+    <input type="hidden" name="siteName" id="hiddenSite" value=""> 
+</form>
     <div class="wrapper">
         <%@ include file = "../common_header_body.jsp" %>
         
@@ -52,10 +59,36 @@
                         <h2>구역 배치도</h2>
                         <p>낚시 구역을를 확인하세요.</p>
                     </div>
-                    <div class="map-container">
-                        <div class="map-placeholder" style="background-image:url('images/예약캠핑.png'); background-size:cover; background-position:center;">
-                        </div>
-                    </div>
+                   <div class="map-container">
+					   <div class="map-placeholder">
+					        <img
+					            id="fishing-image"
+					            src="images/예약좌대.png"
+					            usemap="#fishing-map"
+					            alt="낚시터 배치도"
+					        >
+					
+					        <!-- 하이라이트 -->
+					        <div id="fiA" class="area-highlight"></div>
+					        <div id="fiB" class="area-highlight"></div>
+					    </div>
+					    <map name="fishing-map">
+					        <area
+					            data-area-id="fiA"
+					            shape="rect"
+					            coords="22,118,998,285"
+					            href="#"
+					            alt="얕은 곳"
+					        >
+					        <area
+					            data-area-id="fiB"
+					            shape="rect"
+					            coords="23,304,998,506"
+					            href="#"
+					            alt="깊은 곳"
+					        >
+					    </map>
+					</div>
                 </section>
             </div>
         
@@ -67,12 +100,12 @@
                     <span class="value">선택안함</span>
                 </div>
                 <div class="divider"></div>
-                <div class="info-group">
+                <div class="info-group site-info">
                     <label>SELECTED SITE</label>
                     <span class="value">선택안함</span>
                 </div>
             </div>
-            <button class="reserve-btn" disabled>예약하기</button>
+            <button class="reserve-btn" id="btnReserve" disabled onclick="goPage('YoyakuFishing','detail')">예약하기</button>
         </div>
         </div>
         </main>
@@ -82,9 +115,12 @@
     	<%@ include file= "../common_footer.jsp"%>
     </footer>
     
-    
+
 <script>
 document.addEventListener("DOMContentLoaded", () => {
+	const today = new Date();
+	today.setHours(0, 0, 0, 0); // 시간 제거 (날짜 비교용)
+
     let currentDate = new Date(); // 초기값: 오늘
     
     // 1. 필요한 요소들을 먼저 선택합니다.
@@ -135,10 +171,21 @@ document.addEventListener("DOMContentLoaded", () => {
         for (let d = 1; d <= lastDate; d++) {
             const isSunday = ((firstDay + d - 1) % 7 === 0);
             const dateDiv = document.createElement('div');
+
+            const cellDate = new Date(year, month, d);
+            cellDate.setHours(0, 0, 0, 0);
+
             dateDiv.className = `date ${isSunday ? 'red' : ''}`;
             dateDiv.textContent = d;
+
+            // ✅ 오늘 이전 날짜면 비활성화
+            if (cellDate < today) {
+                dateDiv.classList.add('disabled');
+            }
+
             grid.appendChild(dateDiv);
         }
+
     }
 
     // 3. 이전/다음 달 버튼 이벤트
@@ -157,7 +204,13 @@ document.addEventListener("DOMContentLoaded", () => {
         const cell = e.target.closest('.date');
         
         // 유효한 날짜 셀을 클릭했을 때만 실행
-        if (cell && !cell.classList.contains('empty') && !cell.classList.contains('day-label')) {
+        if (
+			    cell &&
+			    !cell.classList.contains('empty') &&
+			    !cell.classList.contains('day-label') &&
+			    !cell.classList.contains('disabled')
+			) {
+
             // 기존 선택된 스타일 제거
             document.querySelectorAll('.calendar-grid .date.selected')
                     .forEach(el => el.classList.remove('selected'));
@@ -177,6 +230,8 @@ document.addEventListener("DOMContentLoaded", () => {
             inputBox.value = resultValue;           // input
             checkInValue.textContent = resultValue; // 하단 바
             checkInValue.style.color = "#0f172a";
+
+            updateReserveButton(); // ✅ 추가
         }
     });
 
@@ -185,6 +240,23 @@ document.addEventListener("DOMContentLoaded", () => {
 
 }); // <--- DOMContentLoaded가 여기서 닫혀야 합니다!
 
+function updateReserveButton() {
+    const checkInText = document.querySelector(
+        '.non-floating-bar .info-group:first-child .value'
+    ).textContent.trim();
+
+    const siteText = document.querySelector(
+        '.non-floating-bar .info-group:last-child .value'
+    ).textContent.trim();
+
+    const btn = document.getElementById('btnReserve');
+
+    if (checkInText !== '선택안함' && siteText !== '선택안함') {
+        btn.disabled = false;
+    } else {
+        btn.disabled = true;
+    }
+}
 </script>
 
 </body>

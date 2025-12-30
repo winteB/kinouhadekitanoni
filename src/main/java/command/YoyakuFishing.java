@@ -41,14 +41,17 @@ public class YoyakuFishing extends HttpServlet {
 			gubun = "main";
 		}
 		
+		// 1. 메인 예약 달력/지도 페이지
 		//여기서부터 페이지로 보내는 용도
 		if(gubun.equals("main")) {
 
 			view = "yoyaku_fishing/yoyaku_fishing_main.jsp";
 		}
-		else if(gubun.equals("")) {
+		
+		// 2. 예약 상세 페이지 로 (이동)
+		else if(gubun.equals("detail")) {
 
-			view = "";
+			view = "yoyaku_fishing/yoyaku_fishing_detail.jsp";
 		}
 		
 		

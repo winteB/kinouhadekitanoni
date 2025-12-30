@@ -10,30 +10,23 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 /**
- * Servlet implementation class Notice
+ * Servlet implementation class Show
  */
-@WebServlet("/Notice")
-public class Notice extends HttpServlet {
+@WebServlet("/Show")
+public class Show extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
-    /**
-     * @see HttpServlet#HttpServlet()
-     */
-    public Notice() {
+    public Show() {
         super();
-        // TODO Auto-generated constructor stub
     }
 
-	/**
-	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
-	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		request.setCharacterEncoding("utf-8");
 
 		String view = "";
 		String gubun = request.getParameter("t_gubun");
 		
-		//gubun 값 null/공백 처리
+		
 		if(gubun == null) {
 			gubun = "";
 		}
@@ -41,31 +34,17 @@ public class Notice extends HttpServlet {
 			gubun = "list";
 		}
 		
-		//여기서부터 페이지로 보내는 용도
+		// 페이지 이동 경로 설정
 		if(gubun.equals("list")) {
-
-			view = "notice/notice_list.jsp";
-		}
-		else if(gubun.equals("update")) {
-
-			view = "notice/notice_update.jsp";
-		}else if(gubun.equals("view")) {
-
-			view = "notice/notice_view.jsp";
-		}else if(gubun.equals("write")) {
-
-			view = "notice/notice_write.jsp";
+			
+			view = "show/show_index.jsp";
 		}
 		
 		RequestDispatcher rd = request.getRequestDispatcher(view);
 		rd.forward(request, response);
 	}
 
-	/**
-	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
-	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
 		doGet(request, response);
 	}
 

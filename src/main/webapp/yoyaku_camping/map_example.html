@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>이미지 맵 클릭 예제</title>
+    <link rel="stylesheet" href="map_style.css">
+</head>
+<body>
+
+    <h1>캠핑장 예약</h1>
+    <p>원하시는 구역을 클릭하세요.</p>
+
+    <!-- 이미지와 하이라이트 영역을 감싸는 컨테이너 -->
+    <div id="map-container">
+        <!-- 실제 표시될 이미지 -->
+        <!-- 중요: src에는 실제 이미지 경로를 정확히 입력해야 합니다. -->
+        <img src="예약캠핑.png?text=Camping+Map+Image" alt="캠핑장 지도" usemap="#camping-map" id="camping-image">
+
+        <!-- 클릭된 영역을 시각적으로 표시할 오버레이 div들 -->
+        <!-- 각 div는 area 태그의 data-area-id와 일치하는 id를 가집니다. -->
+        <div id="A" class="area-highlight"></div>
+        <div id="B" class="area-highlight"></div>
+        <div id="C" class="area-highlight"></div>
+    </div>
+
+    <!-- 클릭 가능한 영역을 정의하는 map -->
+    <map name="camping-map">
+        <!-- 
+            shape="rect" (사각형) coords="x1,y1,x2,y2"
+            x1,y1: 왼쪽 위 꼭짓점 좌표
+            x2,y2: 오른쪽 아래 꼭짓점 좌표
+            좌표는 이미지의 왼쪽 위를 (0,0)으로 기준합니다.
+            온라인 이미지 맵 좌표 생성기(Online image map coordinate generator)를 사용하면 쉽게 좌표를 얻을 수 있습니다.
+        -->
+        <area shape="rect" href="#" alt="A 구역" data-area-id="A" coords="296,12,20,12,21,261,364,434,400,369,354,310,369,168,296,147" shape="poly">
+        <area shape="rect" href="#" alt="B 구역" data-area-id="B" coords="402,93,405,347,662,334,635,90" shape="poly">
+        <area shape="rect" href="#" alt="C 구역" data-area-id="C" coords="633,52,675,340,528,351,529,430,693,399,1009,260,845,22" shape="poly">
+    </map>
+
+    <!-- 선택된 영역의 정보를 저장하고 다음으로 넘기기 위한 hidden input -->
+    <form id="reservation-form">
+        <input type="hidden" id="selected-area-input" name="selected_area" value="">
+        <button type="submit">선택 완료 및 다음 단계</button>
+    </form>
+
+    <div id="selection-info">선택된 구역: 없음</div>
+
+
+    <script src="map_script.js"></script>
+</body>
+</html>
