@@ -49,7 +49,15 @@ public class Qna extends HttpServlet {
 		else if(gubun.equals("faq_view")) {
 
 			view = "qna/faq_view.jsp";
-		}else if(gubun.equals("qna_list")) {
+		}else if(gubun.equals("faq_write")) {
+
+			view = "qna/faq_write.jsp";
+		}else if(gubun.equals("faq_update")) {
+
+			view = "qna/faq_update.jsp";
+		}
+		
+		else if(gubun.equals("qna_list")) {
 
 			view = "qna/qna_list.jsp";
 		}else if(gubun.equals("qna_view")) {

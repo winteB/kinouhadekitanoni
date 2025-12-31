@@ -6,7 +6,7 @@
 <head>
     <%@ include file="../common_header_head.jsp" %>
 </head>
-<body class="main-page">
+<body>
 
 <div class="wrapper">
     <%@ include file="../common_header_body.jsp" %>

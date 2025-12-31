@@ -118,14 +118,7 @@ body .intro{
    [PART B] 메인 페이지 스타일 (Main Page - test6)
    ================================================================= */
 /* 메인 페이지 전용 바디 스타일 (인트로 설정을 덮어씀) */
-body.main-page {
-    height: auto; /* 스크롤 가능하게 */
-    overflow-y: auto; overflow-x: hidden;
-    display: block; /* flex 해제 */
-    font-family: 'Outfit', 'Noto Sans JP', 'Noto Sans KR', sans-serif;
-    background-color: var(--bg-base);
-    color: var(--text-black);
-}
+
 
 /* 헤더 & 메인 비주얼 */
 .main-header {
