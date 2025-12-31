@@ -1865,13 +1865,7 @@ body {
 /* ============================= */
 	/* NOTICE LIST STYLE */
 	/* ============================= */
-	#b_right {
-		background: #fff;
-		padding: 40px 50px;
-		border-radius: 20px;
-		box-shadow: 0 10px 30px rgba(0, 0, 0, 0.06);
-		margin: 40px auto 80px;
-	}
+
 
 	/* 제목 */
 	.n_title {
@@ -1983,24 +1977,19 @@ body {
 		border-radius: 10px;
 		font-weight: 700;
 	}
-
 /* ============================= */
-/* NOTICE LIST - FULL WIDTH AREA */
+/* NOTICE LIST - FINAL */
 /* ============================= */
 
-/* 🔴 빨간 영역 = 전체 폭 섹션 */
 #b_right {
-	width: 100%;
-	background: #f8f7f5; /* 페이지 배경 */
-	padding: 90px 0 100px; /* 위 아래 여백 */
+	background: #fff;
+	max-width: 1100px;
+	margin: 60px auto 100px;
+	padding: 50px 60px;
+	border-radius: 24px;
+	box-shadow: 0 12px 30px rgba(0,0,0,0.08);
 }
 
-/* 👉 안쪽 콘텐츠만 가운데로 */
-#b_right>* {
-	max-width: 1100px;
-	margin-left: auto;
-	margin-right: auto;
-}
 
 /* ============================= */
 /* NOTICE TITLE */
@@ -2352,3 +2341,9 @@ body {
 	color: #475569;
 	font-weight: 600;
 }
+
+
+
+
+
+/*Notice*/
