@@ -1,5 +1,4 @@
 <%@ page pageEncoding="UTF-8"%>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <nav class="side-nav">
     <h3 class="menu-title">메뉴</h3>
     	<li class="active"><a href="javascript:goPage('Member','login')">로그인</a></li>

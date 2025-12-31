@@ -1,8 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>  
-<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <!DOCTYPE html>
 <html lang="ko">
 <head>
@@ -36,16 +33,9 @@ function goPage(servlet,gubun){
             <a href="javascript:goPage('YoyakuCamping','main')" class="nav-item">예약하기</a>
             <a href="javascript:goPage('Review','list')" class="nav-item">후기/포토</a>
             <a href="javascript:goPage('Notice','list')" class="nav-item">공지사항</a>
-            <c:if test="${empty sessionId }">
-            	<a href="javascript:goPage('Member','login')" class="nav-item">Login</a>
-	            <a href="javascript:goPage('Member','join')" class="nav-item">Join</a>
-            </c:if>
-            <c:if test="${not empty sessionId }">
-	            <a href="javascript:goPage('Member','myinfo')" class="nav-item">${sessionName }</a>
-      		</c:if>
-      		<c:if test="${sessionId eq 'top'}">
-            	<a href="javascript:goPage('Control','main')" class="nav-item">관리자</a>
-        	</c:if>
+            <a href="javascript:goPage('Member','login')" class="nav-item">Login</a>
+            <a href="javascript:goPage('Member','join')" class="nav-item">Join</a>
+            <a href="javascript:goPage('Member','myinfo')" class="nav-item">내 정보</a>
         </nav>
     </header>
 

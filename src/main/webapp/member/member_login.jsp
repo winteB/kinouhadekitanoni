@@ -5,16 +5,6 @@
 <head>
     <%@ include file="../common_header_head.jsp" %>
 </head>
-<script type="text/javascript">
-	function goLogin(){
-		if(checkEmpty(mem.t_id,"ID 입력!")) return;
-		if(checkEmpty(mem.t_password,"비밀번호 입력!")) return;
-		
-		mem.t_gubun.value="memberLogin";
-		mem.action = "Member";
-		mem.submit();
-	}
-</script>
 <body class="main-page">
 
 <div class="wrapper">
