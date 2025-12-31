@@ -5,10 +5,22 @@
 <head>
 	<%@ include file = "../common_header_head.jsp" %>
 	<script type="text/javascript" src="common/map_script.js"></script>
-	
+	<script type="text/javascript">
+		function goDetail(){
+			yoyaku.method="post";
+			yoyaku.action="YoyakuCamping";
+			yoyaku.submit();
+		}
+	</script>
 </head>
 <body>
+     <form name="yoyaku">    	
+        <input type="hidden" name="t_gubun" value="detail">
+        <input type="hidden" name="selected_area" id="selected-site-type" value="">
+    	<input type="hidden" name="selected_date" id="selectedDate" value="">
+    </form>
     <div class="wrapper">
+
         <%@ include file = "../common_header_body.jsp" %>
         
 		<div class="layout">
@@ -24,7 +36,6 @@
                         <p>원하시는 체크인 날짜를 선택해주세요.</p>
                     </div>
                     
-<input type="hidden" id="selectedDate" readonly />
 
                     <div class="calendar-card">
                         <div class="calendar-nav">
@@ -96,10 +107,7 @@
     </map>
 
     <!-- 선택된 영역의 정보를 저장하고 다음으로 넘기기 위한 hidden input -->
-    <form id="reservation-form">
-<!--         <input type="hidden" id="selected-area-input" name="selected_area" value=""> -->
-    	<input type="hidden" id="selected-site-type" name="selected_site_type" value="">
-    </form>
+
     
     
                 </section>
@@ -113,13 +121,13 @@
                     <span class="value">선택안함</span>
                 </div>
                 <div class="divider"></div>
-                <div class="info-group">
+                <div class="info-group2">
 				    <label>SELECTED SITE</label>
 				    <span class="value">선택안함</span>
 				</div>
 
             </div>
-            <button class="reserve-btn" id="btnReserve" disabled onclick="goPage('YoyakuCamping','detail')">예약하기</button>
+            <button class="reserve-btn" id="btnReserve" disabled onclick="goDetail()">예약하기</button>
         </div>
         </div>
         </main>
@@ -256,11 +264,11 @@ document.addEventListener("DOMContentLoaded", () => {
 
 function updateReserveButton() {
     const checkInText = document.querySelector(
-        '.non-floating-bar .info-group:first-child .value'
+        '.non-floating-bar .info-group .value'
     ).textContent.trim();
 
     const siteText = document.querySelector(
-        '.non-floating-bar .info-group:last-child .value'
+        '.non-floating-bar .info-group2 .value'
     ).textContent.trim();
 
     const btn = document.getElementById('btnReserve');

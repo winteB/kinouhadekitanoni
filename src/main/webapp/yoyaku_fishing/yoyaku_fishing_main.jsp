@@ -7,15 +7,19 @@
 	<script type="text/javascript" src="common/fishing-map.js"></script>
 		
 	<script type="text/javascript">
-	
+		function goDetail(){
+			yoyaku.method="post";
+			yoyaku.action="YoyakuFishing";
+			yoyaku.submit();
+		}
 	</script>
 </head>
 <body>
-<form name="reservForm" action="YoyakuFishing" method="post">
-    <input type="hidden" name="t_gubun" value="detail">
-    <input type="hidden" name="reserveDate" id="hiddenDate">
-    <input type="hidden" name="siteName" id="hiddenSite" value=""> 
-</form>
+    <form name="yoyaku">    	
+        <input type="hidden" name="t_gubun" value="detail">
+        <input type="hidden" name="selected_area" id="selected-site-type" value="">
+    	<input type="hidden" name="selected_date" id="selectedDate" value="">
+    </form>
     <div class="wrapper">
         <%@ include file = "../common_header_body.jsp" %>
         
@@ -32,7 +36,6 @@
                         <p>원하시는 체크인 날짜를 선택해주세요.</p>
                     </div>
                     
-<input type="hidden" id="selectedDate" readonly />
 
                     <div class="calendar-card">
                         <div class="calendar-nav">

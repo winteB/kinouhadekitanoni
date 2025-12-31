@@ -46,12 +46,12 @@
 								<div class="form-group">
 									<label>입실일 (Check-in)</label>
 									<!-- 이전 페이지에서 받은 날짜 (수정 불가) -->
-									<input type="text" class="form-input" id="checkInDate" name="r_date" value="<%= rDate %>" readonly>
+									<input type="text" class="form-input" id="checkInDate" name="r_checkin_date" value="<%= rDate %>" readonly>
 								</div>
 								<div class="form-group">
 									<label>퇴실일 (Check-out)</label>
 									<!-- 퇴실일은 선택 가능하도록 date 타입 사용 -->
-									<input type="date" class="form-input" id="checkOutDate" name="r_checkout_date" min="${start_date}" required>
+									<input type="date" class="form-input" id="checkOutDate" name="r_checkout_date" required>
 								</div>
 							</div>
 
