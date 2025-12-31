@@ -25,6 +25,8 @@
         </div>
     </header>
 
-       <div style="height: 400px; background-color: blue; color: white; display: flex; justify-content: center; align-items: center; font-size: 20px;">
-            여기는 높이 400px 파란 블록입니다.
-        </div>
+       <div style="height: 400px; background-color: blue;">
+   	 <img src="images/F5 헤더.png" 
+        	 alt="사진" 
+     	    style="width: 100%; height: 100%; object-fit: cover;">
+</div>

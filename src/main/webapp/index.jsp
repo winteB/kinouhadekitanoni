@@ -56,7 +56,7 @@ function goPage(servlet,gubun){
         <div class="hot-grid-container">
             <a href="#" class="hot-card">
                 <div class="card-thumb-box">
-                    <img src="" alt="후기 첨부 사진">
+                    <img src="images/meat.png">
                     <span class="category-label">글램핑</span>
                 </div>
                 <div class="card-text-chunk">
@@ -65,7 +65,7 @@ function goPage(servlet,gubun){
             </a>
             <a href="#" class="hot-card">
                 <div class="card-thumb-box">
-                    <img src="https://niwacan.jp/wp-content/uploads/2025/08/ポスト写真.webp" alt="post">
+                    <img src="images/fish_review.png" alt="post">
                     <span class="category-label">낚시</span>
                 </div>
                 <div class="card-text-chunk">
