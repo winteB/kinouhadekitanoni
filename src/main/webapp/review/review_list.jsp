@@ -99,7 +99,7 @@
                         
         <div class="detail-btn-group">
             <a href="javascript:goPage('Review','write')" class="btn">글쓰기</a>
-            <a href="" class="btn">??</a>
+            <a href="javascript:goPage('Review','view')" class="btn">뷰페이지 임시</a>
         </div>
     </div>
     </div>

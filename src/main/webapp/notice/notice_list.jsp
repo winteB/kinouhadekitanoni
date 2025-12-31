@@ -173,7 +173,7 @@
             border-color: #0f172a;
         }
         .paging .write {
-            position: absolute;
+            position: static;
             right: 0;
             top: 50%;
             transform: translateY(-50%);
@@ -311,7 +311,8 @@
                 </c:if>
 
                 <c:if test="${sessionLevel eq 'top' }">
-                    <a href="javascript:goWriteForm()" class="write">글쓰기</a>
+                    <a href="javascript:goPage('Notice','write')" class="write">글쓰기</a>
+                	<a href="javascript:goPage('Notice','view')" class="write">뷰페이지 임시</a>
                 </c:if>
             </div>
         </div>
