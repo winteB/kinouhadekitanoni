@@ -5,6 +5,14 @@
 <head>
     <%@ include file="../common_header_head.jsp" %>
 </head>
+<script type="text/javascript">
+	function goLogin(){
+		if(checkEmpty(login.t_id,"ID 입력!")) return;
+		if(checkEmpty(login.t_password,"비밀번호 입력!")) return;
+		
+		mem.t_gubun.value = ""
+	}
+</script>
 <body class="main-page">
 
 <div class="wrapper">
