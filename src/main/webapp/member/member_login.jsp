@@ -7,10 +7,12 @@
 </head>
 <script type="text/javascript">
 	function goLogin(){
-		if(checkEmpty(login.t_id,"ID 입력!")) return;
-		if(checkEmpty(login.t_password,"비밀번호 입력!")) return;
+		if(checkEmpty(mem.t_id,"ID 입력!")) return;
+		if(checkEmpty(mem.t_password,"비밀번호 입력!")) return;
 		
-		mem.t_gubun.value = ""
+		mem.t_gubun.value="memberLogin";
+		mem.action = "Member";
+		mem.submit();
 	}
 </script>
 <body class="main-page">

@@ -9,6 +9,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import command.member.MemberLogin;
 import command.member.MemberSave;
 import common.CommonExecute;
 
@@ -49,8 +50,12 @@ public class Member extends HttpServlet {
       if(gubun.equals("login")) {
 
          view = "member/member_login.jsp";
-      }
-      else if(gubun.equals("password")) {
+      }//로그인 시도
+      else if(gubun.equals("memberLogin")) {
+    	  CommonExecute mem = new MemberLogin();
+    	  mem.execute(request);
+          view = "common_alert.jsp";
+       }else if(gubun.equals("password")) {
 
          view = "member/member_password.jsp";
       }else if(gubun.equals("join")) {
