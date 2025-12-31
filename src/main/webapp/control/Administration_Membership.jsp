@@ -10,8 +10,34 @@
     <title>niwacan Admin - Membership</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link rel="stylesheet" href="${pageContext.request.contextPath}/control/Administration.css"> 
-    <link rel="stylesheet" href="admin_style.css">
+    <link rel="stylesheet" href="Administration.css">
 </head>
+<script>
+    function goUser(){
+        controller.gubun.value="user";
+        controller.method="post";
+        controller.action = "/kinouhadekitanoni/Control";
+        controller.submit();
+    }
+    function goSell(){
+        controller.gubun.value="sell";
+        controller.method="post";
+        controller.action = "/kinouhadekitanoni/Control";
+        controller.submit();
+    }
+    function goReservation(){
+        controller.gubun.value="reservation";
+        controller.method="post";
+        controller.action = "/kinouhadekitanoni/Control";
+        controller.submit();
+    }
+    function goDesh(){
+        controller.gubun.value="desh";
+        controller.method="post";
+        controller.action = "/kinouhadekitanoni/Control";
+        controller.submit();
+    }
+</script>
 <body class="admin-page">
     
     <header class="main-header" id="mainHeader">
@@ -25,38 +51,25 @@
         </div>
         
         <nav class="main-nav">
-            <a href="#" class="nav-item">CONCEPT</a>
-            <a href="#" class="nav-item">PRODUCTS</a>
-            <a href="#" class="nav-item">GALLERY</a>
-            
-            <div class="admin-tools">
-                 <i class="fa-solid fa-magnifying-glass"></i>
-                 <i class="fa-solid fa-bell"></i>
-                 <img src="https://i.pravatar.cc/150?img=11" class="header-profile-img" alt="User">
-            </div>
+            <%@ include file = "common_header_body.jsp" %>
         </nav>
     </header>
-
+    <FORM name="controller">
+        <input type="hidden" name="gubun">
     <div class="dashboard-container">
        <aside class="sidebar">
-            <nav class="menu-nav">
-                <a href="#" class="menu-item active">
-                    <i class="fa-solid fa-chart-pie"></i> <span>Dashboard</span>
+           <nav class="menu-nav">
+                <a href="javascript:goDesh()" class="menu-item">
+                    <i class="fa-solid fa-chart-pie"></i> <span>대쉬 보드</span>
                 </a>
-                <a href="#" class="menu-item">
-                    <i class="fa-solid fa-chart-line"></i> <span>Membership management</span>
+                <a href="javascript:goUser()" class="menu-item active">
+                    <i class="fa-solid fa-chart-line"></i> <span>회원 관리 </span>
                 </a>
-                <a href="#" class="menu-item">
-                    <i class="fa-regular fa-credit-card"></i> <span>sales statistics</span>
+                <a href="javascript:goSell()" class="menu-item">
+                    <i class="fa-regular fa-credit-card"></i> <span>매출 통계</span>
                 </a>
-                <a href="#" class="menu-item">
-                    <i class="fa-solid fa-box-open"></i> <span>Manage reservations</span>
-                </a>
-                <a href="#" class="menu-item">
-                    <i class="fa-regular fa-user"></i> <span>Inquiry Management</span>
-                </a>
-                <a href="#" class="menu-item">
-                    <i class="fa-solid fa-gear"></i> <span>Managing Bulletin</span>
+                <a href="javascript:goReservation()" class="menu-item">
+                    <i class="fa-solid fa-box-open"></i> <span>예약 관리</span>
                 </a>
             </nav>
 
@@ -213,6 +226,7 @@
             </div>
         </main>
     </div>
+    </FORM>
     
     <script>
         // 스크롤 시 헤더 디자인 변경

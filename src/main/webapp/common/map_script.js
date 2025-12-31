@@ -5,7 +5,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const allTags = document.querySelectorAll('.site-tag');
     const hiddenInput = document.getElementById('selected-site-type');
 	const siteValue = document.querySelector(
-	    '.non-floating-bar .site-info .value'
+	    '.non-floating-bar .info-group2 .value'
 	);
 
 

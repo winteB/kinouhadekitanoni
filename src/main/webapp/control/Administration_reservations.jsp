@@ -9,10 +9,37 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>niwacan Admin - List View</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <link rel="stylesheet" href="Administration.css"> 
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/control/Administration.css"> 
 </head>
+<script>
+    function goUser(){
+        controller.gubun.value="user";
+        controller.method="post";
+        controller.action = "/kinouhadekitanoni/Control";
+        controller.submit();
+    }
+    function goSell(){
+        controller.gubun.value="sell";
+        controller.method="post";
+        controller.action = "/kinouhadekitanoni/Control";
+        controller.submit();
+    }
+    function goReservation(){
+        controller.gubun.value="reservation";
+        controller.method="post";
+        controller.action = "/kinouhadekitanoni/Control";
+        controller.submit();
+    }
+    function goDesh(){
+        controller.gubun.value="desh";
+        controller.method="post";
+        controller.action = "/kinouhadekitanoni/Control";
+        controller.submit();
+    }
+</script>
 <body class="admin-page">
-    
+    <FORM name="controller">
+        <input type="hidden" name="gubun">
     <header class="main-header" id="mainHeader">
         <div class="brand-wrapper">
             <div class="brand-text">niwacan</div>
@@ -39,23 +66,17 @@
     <div class="dashboard-container">
         <aside class="sidebar">
             <nav class="menu-nav">
-                <a href="#" class="menu-item">
-                    <i class="fa-solid fa-chart-pie"></i> <span>Dashboard</span>
+                <a href="javascript:goDesh()" class="menu-item">
+                    <i class="fa-solid fa-chart-pie"></i> <span>대쉬 보드</span>
                 </a>
-                <a href="#" class="menu-item active">
-                    <i class="fa-solid fa-chart-line"></i> <span>Membership management</span>
+                <a href="javascript:goUser()" class="menu-item">
+                    <i class="fa-solid fa-chart-line"></i> <span>회원 관리 </span>
                 </a>
-                <a href="#" class="menu-item">
-                    <i class="fa-regular fa-credit-card"></i> <span>Sales statistics</span>
+                <a href="javascript:goSell()" class="menu-item">
+                    <i class="fa-regular fa-credit-card"></i> <span>매출 통계</span>
                 </a>
-                <a href="#" class="menu-item">
-                    <i class="fa-solid fa-box-open"></i> <span>Manage reservations</span>
-                </a>
-                <a href="#" class="menu-item">
-                    <i class="fa-regular fa-user"></i> <span>Inquiry Management</span>
-                </a>
-                <a href="#" class="menu-item">
-                    <i class="fa-solid fa-gear"></i> <span>Managing Bulletin</span>
+                <a href="javascript:goReservation()" class="menu-item active">
+                    <i class="fa-solid fa-box-open"></i> <span>예약 관리</span>
                 </a>
             </nav>
 
@@ -205,7 +226,7 @@
 
     </div>
 </div>
-
+</FORM>
               
 
             </div>

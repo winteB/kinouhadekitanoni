@@ -181,7 +181,7 @@ body.main-page {
 
 .hero-section {
     position: relative; width: 100%; height: 100vh; min-height: 800px;
-    background: url('https://niwacan.jp/wp-content/themes/niwacan/assets/img/top/main_visual.jpg') center/cover no-repeat;
+    background: url("../images/1230사진.png") center/cover no-repeat;
     overflow: hidden;
 }
 .floating-button-layer {
@@ -579,7 +579,7 @@ body {
 
 /* 지도 스타일 */
 .map-container {
-    height: 100%;
+/*     height: 100%; */
     min-height: 400px;
 }
 .site-tags-container {
@@ -614,6 +614,7 @@ body {
 	}
 .map-placeholder {
     width: 95%;
+    margin: 0 auto;
     aspect-ratio: 16 / 9;   /* ⭐ 핵심 */
     border-radius: 16px;
     position: relative;
@@ -711,7 +712,28 @@ body {
     color: #0f172a;
     font-weight: 600;
 }
-
+.info-group label {
+    display: block;
+    font-size: 0.65rem;
+    font-weight: 800;
+    color: #94a3b8;
+    margin-bottom: 4px;
+}
+.info-group2 .value {
+    font-weight: 700;
+    color: #cbd5e1;
+}
+.info-group2 .value.selected {
+    color: #0f172a;
+    font-weight: 600;
+}
+.info-group2 label {
+    display: block;
+    font-size: 0.65rem;
+    font-weight: 800;
+    color: #94a3b8;
+    margin-bottom: 4px;
+}
 .divider {
     width: 1px;
     background: #f1f5f9;
@@ -1865,13 +1887,7 @@ body {
 /* ============================= */
 	/* NOTICE LIST STYLE */
 	/* ============================= */
-	#b_right {
-		background: #fff;
-		padding: 40px 50px;
-		border-radius: 20px;
-		box-shadow: 0 10px 30px rgba(0, 0, 0, 0.06);
-		margin: 40px auto 80px;
-	}
+
 
 	/* 제목 */
 	.n_title {
@@ -1983,24 +1999,19 @@ body {
 		border-radius: 10px;
 		font-weight: 700;
 	}
-
 /* ============================= */
-/* NOTICE LIST - FULL WIDTH AREA */
+/* NOTICE LIST - FINAL */
 /* ============================= */
 
-/* 🔴 빨간 영역 = 전체 폭 섹션 */
 #b_right {
-	width: 100%;
-	background: #f8f7f5; /* 페이지 배경 */
-	padding: 90px 0 100px; /* 위 아래 여백 */
+	background: #fff;
+	max-width: 1100px;
+	margin: 60px auto 100px;
+	padding: 50px 60px;
+	border-radius: 24px;
+	box-shadow: 0 12px 30px rgba(0,0,0,0.08);
 }
 
-/* 👉 안쪽 콘텐츠만 가운데로 */
-#b_right>* {
-	max-width: 1100px;
-	margin-left: auto;
-	margin-right: auto;
-}
 
 /* ============================= */
 /* NOTICE TITLE */
@@ -2352,3 +2363,9 @@ body {
 	color: #475569;
 	font-weight: 600;
 }
+
+
+
+
+
+/*Notice*/

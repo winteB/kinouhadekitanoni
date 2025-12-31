@@ -2,7 +2,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
     const image = document.getElementById('fishing-image');
     const mapPlaceholder = document.querySelector('.map-placeholder');
-
+	const hiddenInput = document.getElementById('selected-site-type');
     const areas = Array.from(
         document.querySelectorAll('map[name="fishing-map"] area')
     );
@@ -86,6 +86,7 @@ document.addEventListener('DOMContentLoaded', () => {
 			);
 
 			siteValue.textContent = siteName;
+			hiddenInput.value = siteName;
 			siteValue.classList.add('selected');
 
 

@@ -9,20 +9,17 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import common.CommonExecute;
-import dao.ControlDAO;
-
 /**
- * Servlet implementation class Control
+ * Servlet implementation class Paymant
  */
-@WebServlet("/Control")
-public class Control extends HttpServlet {
+@WebServlet("/Paymant")
+public class Paymant extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public Control() {
+    public Paymant() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -34,37 +31,31 @@ public class Control extends HttpServlet {
 		request.setCharacterEncoding("utf-8");
 
 		String view = "";
-		String gubun = request.getParameter("gubun");
-		
-		ControlDAO dao=new ControlDAO();
-		
+		String gubun = request.getParameter("t_gubun");
+		//gubun 값으로 낚시 예약페이지에서 온 건지 캠핑 예약 페이지에서 온 건지 구분
 		//gubun 값 null/공백 처리
 		if(gubun == null) {
 			gubun = "";
 		}
-		if(gubun.equals("")){
-			gubun="desh";
+		if(gubun.equals("")) {
+			gubun = "main";
 		}
 		
 		//여기서부터 페이지로 보내는 용도
+		//잘못 넘어온 거면 커버 페이지로 보냄
+		if(gubun.equals("main")) {
 
-		if(gubun.equals("desh")) {
-			
-			view="/control/Administration_main.jsp";
+			view = "cover.jsp";
 		}
-		//여기서부터 페이지로 보내는 용도
-		if(gubun.equals("user")) {
-
-			view="/control/Administration_Membership.jsp";
+		else if(gubun.equals("camping")) {
+			//성공, 실패 검증 클래스
+			view = "common_alert.jsp";
 		}
-		else if(gubun.equals("sell")) {
-
-			view="/control/Administration_sales.jsp";
+		else if(gubun.equals("fishing")) {
+			//성공, 실패 검증 클래스
+			view = "common_alert.jsp";
 		}
-		else if(gubun.equals("reservation")) {
-
-			view="/control/Administration_reservations.jsp";
-		}
+		
 		
 		RequestDispatcher rd = request.getRequestDispatcher(view);
 		rd.forward(request, response);
