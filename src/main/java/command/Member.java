@@ -9,6 +9,11 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import command.member.MemberLogin;
+import command.member.MemberLogout;
+import command.member.MemberSave;
+import common.CommonExecute;
+
 /**
  * Servlet implementation class Member
  */
@@ -42,22 +47,42 @@ public class Member extends HttpServlet {
       }
       
       //여기서부터 페이지로 보내는 용도
+      //로그인
       if(gubun.equals("login")) {
 
          view = "member/member_login.jsp";
-      }
+      }//로그인 시도
+      else if(gubun.equals("memberLogin")) {
+    	  CommonExecute mem = new MemberLogin();
+    	  mem.execute(request);
+          view = "common_alert.jsp";
+      }else if(gubun.equals("memberLogout")){
+    	  CommonExecute mem = new MemberLogout();
+    	  mem.execute(request);
+    	  view = "common_alert.jsp";
+		}
+      
+      
       else if(gubun.equals("password")) {
 
          view = "member/member_password.jsp";
       }else if(gubun.equals("join")) {
-
+    	  
          view = "member/member_join.jsp";
+      
+      //회원등록
+      }else if(gubun.equals("save")){
+    	  CommonExecute member = new MemberSave();
+    	  member.execute(request);
+ 			
+    	  view="common_alert.jsp";
+    
       }else if(gubun.equals("myinfo")) {
 
          view = "member/member_myinfo.jsp";
       }else if(gubun.equals("myyoyaku")) {
 
-          view = "member/member_myyoyaku.jsp";
+         view = "member/member_myyoyaku.jsp";
        }
       
       RequestDispatcher rd = request.getRequestDispatcher(view);

@@ -96,7 +96,11 @@
             <a href="#" class="page-btn">10</a>
             <a href="#" class="page-btn next"><i class="fa-solid fa-chevron-right"></i></a>
         </div>
-        
+                        
+        <div class="detail-btn-group">
+            <a href="javascript:goPage('Review','write')" class="btn">글쓰기</a>
+            <a href="" class="btn">??</a>
+        </div>
     </div>
     </div>
     </main>

@@ -16,6 +16,14 @@
 	
 	<!-- CSS 파일 링크 (캠핑용 CSS로 변경) -->
 	<link rel="stylesheet" type="text/css" href="../css/yoyaku_camping_detail.css">
+	<script src="https://js.tosspayments.com/v1"></script>
+	<script type="text/javascript">
+		function goPay(){
+			yoyaku.method="post";
+			yoyaku.action="YoyakuCamping";
+			yoyaku.submit();
+		}
+	</script>
 </head>
 <body>
     <div class="wrapper">
@@ -35,19 +43,24 @@
 	        		</div>
 
 					<!-- action을 YoyakuCamping으로 변경 -->
-					<form action="YoyakuCamping" method="post" name="confirmForm" onsubmit="return validateForm()">
+					<form action="yoyaku" method="post" name="confirmForm" onsubmit="return validateForm()">
 						<input type="hidden" name="t_gubun" value="confirm">
 						
 						<div class="detail-card">
+							<div class="map-container">
+								<div class="map-placeholder">
+									<img src="images/예약캠핑.png" alt="캠핑장 배치도" style="display:block; margin:0 auto;">
+								</div>
+							</div>
 							<!-- 1. 일정 및 위치 정보 -->
-							<h3 style="margin-bottom:1rem; font-size:1.1rem; border-left:4px solid #16a34a; padding-left:10px;">일정 및 위치</h3>
+							<h3 style="margin-bottom:1rem; font-size:1.1rem; border-left:4px solid #16a34a; padding-up:15px; padding-left:10px;">일정 및 위치</h3>
 							
 							<!-- 입실일 / 퇴실일 한 줄 배치 -->
 							<div class="info-grid">
 								<div class="form-group">
 									<label>입실일 (Check-in)</label>
 									<!-- 이전 페이지에서 받은 날짜 (수정 불가) -->
-									<input type="text" class="form-input" id="checkInDate" name="r_date" value="<%= rDate %>" readonly>
+									<input type="text" class="form-input" id="checkInDate" name="r_checkin_date" value="<%= rDate %>" readonly>
 								</div>
 								<div class="form-group">
 									<label>퇴실일 (Check-out)</label>
@@ -57,9 +70,22 @@
 							</div>
 
 							<!-- 위치 정보 (그 아래 배치) -->
-							<div class="form-group">
-								<label>선택한 구역 (Campsite)</label>
-								<input type="text" class="form-input" name="r_site" value="<%= rSite %>" readonly>
+							<div class="info-grid">
+								<div class="form-group">
+									<label for="campingType">캠핑 종류 (Type)</label>
+									<input type="number" name="r_site" class="form-input" value="<%= rSite %>" readonly>
+								</div>
+								
+								<div class="form-group">
+									<label>선택한 구역 (Campsite)</label>
+									<!-- 입력칸 대신 선택박스로 변경 -->
+									<select id="campingType" name="r_roomtype" class="form-input">
+										<option value="">A-001</option>
+										<option value="">A-002</option>
+										<option value="">A-003</option>
+									</select>
+									
+								</div>
 							</div>
 
 							<!-- 2. 예약자 및 요금 정보 -->
@@ -129,7 +155,7 @@
 						<!-- 하단 버튼 -->
 						<div class="btn-area">
 							<button type="button" class="btn-cancel" onclick="history.back()">취소</button>
-							<button type="submit" class="btn-confirm" style="background-color: #16a34a;">예약 확정</button>
+							<button type="button" class="btn-confirm" onclick="goPay()" style="background-color: #16a34a;">예약 확정</button>
 						</div>
 					</form>
 	        	</div>

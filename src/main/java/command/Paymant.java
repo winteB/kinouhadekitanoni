@@ -10,16 +10,16 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 /**
- * Servlet implementation class Qna
+ * Servlet implementation class Paymant
  */
-@WebServlet("/Qna")
-public class Qna extends HttpServlet {
+@WebServlet("/Paymant")
+public class Paymant extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public Qna() {
+    public Paymant() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -32,44 +32,30 @@ public class Qna extends HttpServlet {
 
 		String view = "";
 		String gubun = request.getParameter("t_gubun");
-		
+		//gubun 값으로 낚시 예약페이지에서 온 건지 캠핑 예약 페이지에서 온 건지 구분
 		//gubun 값 null/공백 처리
 		if(gubun == null) {
 			gubun = "";
 		}
 		if(gubun.equals("")) {
-			gubun = "faq_list";
+			gubun = "main";
 		}
 		
 		//여기서부터 페이지로 보내는 용도
-		if(gubun.equals("faq_list")) {
+		//잘못 넘어온 거면 커버 페이지로 보냄
+		if(gubun.equals("main")) {
 
-			view = "qna/faq_list.jsp";
+			view = "cover.jsp";
 		}
-		else if(gubun.equals("faq_view")) {
-
-			view = "qna/faq_view.jsp";
-		}else if(gubun.equals("faq_write")) {
-
-			view = "qna/faq_write.jsp";
-		}else if(gubun.equals("faq_update")) {
-
-			view = "qna/faq_update.jsp";
+		else if(gubun.equals("camping")) {
+			//성공, 실패 검증 클래스
+			view = "common_alert.jsp";
+		}
+		else if(gubun.equals("fishing")) {
+			//성공, 실패 검증 클래스
+			view = "common_alert.jsp";
 		}
 		
-		else if(gubun.equals("qna_list")) {
-
-			view = "qna/qna_list.jsp";
-		}else if(gubun.equals("qna_view")) {
-
-			view = "qna/qna_view.jsp";
-		}else if(gubun.equals("qna_write")) {
-
-			view = "qna/qna_write.jsp";
-		}else if(gubun.equals("qna_update")) {
-
-			view = "qna/qna_update.jsp";
-		}
 		
 		RequestDispatcher rd = request.getRequestDispatcher(view);
 		rd.forward(request, response);

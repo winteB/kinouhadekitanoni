@@ -10,10 +10,37 @@
     <link rel="stylesheet" href="${pageContext.request.contextPath}/control/Administration.css"> 
     <link rel="stylesheet" href="admin_style.css">
 </head>
+<script>
+    function goUser(){
+        controller.gubun.value="user";
+        controller.method="post";
+        controller.action = "/kinouhadekitanoni/Control";
+        controller.submit();
+    }
+    function goSell(){
+        controller.gubun.value="sell";
+        controller.method="post";
+        controller.action = "/kinouhadekitanoni/Control";
+        controller.submit();
+    }
+    function goReservation(){
+        controller.gubun.value="reservation";
+        controller.method="post";
+        controller.action = "/kinouhadekitanoni/Control";
+        controller.submit();
+    }
+    function goDesh(){
+        controller.gubun.value="desh";
+        controller.method="post";
+        controller.action = "/kinouhadekitanoni/Control";
+        controller.submit();
+    }
+</script>
 <body class="admin-page">
     
     <header class="main-header" id="mainHeader">
         <div class="brand-wrapper">
+             <%@ include file = "common_header_body.jsp" %>
             <div class="brand-text">niwacan</div>
             <svg class="brand-logo-svg" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
                 <circle cx="50" cy="50" r="48" fill="#00ffcc" stroke="#1a1a1a" stroke-width="4"/>
@@ -34,27 +61,22 @@
             </div>
         </nav>
     </header>
-
+    <FORM name="controller">
+        <input type="hidden" name="gubun">
     <div class="dashboard-container">
         <aside class="sidebar">
             <nav class="menu-nav">
-                <a href="#" class="menu-item active">
-                    <i class="fa-solid fa-chart-pie"></i> <span>Dashboard</span>
+                <a href="javascript:goDesh()" class="menu-item active">
+                    <i class="fa-solid fa-chart-pie"></i> <span>대쉬 보드</span>
                 </a>
-                <a href="#" class="menu-item">
-                    <i class="fa-solid fa-chart-line"></i> <span>Membership management</span>
+                <a href="javascript:goUser()" class="menu-item">
+                    <i class="fa-solid fa-chart-line"></i> <span>회원 관리 </span>
                 </a>
-                <a href="#" class="menu-item">
-                    <i class="fa-regular fa-credit-card"></i> <span>sales statistics</span>
+                <a href="javascript:goSell()" class="menu-item">
+                    <i class="fa-regular fa-credit-card"></i> <span>매출 통계</span>
                 </a>
-                <a href="#" class="menu-item">
-                    <i class="fa-solid fa-box-open"></i> <span>Manage reservations</span>
-                </a>
-                <a href="#" class="menu-item">
-                    <i class="fa-regular fa-user"></i> <span>Inquiry Management</span>
-                </a>
-                <a href="#" class="menu-item">
-                    <i class="fa-solid fa-gear"></i> <span>Managing Bulletin</span>
+                <a href="javascript:goReservation()" class="menu-item">
+                    <i class="fa-solid fa-box-open"></i> <span>예약 관리</span>
                 </a>
             </nav>
 
@@ -75,7 +97,7 @@
                                 <div class="icon-circle"><i class="fa-solid fa-wallet"></i></div>
                                 <span class="badge-pill">+17%</span>
                             </div>
-                            <div class="card-info"><span class="label">캠핑 매출</span><h2 class="amount">$ 56,874</h2></div>
+                            <div class="card-info"><span class="label">캠핑 매출</span><h2 class="amount">56,000원</h2></div>
                             <div class="wave-bg"></div>
                         </div>
                         <div class="stat-card card-yellow">
@@ -83,7 +105,7 @@
                                 <div class="icon-circle"><i class="fa-solid fa-bag-shopping"></i></div>
                                 <span class="badge-pill">+23%</span>
                             </div>
-                            <div class="card-info"><span class="label">낚시 매출</span><h2 class="amount">$ 24,575</h2></div>
+                            <div class="card-info"><span class="label">낚시 매출</span><h2 class="amount">24,000원</h2></div>
                             <div class="wave-bg"></div>
                         </div>
                         
@@ -117,26 +139,20 @@
                         <div class="donut-visual">
                              <div class="inner-circle"><span class="total-val">$76k</span></div>
                         </div>
-                        <div class="legend-box">
-                            <div class="legend"><span class="dot mint"></span>Giveaway</div>
-                            <div class="legend"><span class="dot yellow"></span>Affiliate</div>
-                            <div class="legend"><span class="dot gray"></span>Offline</div>
-                        </div>
+                        
                     </div>
                     
                     <div class="widget recent-sales-widget">
                         <h3>최근판매</h3>
                         <ul class="sales-list-vertical">
                             <li><img src="https://i.pravatar.cc/150?img=33" alt=""><div class="text"><strong>Steven</strong><span>2m ago</span></div><div class="money">+$52</div></li>
-                            <li><img src="https://i.pravatar.cc/150?img=47" alt=""><div class="text"><strong>Jordan</strong><span>5m ago</span></div><div class="money">+$83</div></li>
-                            <li><img src="https://i.pravatar.cc/150?img=9" alt=""><div class="text"><strong>Anna</strong><span>15m ago</span></div><div class="money">+$2,351</div></li>
                         </ul>
                     </div>
                 </aside>
             </div>
         </main>
     </div>
-
+    </FORM>
     <script>
         // 스크롤 시 헤더 디자인 변경 (메인 콘텐츠 내부 스크롤 감지)
         const mainContent = document.querySelector('.main-content');

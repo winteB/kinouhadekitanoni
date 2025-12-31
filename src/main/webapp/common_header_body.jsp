@@ -1,4 +1,7 @@
 <%@ page pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>  
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <form name = "work">
 	<input type="hidden" name="t_gubun">
 </form>
@@ -9,14 +12,23 @@
             </a>
         </div>
         <nav class="main-nav">
+            <a href="javascript:goPage('Notice','view')" class="nav-item">뷰</a>
+            <a href="javascript:goPage('Notice','write')" class="nav-item">라이트</a>
             <a href="javascript:goPage('Show','list')" class="nav-item">시설안내</a>
             <a href="javascript:goPage('YoyakuCamping','main')" class="nav-item">예약하기</a>
             <a href="javascript:goPage('Review','list')" class="nav-item">후기/포토</a>
             <a href="javascript:goPage('Notice','list')" class="nav-item">공지사항</a>
-            <a href="javascript:goPage('Member','login')" class="nav-item">Login</a>
-            <a href="javascript:goPage('Member','join')" class="nav-item">Join</a>
-            <a href="javascript:goPage('Member','myinfo')" class="nav-item">내 정보</a>
-            <a href="javascript:goPage('Control','main')" class="nav-item">관리자</a>
+            <c:if test="${empty sessionId }">
+            	<a href="javascript:goPage('Member','login')" class="nav-item">Login</a>
+	            <a href="javascript:goPage('Member','join')" class="nav-item">Join</a>
+            </c:if>
+            <c:if test="${not empty sessionId }">
+	            <a href="javascript:goPage('Member','myinfo')" class="nav-item">내 정보</a>
+				<a href="javascript:goPage('Member','memberLogout')" class="nav-item">Logout</a>
+      		</c:if>
+      		<c:if test="${sessionId eq 'top'}">
+            	<a href="javascript:goPage('Control','main')" class="nav-item">관리자</a>
+        	</c:if>
         </nav>
     </header>
     <header id="main-header">

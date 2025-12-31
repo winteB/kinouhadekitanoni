@@ -4,10 +4,6 @@
 <!DOCTYPE html>
 <html lang="ko">
 <head>
-    <!-- 기존 CSS -->
-    <link rel="stylesheet" href="${pageContext.request.contextPath}/css/css.css">
-    
-    <!-- 공통 헤더 head 포함 -->
     <%@ include file="../common_header_head.jsp" %>
 
     <!-- [핵심] 게시판 전용 스타일을 직접 적용 (파일 로드 문제 해결) -->
@@ -200,7 +196,7 @@
         }
     </style>
 </head>
-<body class="main-page">
+<body>
 
 <div class="wrapper">
     <%@ include file="../common_header_body.jsp" %>
