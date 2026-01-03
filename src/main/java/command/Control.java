@@ -10,7 +10,6 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import common.CommonExecute;
-import dao.ControlDAO;
 
 /**
  * Servlet implementation class Control
@@ -36,7 +35,7 @@ public class Control extends HttpServlet {
 		String view = "";
 		String gubun = request.getParameter("gubun");
 		
-		ControlDAO dao=new ControlDAO();
+//		ControlDAO dao=new ControlDAO();
 		
 		//gubun 값 null/공백 처리
 		if(gubun == null) {

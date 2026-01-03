@@ -10,6 +10,7 @@
 	<script src="https://js.tosspayments.com/v1"></script>
 	<script type="text/javascript">
 		function goPay(){
+			yoyaku.t_gubun.value="pay"
 			yoyaku.method="post";
 			yoyaku.action="YoyakuCamping";
 			yoyaku.submit();
@@ -120,7 +121,7 @@
 								</div>
 								<div class="form-group">
 									<label for="peopleCount">인원수 (명)</label>
-									<input type="number" id="peopleCount" name="r_count" class="form-input" min="1" max="10" placeholder="인원수를 입력하세요" required>
+									<input type="number" id="peopleCount" name="r_party" class="form-input" min="1" max="10" placeholder="인원수를 입력하세요" required>
 								</div>
 							</div>
 							

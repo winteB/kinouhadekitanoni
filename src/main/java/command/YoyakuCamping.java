@@ -10,7 +10,9 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import command.yoyaku.CampingtoDetail;
+import command.yoyaku.PreYoyaku;
 import common.CommonExecute;
+import common.CommonUtil;
 
 /**
  * Servlet implementation class YoyakuCamping
@@ -54,8 +56,19 @@ public class YoyakuCamping extends HttpServlet {
 			yoya.execute(request);
 			view = "yoyaku_camping/yoyaku_camping_detail.jsp";
 		}
+		else if(gubun.equals("pay")) {
+			CommonExecute yoya = new PreYoyaku();
+			yoya.execute(request);
+			view = "yoyaku_camping/yoyaku_camping_detail.jsp";
+		}
 		
 		
+		request.setAttribute("sidemenu", "camping");
+		if(CommonUtil.getSessionInfo(request)==null) {
+			view = "Member";
+		}else if(CommonUtil.getSessionInfo(request).equals("")){
+			view = "Member";
+		}
 		RequestDispatcher rd = request.getRequestDispatcher(view);
 		rd.forward(request, response);
 	}

@@ -10,12 +10,11 @@
 		var tossPayments = TossPayments(clientKey)
 		function goPay(){
 			tossPayments.requestPayment('카드', {
-		          amount: 15000,
-		          orderId: 'zUo_E9x6JfRS46bqXbvLh',
-		          orderName: '토스 티셔츠 외 2건',
-		          customerName: '박토스',
-		          successUrl: 'Paymant',
-		          failUrl: 'Paymant',
+		          amount: ${price},
+		          orderId: ${orderID},
+		          orderName: "캠핑 예약",
+		          successUrl: "/payment/result?status=success",
+		          failUrl: "/payment/result?status=fail"
 		        })
 		}
 	</script>

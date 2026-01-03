@@ -9,7 +9,6 @@ public class DBtest {
 		
 		Connection con = DBConnection.getConnection();
 		
-		System.out.println(con);
 		
 		DBConnection.closeDB(con, null, null);
 	}

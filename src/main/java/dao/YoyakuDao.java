@@ -8,6 +8,7 @@ import java.util.List;
 
 import common.DBConnection;
 import dto.CampingDto;
+import dto.FishingDto;
 
 public class YoyakuDao {
 	Connection conn = null;
@@ -47,6 +48,47 @@ public class YoyakuDao {
 		}
 		return list;
 	}
+//	예약가능 좌대 리스트업
+	public List<FishingDto> getFishingSiteList(String selected_date, String checkout_date) {
+		List<FishingDto> list = new ArrayList<FishingDto>();
+		String sql = "SELECT Fish_NO, Fish_SIZE, Fish_NAME\r\n"
+				+ "FROM (\r\n"
+				+ "    SELECT f.Fish_NO,\r\n"
+				+ "           f.Fish_SIZE,\r\n"
+				+ "           f.Fish_NAME,\r\n"
+				+ "           ROW_NUMBER() OVER (PARTITION BY f.Fish_SIZE ORDER BY f.Fish_NO) AS rn\r\n"
+				+ "    FROM Fishing f\r\n"
+				+ "    WHERE NOT EXISTS (\r\n"
+				+ "        SELECT 1\r\n"
+				+ "        FROM YOYAKU_STATE r\r\n"
+				+ "        WHERE r.SPOT = f.Fish_NO\r\n"
+				+ "          AND r.INDAY BETWEEN TO_DATE('"+selected_date+"','YYYY-MM-DD')\r\n"
+				+ "                          AND TO_DATE('"+checkout_date+"','YYYY-MM-DD') - 1\r\n"
+				+ "    )\r\n"
+				+ ")\r\n"
+				+ "WHERE rn = 1\r\n"
+				+ "ORDER BY Fish_NO";
+		System.out.println(sql);
+		try {
+			conn = DBConnection.getConnection();
+			ps = conn.prepareStatement(sql);
+			rs = ps.executeQuery();
+			while(rs.next()) {
+				String no = rs.getString("Fish_NO");
+				String size = rs.getString("Fish_SIZE");
+				String name = rs.getString("Fish_NAME");
+				FishingDto dto = new FishingDto(no, name, size);
+				list.add(dto);
+			}
+		}catch(Exception e){
+			e.printStackTrace();
+		}finally {
+			DBConnection.closeDB(conn, ps, rs);
+		}
+		return list;
+	}
+	
+	
 //	캠핑 가격 조회
 	public int getCampingPrice(String selected_area) {
 		int price = 0;
@@ -60,13 +102,33 @@ public class YoyakuDao {
 				price = rs.getInt("price");
 			}
 		} catch (Exception e) {
-			// TODO: handle exception
+			e.printStackTrace();
 		} finally {
 			DBConnection.closeDB(conn, ps, rs);
 		}
 		
 		
 		return price;
+	}
+	public String getFishSize(String selected_area) {
+		String size = "";
+		String sql = "select fish_size from fishing where fish_no='"+selected_area+"'";
+		
+		try {
+			conn = DBConnection.getConnection();
+			ps = conn.prepareStatement(sql);
+			rs = ps.executeQuery();
+			if(rs.next()) {
+				size = rs.getString("fish_size");
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			DBConnection.closeDB(conn, ps, rs);
+		}
+		
+		
+		return size;
 	}
 
 }

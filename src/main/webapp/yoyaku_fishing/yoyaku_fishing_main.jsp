@@ -15,12 +15,13 @@
 	</script>
 </head>
 <body>
-    <form name="yoyaku">    	
+	<form name="yoyaku">    	
         <input type="hidden" name="t_gubun" value="detail">
         <input type="hidden" name="selected_area" id="selected-site-type" value="">
     	<input type="hidden" name="selected_date" id="selectedDate" value="">
     </form>
     <div class="wrapper">
+        
         <%@ include file = "../common_header_body.jsp" %>
         
 		<div class="layout">
@@ -108,7 +109,7 @@
                     <span class="value">선택안함</span>
                 </div>
             </div>
-            <button class="reserve-btn" id="btnReserve" disabled onclick="goPage('YoyakuFishing','detail')">예약하기</button>
+            <button class="reserve-btn" id="btnReserve" disabled onclick="goDetail()">예약하기</button>
         </div>
         </div>
         </main>
