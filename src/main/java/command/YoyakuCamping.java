@@ -9,6 +9,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import command.yoyaku.CampingtoDetail;
 import common.CommonExecute;
 
 /**
@@ -49,7 +50,8 @@ public class YoyakuCamping extends HttpServlet {
 			view = "yoyaku_camping/yoyaku_camping_main.jsp";
 		}
 		else if(gubun.equals("detail")) {
-			
+			CommonExecute yoya = new CampingtoDetail();
+			yoya.execute(request);
 			view = "yoyaku_camping/yoyaku_camping_detail.jsp";
 		}
 		

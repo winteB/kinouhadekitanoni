@@ -1386,10 +1386,9 @@ body {
     transition: all 0.2s;
 }
 
-.form-input:read-only {
+input.form-input:read-only {
     background-color: #f8fafc;
     color: #64748b;
-    cursor: not-allowed;
 }
 
 .info-grid {

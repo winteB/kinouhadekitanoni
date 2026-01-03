@@ -227,7 +227,7 @@ document.addEventListener("DOMContentLoaded", () => {
             const day = String(cell.textContent.trim()).padStart(2, '0');
 
             // 최종 포맷: YYYY/MM/DD
-            const resultValue = year + "/" + month + "/" + day;
+            const resultValue = year + "-" + month + "-" + day;
 
             // 값 적용
             inputBox.value = resultValue;           // input
