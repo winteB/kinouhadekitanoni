@@ -24,26 +24,7 @@
 
 		// 폼 제출 전 유효성 검사
 		function validateForm() {
-			const count = document.getElementById('peopleCount').value;
-			const agree = document.getElementById('agreeCheck').checked;
-			const checkOut = document.getElementById('checkOutDate').value;
-
-			if (!checkOut) {
-				alert("퇴실일을 선택해주세요.");
-				return false;
-			}
-
-			if (!count || count < 1) {
-				alert("올바른 인원수를 입력해주세요.");
-				return false;
-			}
 			
-			if (!agree) {
-				alert("주의사항에 동의해주셔야 예약이 가능합니다.");
-				return false;
-			}
-
-			return true;
 		}
 	</script>
 </head>
@@ -67,11 +48,12 @@
 					<!-- action을 YoyakuCamping으로 변경 -->
 					<form name="yoyaku">
 						<input type="hidden" name="t_gubun" value="confirm">
+						<input type="hidden" name="t_kind" value="ca">
 						
 						<div class="detail-card">
 							<div class="map-container">
 								<div class="map-placeholder">
-									<img src="images/예약캠핑.png" alt="캠핑장 배치도" style="display:block; margin:0 auto;">
+									<img src="images/예약_2_${selected_area }.png" alt="캠핑장 배치도" style="display:block; margin:0 auto; max-width:auto; height:100%;">
 								</div>
 							</div>
 							<!-- 1. 일정 및 위치 정보 -->
@@ -103,7 +85,7 @@
 									<!-- 입력칸 대신 선택박스로 변경 -->
 									<select name="r_spot" class="form-input">
 										<c:forEach var="cmp" items="${clist }">
-											<option value="${cmp.getNo() }">${cmp.getName() }</option>
+								 			<option value="${cmp.getNo() }" <c:if test="${cmp.getNo() eq spot }">selected</c:if>>${cmp.getName() }</option>
 										</c:forEach>
 									</select>
 									
@@ -117,7 +99,7 @@
 								<div class="form-group">
 									<label>예약자 성명</label>
 									<!-- 너비를 50%로 줄임 -->
-									<input type="text" class="form-input" name="r_name" value="${sessionName }">
+									<input type="text" class="form-input" name="r_name" value="${sessionName }" readonly>
 								</div>
 								<div class="form-group">
 									<label for="peopleCount">인원수 (명)</label>
@@ -161,7 +143,7 @@
 								<li>예약 취소는 이용일 3일 전까지만 100% 환불 가능합니다.</li>
 							</ul>
 							<div style="margin-top:1rem;">
-								<input type="checkbox" id="agreeCheck" required>
+								<input type="checkbox" id="agreeCheck" name="r_check">
 								<label for="agreeCheck" style="font-size:0.9rem; font-weight:600;">위 안내사항 및 주의사항을 모두 확인하였으며 이에 동의합니다.</label>
 							</div>
 						</div>

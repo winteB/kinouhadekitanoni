@@ -4,17 +4,21 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
+<title>결제</title>
+
+	<script src="https://js.tosspayments.com/v1"></script>
 	<script type="text/javascript">
 		var clientKey = 'test_ck_0RnYX2w532zRbgPnXnOM3NeyqApQ'
 		var tossPayments = TossPayments(clientKey)
-		function goPay(){
+		window.onload = function goPay(){
 			tossPayments.requestPayment('카드', {
-		          amount: ${price},
-		          orderId: ${orderID},
-		          orderName: "캠핑 예약",
-		          successUrl: "/payment/result?status=success",
-		          failUrl: "/payment/result?status=fail"
+		          amount: "${price}",
+		          orderId: "${orderNo}",
+		          orderName: "${orderName}",
+		          customerName: "${customerName}",
+		          
+		          successUrl: "${successUrl}",
+		          failUrl: "${failUrl}"
 		        })
 		}
 	</script>

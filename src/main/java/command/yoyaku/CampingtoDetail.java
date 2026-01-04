@@ -54,6 +54,7 @@ public class CampingtoDetail implements CommonExecute {
 		request.setAttribute("checkout_date", checkout_date);
 		request.setAttribute("clist", clist);
 		request.setAttribute("price", price);
+		request.setAttribute("spot", request.getParameter("r_spot") );
 	}
 
 }

@@ -65,6 +65,7 @@
 
 					<form name="yoyaku">
 						<input type="hidden" name="t_gubun" value="confirm">
+						<input type="hidden" name="t_kind" value="fi">
 						
 						<div class="detail-card">
 							<!-- 1. 일정 및 위치 정보 -->
@@ -92,7 +93,7 @@
 								</div>
 								<div class="form-group">
 									<label>좌대 사이즈</label>
-									<select name="r_site" class="form-input" onchange="changeCheckout()">
+									<select name="r_spot" class="form-input" onchange="changeCheckout()">
 										<c:forEach var="fi" items="${flist }">
 											<option value="${fi.getNo() }"  
 												<c:if test="${selected_area eq fi.getNo() }">selected</c:if>>
@@ -107,7 +108,7 @@
 							<h3 style="margin-top:1.5rem; margin-bottom:1rem; font-size:1.1rem; border-left:4px solid #2563eb; padding-left:10px;">예약자 정보</h3>
 							<div class="form-group">
 								<label>예약자 성명</label>
-								<input type="text" class="form-input" name="r_name" value="${sessionName }">
+								<input type="text" class="form-input" name="r_name" value="${sessionName }" readonly>
 							</div>
 							
 							<div class="info-grid">

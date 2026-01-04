@@ -10,10 +10,15 @@ public class YoyakuDto {
 			       price     ,
 			       start_date,
 			       end_date  ,
-			       paymant   ;
+			       party	 ,
+			       paymant   ;//결제상태
+	
+	private String 	username,
+					site;//글램핑 오토캠핑 카라반 좌대
+					
 
 	public YoyakuDto(String no, String user_id, String kind, String spot, String river, String pay_date, String price,
-			String start_date, String end_date, String paymant) {
+			String start_date, String end_date, String paymant, String party) {
 		super();
 		this.no = no;
 		this.user_id = user_id;
@@ -25,10 +30,23 @@ public class YoyakuDto {
 		this.start_date = start_date;
 		this.end_date = end_date;
 		this.paymant = paymant;
+		this.party = party;
 	}
 
 	public String getNo() {
 		return no;
+	}
+
+	public String getParty() {
+		return party;
+	}
+
+	public String getUsername() {
+		return username;
+	}
+
+	public String getSite() {
+		return site;
 	}
 
 	public String getUser_id() {

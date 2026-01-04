@@ -9,6 +9,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import command.yoyaku.FishingPay;
 import command.yoyaku.FishingtoDetail;
 import common.CommonExecute;
 import common.CommonUtil;
@@ -58,7 +59,12 @@ public class YoyakuFishing extends HttpServlet {
 			yoya.execute(request);
 			view = "yoyaku_fishing/yoyaku_fishing_detail.jsp";
 		}
-		
+		//3. 결제하기 버튼
+		else if(gubun.equals("pay")) {
+			CommonExecute yoya = new FishingPay();
+			yoya.execute(request);
+			view = "yoyaku_camping/yoyaku_camping_detail.jsp";
+		}
 		
 		request.setAttribute("sidemenu", "fishing");
 		if(CommonUtil.getSessionInfo(request)==null) {

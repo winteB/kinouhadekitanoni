@@ -18,17 +18,17 @@ public class YoyakuDao {
 	// 예약가능 캠핑 사이트 리스트업
 	public List<CampingDto> getCampingSiteList(String selected_area, String selected_date, String checkout_date) {
 		List<CampingDto> list = new ArrayList<CampingDto>();
-		String sql = "SELECT c.CAM_NO, c.CAM_TYPE, c.CAM_NAME\r\n"
-				+ "FROM Camping c\r\n"
-				+ "WHERE c.CAM_TYPE = '"+selected_area+"'\r\n"
-				+ "  AND NOT EXISTS (\r\n"
-				+ "        SELECT 1\r\n"
-				+ "        FROM YOYAKU_STATE r\r\n"
-				+ "        WHERE r.SPOT = c.CAM_NO\r\n"
-				+ "          AND r.INDAY BETWEEN TO_DATE('"+selected_date+"', 'YYYY-MM-DD')\r\n"
-				+ "                          AND TO_DATE('"+checkout_date+"', 'YYYY-MM-DD') - 1\r\n"
-				+ "      )"
-				+ " order by CAM_NAME";
+		String sql =  "SELECT c.CAM_NO, c.CAM_TYPE, c.CAM_NAME \r\n"
+				+ "FROM Camping c \r\n"
+				+ "WHERE c.CAM_TYPE = '"+selected_area+"' \r\n"
+				+ "AND NOT EXISTS \r\n"
+				+ "    (SELECT 1 FROM yoyaku y\r\n"
+				+ "    WHERE y.SPOT = c.CAM_NO\r\n"
+				+ "    AND y.KIND = 'ca'\r\n"
+				+ "    AND y.START_DATE < TO_DATE('"+checkout_date+"', 'YYYY-MM-DD')\r\n"
+				+ "    AND y.END_DATE   > TO_DATE('"+selected_date+"', 'YYYY-MM-DD') ) \r\n"
+				+ "ORDER BY c.CAM_NAME";
+
 		System.out.println(sql);
 		try {
 			conn = DBConnection.getConnection();
@@ -58,13 +58,12 @@ public class YoyakuDao {
 				+ "           f.Fish_NAME,\r\n"
 				+ "           ROW_NUMBER() OVER (PARTITION BY f.Fish_SIZE ORDER BY f.Fish_NO) AS rn\r\n"
 				+ "    FROM Fishing f\r\n"
-				+ "    WHERE NOT EXISTS (\r\n"
-				+ "        SELECT 1\r\n"
-				+ "        FROM YOYAKU_STATE r\r\n"
-				+ "        WHERE r.SPOT = f.Fish_NO\r\n"
-				+ "          AND r.INDAY BETWEEN TO_DATE('"+selected_date+"','YYYY-MM-DD')\r\n"
-				+ "                          AND TO_DATE('"+checkout_date+"','YYYY-MM-DD') - 1\r\n"
-				+ "    )\r\n"
+				+ "    WHERE NOT EXISTS "
+				+ "    (SELECT 1 FROM yoyaku y\r\n"
+				+ "    WHERE y.SPOT = f.Fish_NO\r\n"
+				+ "    AND y.KIND = 'fi'\r\n"
+				+ "    AND y.START_DATE < TO_DATE('"+checkout_date+"', 'YYYY-MM-DD')\r\n"
+				+ "    AND y.END_DATE   > TO_DATE('"+selected_date+"', 'YYYY-MM-DD') ) \r\n"
 				+ ")\r\n"
 				+ "WHERE rn = 1\r\n"
 				+ "ORDER BY Fish_NO";
