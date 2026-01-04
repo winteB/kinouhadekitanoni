@@ -44,26 +44,10 @@
 <body class="admin-page">
     <FORM name="controller">
         <input type="hidden" name="gubun">
-    <header class="main-header" id="mainHeader">
-        <div class="brand-wrapper">
-            <div class="brand-text">niwacan</div>
-            <svg class="brand-logo-svg" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
-                <circle cx="50" cy="50" r="48" fill="#00ffcc" stroke="#1a1a1a" stroke-width="4"/>
-                <path d="M50 20 L80 80 L20 80 Z" fill="#e6ff00" stroke="#1a1a1a" stroke-width="3" stroke-linejoin="round"/>
-                <text x="50" y="72" font-family="Outfit, sans-serif" font-weight="900" font-size="36" text-anchor="middle" fill="#1a1a1a">nc</text>
-            </svg>
-        </div>
+       <header class="main-header" id="mainHeader">
         
         <nav class="main-nav">
-            <a href="#" class="nav-item">CONCEPT</a>
-            <a href="#" class="nav-item">PRODUCTS</a>
-            <a href="#" class="nav-item">GALLERY</a>
-            
-            <div class="admin-tools">
-                 <i class="fa-solid fa-magnifying-glass"></i>
-                 <i class="fa-solid fa-bell"></i>
-                 <img src="https://i.pravatar.cc/150?img=11" class="header-profile-img" alt="User">
-            </div>
+            <%@include file = "cover2.jsp"%>
         </nav>
     </header>
 
