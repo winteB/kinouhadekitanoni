@@ -19,7 +19,7 @@ public class FishingtoDetail implements CommonExecute {
 		//선택한 강 지역 + 메인서 진입
 		String river = request.getParameter("selected_area");
 		//여기선 좌대 크기
-		String selected_area = "";
+		String selected_area = "S";
 		String selected_date = "";
 		String checkout_date = "";
 		int nights = 1;
@@ -29,7 +29,7 @@ public class FishingtoDetail implements CommonExecute {
 		List<FishingDto> flist = null;
 		if(river==null) {
 			//디테일에서 새 선택
-			selected_area = request.getParameter("r_site");
+			selected_area = request.getParameter("r_spot");
 			river = request.getParameter("r_river");
 			selected_date = request.getParameter("r_checkin_date");
 			checkout_date = request.getParameter("r_checkout_date");

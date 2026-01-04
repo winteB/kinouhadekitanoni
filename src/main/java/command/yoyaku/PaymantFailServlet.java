@@ -38,8 +38,8 @@ public class PaymantFailServlet extends HttpServlet {
 
 		
 		PaymantDao dao = new PaymantDao();
-		int result = dao.updatePreYoyaky(orderId);
-		String msg = result==1?"결제 완료":"오류 발생";
+		int result = dao.deletPreYoyaky(orderId);
+		String msg = result==1?"결제 실패":"오류 발생";
 		
 		request.setAttribute("t_msg", msg);
 		request.setAttribute("t_url", "index");

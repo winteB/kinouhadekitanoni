@@ -99,4 +99,23 @@ public class PaymantDao {
 		
 		return res;
 	}
+
+	public int deletPreYoyaky(String orderId) {
+		int res = 0;
+		String sql = "delete from yoyaku\r\n"
+				+ "WHERE no = '"+orderId+"'";
+		System.out.println(sql);
+		try {
+			conn = DBConnection.getConnection();
+			ps = conn.prepareStatement(sql);
+			res = ps.executeUpdate();
+		}catch(Exception e) {
+			System.out.println("deletPreYoyaky 에러");
+			e.printStackTrace();
+		}finally {
+			DBConnection.closeDB(conn, ps, rs);
+		}
+		
+		return res;
+	}
 }

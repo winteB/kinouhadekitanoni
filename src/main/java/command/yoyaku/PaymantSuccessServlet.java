@@ -1,11 +1,15 @@
 package command.yoyaku;
 
 import java.io.IOException;
+
+import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+
+import dao.PaymantDao;
 
 /**
  * Servlet implementation class PaymantSuccessServlet
@@ -26,8 +30,22 @@ public class PaymantSuccessServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
-		response.getWriter().append("Served at: ").append(request.getContextPath());
+request.setCharacterEncoding("utf-8");
+		
+		String paymentKey = request.getParameter("paymentKey");
+		String orderId    = request.getParameter("orderId");
+		String amount     = request.getParameter("amount");
+
+		
+		PaymantDao dao = new PaymantDao();
+		int result = dao.updatePreYoyaky(orderId);
+		String msg = result==1?"결제 완료":"오류 발생";
+		
+		request.setAttribute("t_msg", msg);
+		request.setAttribute("t_url", "index");
+		
+		RequestDispatcher rd = request.getRequestDispatcher("common_alert.jsp");
+		rd.forward(request, response);
 	}
 
 	/**

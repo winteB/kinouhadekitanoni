@@ -63,7 +63,7 @@ public class YoyakuFishing extends HttpServlet {
 		else if(gubun.equals("pay")) {
 			CommonExecute yoya = new FishingPay();
 			yoya.execute(request);
-			view = "yoyaku_camping/yoyaku_camping_detail.jsp";
+			view = "paymant/paymant.jsp";
 		}
 		
 		request.setAttribute("sidemenu", "fishing");

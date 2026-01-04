@@ -9,6 +9,11 @@
 	<link rel="stylesheet" type="text/css" href="../css/yoyaku_fishing_detail.css">
 	<script type="text/javascript">
 		function goPay(){
+			if(checkEmpty(yoyaku.r_party,"인원수를 입력하세요.")) return;
+			if (!document.yoyaku.r_check.checked) {
+		        alert("주의사항에 동의하셔야 합니다.");
+		        return;
+		    }
 			yoyaku.t_gubun.value="pay"
 			yoyaku.method="post";
 			yoyaku.action="YoyakuFishing";
@@ -21,29 +26,6 @@
 			yoyaku.submit();
 		}
 
-		// 폼 제출 전 유효성 검사
-		function validateForm() {
-			const count = document.getElementById('peopleCount').value;
-			const agree = document.getElementById('agreeCheck').checked;
-			const checkOut = document.getElementById('checkOutDate').value;
-
-			if (!checkOut) {
-				alert("퇴실일을 선택해주세요.");
-				return false;
-			}
-
-			if (!count || count < 1) {
-				alert("올바른 인원수를 입력해주세요.");
-				return false;
-			}
-			
-			if (!agree) {
-				alert("주의사항에 동의해주셔야 예약이 가능합니다.");
-				return false;
-			}
-
-			return true;
-		}
 	</script>
 </head>
 <body>
@@ -157,7 +139,7 @@
 								<li>예약 취소는 이용일 3일 전까지만 100% 환불 가능합니다.</li>
 							</ul>
 							<div style="margin-top:1rem;">
-								<input type="checkbox" id="agreeCheck" required>
+								<input type="checkbox" name="r_check" id="agreeCheck">
 								<label for="agreeCheck" style="font-size:0.9rem; font-weight:600;">위 안내사항 및 주의사항을 모두 확인하였으며 이에 동의합니다.</label>
 							</div>
 						</div>

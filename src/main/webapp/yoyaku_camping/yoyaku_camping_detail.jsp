@@ -10,6 +10,11 @@
 	<script src="https://js.tosspayments.com/v1"></script>
 	<script type="text/javascript">
 		function goPay(){
+			if(checkEmpty(yoyaku.r_party,"인원수를 입력하세요.")) return;
+			if (!document.yoyaku.r_check.checked) {
+		        alert("주의사항에 동의하셔야 합니다.");
+		        return;
+		    }
 			yoyaku.t_gubun.value="pay"
 			yoyaku.method="post";
 			yoyaku.action="YoyakuCamping";
