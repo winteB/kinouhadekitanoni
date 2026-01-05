@@ -1,6 +1,17 @@
 <%@ page pageEncoding="UTF-8"%>
+<head>
+	<script type="text/javascript">
+		function goPage(servlet,gubun){
+			if(gubun!=null){
+				work.t_gubun.value=gubun;
+			}
+			work.method="post";
+			work.action=servlet;
+			work.submit();
+		}
+	</script>
+</head>
 
-<body class="intro">
     <form name = "work">
 	<input type="hidden" name="t_gubun">
 	</form>
@@ -51,4 +62,3 @@
         </div>
     </section>
 
-</body>

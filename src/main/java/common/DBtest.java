@@ -15,6 +15,8 @@ public class DBtest {
 //		dao.getOrderNo();
 		dao.updatePreYoyaky("2026-01-04_00002");
 		
+		
+		
 		DBConnection.closeDB(con, null, null);
 		
 	}

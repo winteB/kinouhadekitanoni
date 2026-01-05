@@ -26,7 +26,7 @@
 	            <a href="javascript:goPage('Member','myinfo')" class="nav-item">내 정보</a>
 				<a href="javascript:goPage('Member','memberLogout')" class="nav-item">Logout</a>
       		</c:if>
-      		<c:if test="${sessionId eq 'top'}">
+      		<c:if test="${sessionLevel eq 'top'}">
             	<a href="javascript:goPage('Control','main')" class="nav-item">관리자</a>
         	</c:if>
         </nav>
