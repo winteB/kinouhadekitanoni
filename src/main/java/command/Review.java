@@ -15,6 +15,7 @@ import javax.servlet.http.HttpSession;
 import com.oreilly.servlet.MultipartRequest;
 import com.oreilly.servlet.multipart.DefaultFileRenamePolicy;
 
+import common.CommonUtil;
 import dao.ReviewDao;
 import dto.ReviewCommentDto;
 import dto.ReviewDto;
@@ -58,7 +59,9 @@ public class Review extends HttpServlet {
 		
 		// 3. 리뷰 저장
 		else if(gubun.equals("save")) {
-			String dir = request.getServletContext().getRealPath("/file_room");
+			
+//			String dir = request.getServletContext().getRealPath("/file_room");
+			String dir = CommonUtil.getFileSaveDir(request, "review");
 			File folder = new File(dir);
 			if(!folder.exists()) {
 				folder.mkdirs();

@@ -8,12 +8,14 @@
     <title>昨日はできたのに</title>
     <link rel="stylesheet" href="css/css.css">
 	<script type="text/javascript">
-		function goPage(servlet,gubun){
+	function goPage(servlet,gubun){
+		if(gubun!=null){
 			work.t_gubun.value=gubun;
-			work.method="post";
-			work.action=servlet;
-			work.submit();
 		}
+		work.method="post";
+		work.action=servlet;
+		work.submit();
+	}
 	</script>
 </head>
 <body class="intro">
@@ -62,7 +64,7 @@
             <h2 class="section-title">CAMP</h2>
             <a href="javascript:goPage('YoyakuCamping','main')" class="enter-pill">입장하기</a>
         </div>
-        <div class="split-section fish-section" onclick="goPage('YoyakuFishing','main')"">
+        <div class="split-section fish-section" onclick="goPage('YoyakuFishing','main')">
             <svg class="section-icon" viewBox="0 0 100 100">
                 <path d="M10 50 Q 30 20 70 20 L 90 50 L 70 80 Q 30 80 10 50 Z" fill="#fff" stroke="#1a1a1a" stroke-width="4"/>
                 <circle cx="70" cy="40" r="5" fill="#1a1a1a"/>
