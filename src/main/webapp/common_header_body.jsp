@@ -12,8 +12,8 @@
             </a>
         </div>
         <nav class="main-nav">
-            <a href="javascript:goPage('Qna','qna_view')" class="nav-item">뷰</a>
-            <a href="javascript:goPage('Qna','qna_write')" class="nav-item">라이트</a>
+            <a href="javascript:goPage('Faq','faq_view')" class="nav-item">뷰</a>
+            <a href="javascript:goPage('Faq','faq_write')" class="nav-item">라이트</a>
             <a href="javascript:goPage('Show','list')" class="nav-item">시설안내</a>
             <a href="javascript:goPage('YoyakuCamping','main')" class="nav-item">예약하기</a>
             <a href="javascript:goPage('Review','list')" class="nav-item">후기/포토</a>
