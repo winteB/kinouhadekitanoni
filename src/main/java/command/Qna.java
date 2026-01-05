@@ -43,7 +43,7 @@ public class Qna extends HttpServlet {
 			gubun = "";
 		}
 		if(gubun.equals("")) {
-			gubun = "qna_list";
+			gubun = "faq_list";
 		}
 		
 		//여기서부터 페이지로 보내는 용도
