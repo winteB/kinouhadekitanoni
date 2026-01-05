@@ -40,13 +40,7 @@
     
     <header class="main-header" id="mainHeader">
         <div class="brand-wrapper">
-             <%@ include file = "common_header_body.jsp" %>
-            <div class="brand-text">niwacan</div>
-            <svg class="brand-logo-svg" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
-                <circle cx="50" cy="50" r="48" fill="#00ffcc" stroke="#1a1a1a" stroke-width="4"/>
-                <path d="M50 20 L80 80 L20 80 Z" fill="#e6ff00" stroke="#1a1a1a" stroke-width="3" stroke-linejoin="round"/>
-                <text x="50" y="72" font-family="Outfit, sans-serif" font-weight="900" font-size="36" text-anchor="middle" fill="#1a1a1a">nc</text>
-            </svg>
+             <%@include file = "cover2.jsp"%>
         </div>
         
         <nav class="main-nav">
@@ -67,22 +61,31 @@
         <aside class="sidebar">
             <nav class="menu-nav">
                 <a href="javascript:goDesh()" class="menu-item active">
-                    <i class="fa-solid fa-chart-pie"></i> <span>대쉬 보드</span>
+                    <i class="fa-solid fa-chart-pie"></i> 
+                    <span>대쉬 보드</span>
                 </a>
+
                 <a href="javascript:goUser()" class="menu-item">
-                    <i class="fa-solid fa-chart-line"></i> <span>회원 관리 </span>
+                    <i class="fa-solid fa-users"></i> 
+                    <span>회원 관리</span>
                 </a>
+
                 <a href="javascript:goSell()" class="menu-item">
-                    <i class="fa-regular fa-credit-card"></i> <span>매출 통계</span>
+                    <i class="fa-regular fa-credit-card"></i> 
+                    <span>매출 통계</span>
                 </a>
+
                 <a href="javascript:goReservation()" class="menu-item">
-                    <i class="fa-solid fa-box-open"></i> <span>예약 관리</span>
+                    <i class="fa-solid fa-calendar-check"></i> 
+                    <span>예약 관리</span>
                 </a>
+                
             </nav>
 
             <div class="logout-area">
                 <a href="#" class="menu-item logout-link">
-                    <i class="fa-solid fa-arrow-right-from-bracket"></i> <span>Log Out</span>
+                    <i class="fa-solid fa-arrow-right-from-bracket"></i> 
+                    <span>Log Out</span>
                 </a>
             </div>
         </aside>

@@ -9,7 +9,9 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import command.control.ControlUser;
 import common.CommonExecute;
+
 
 /**
  * Servlet implementation class Control
@@ -35,7 +37,7 @@ public class Control extends HttpServlet {
 		String view = "";
 		String gubun = request.getParameter("gubun");
 		
-//		ControlDAO dao=new ControlDAO();
+		
 		
 		//gubun 값 null/공백 처리
 		if(gubun == null) {
@@ -53,7 +55,8 @@ public class Control extends HttpServlet {
 		}
 		//여기서부터 페이지로 보내는 용도
 		if(gubun.equals("user")) {
-
+			CommonExecute control=new ControlUser();
+			control.execute(request);
 			view="/control/Administration_Membership.jsp";
 		}
 		else if(gubun.equals("sell")) {

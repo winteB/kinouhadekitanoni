@@ -947,6 +947,50 @@ body {
 	    line-height: 1.6;
 	    padding: 20px;
 	}
+	.content-row.input600 {
+		width: 150px;
+		height: 30px;
+		padding: 3px;
+	}
+	.content-row.input600 {
+		width: 600px;
+		height: 30px;
+		padding: 3px;
+	}
+	.content-row.textarea_H250{
+		width:600px;
+		height:250px;
+		padding:5px;
+	}
+	/* 이전글 다음글 */
+	.preNext{
+		height:40px;
+		margin-top:10px;
+	}
+	.preNext p{
+		height:40px;
+		width:250px;
+	}
+	.preNext .pre{
+		float:left;
+	}
+	.preNext .next{
+		float:right;
+		text-align:right;
+	}
+	.preNext span{
+		display:block;
+		height:20px;
+	}
+	.preNext .preNextTitle{
+		color:#848484;
+	}
+	/* 업데이트 update*/
+	.checkbox{
+		padding-left:2px;
+		height:15px;
+		vertical-align:middle;
+	}
 	
 	.detail-btn-group {
 	    margin-top: 30px;
