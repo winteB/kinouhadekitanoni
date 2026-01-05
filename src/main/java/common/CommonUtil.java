@@ -144,8 +144,9 @@ public class CommonUtil {
 //		return attachDir;
 //	   }
 	
+	
 //	공통으로 첨부파일 경로 가져오기
-	public static String getReviewDir(HttpServletRequest request,String folderName) {
+	public static String getFileSaveDir(HttpServletRequest request,String folderName) {
 		// 1. 현재 실행 중인 클래스의 위치를 가져옵니다. 
 		// 결과: /C:/Users/.../kinouhadekitanoni/build/classes/java/main/ (혹은 bin 폴더)
 		String classPath = CommonUtil.class.getResource("/").getPath();

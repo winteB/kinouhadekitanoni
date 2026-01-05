@@ -17,7 +17,7 @@ public class NoticeSave implements CommonExecute{
 	public void execute(HttpServletRequest request) {
 		NoticeDao dao = new NoticeDao();
 		MultipartRequest mpr = null;
-		String attachDir = CommonUtil.getNoticeDir(request);
+		String attachDir = CommonUtil.getFileSaveDir(request,"notice");
 		int maxSize = 1024 * 1024 * 10;
 		
 		try {

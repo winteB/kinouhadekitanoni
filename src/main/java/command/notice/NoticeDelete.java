@@ -19,7 +19,7 @@ public class NoticeDelete implements CommonExecute {
 		
 		int result = dao.noticeDelete(no);
 		if(result == 1 && !attach.equals("")) {
-			File file = new File(CommonUtil.getNoticeDir(request), attach);
+			File file = new File(CommonUtil.getFileSaveDir(request,"notice"), attach);
 			boolean tf = file.delete();
 			if(!tf) System.out.println("공지사항 삭제 첨부파일 삭제 오류!");
 		}

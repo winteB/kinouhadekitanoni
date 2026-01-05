@@ -38,10 +38,10 @@ public class FileDownServlet extends HttpServlet {
 	 	String fileName = request.getParameter("t_fileName");   // 다운로드 받을 첨부파일명
 	 	
 		if(savePath.equals("notice")) {
-			savePath = CommonUtil.getNoticeDir(request);
+			savePath = CommonUtil.getFileSaveDir(request,"notice");
 		}
 		else if(savePath.equals("review")) {
-			savePath = CommonUtil.getReviewDir(request);
+			savePath = CommonUtil.getFileSaveDir(request,"review");
 		}
 		String orgfilename = fileName ;
 
