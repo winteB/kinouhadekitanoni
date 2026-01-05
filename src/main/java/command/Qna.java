@@ -9,6 +9,11 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import command.qna.QnaSave;
+import command.qna.QnaView;
+import common.CommonExecute;
+import common.CommonUtil;
+
 /**
  * Servlet implementation class Qna
  */
@@ -38,7 +43,7 @@ public class Qna extends HttpServlet {
 			gubun = "";
 		}
 		if(gubun.equals("")) {
-			gubun = "faq_list";
+			gubun = "qna_list";
 		}
 		
 		//여기서부터 페이지로 보내는 용도
@@ -55,17 +60,31 @@ public class Qna extends HttpServlet {
 		}else if(gubun.equals("faq_update")) {
 
 			view = "qna/faq_update.jsp";
-		}
 		
-		else if(gubun.equals("qna_list")) {
+		//qna 목록
+		}else if(gubun.equals("qna_list")) {
 
 			view = "qna/qna_list.jsp";
-		}else if(gubun.equals("qna_view")) {
-
-			view = "qna/qna_view.jsp";
+		
+		//qna 글쓰기
 		}else if(gubun.equals("qna_write")) {
-
+			request.setAttribute("toDay", CommonUtil.getToday());
+			
 			view = "qna/qna_write.jsp";
+		
+		//qna 글쓰기 저장
+		}else if(gubun.equals("qna_save")) {
+			CommonExecute qna = new QnaSave();
+			qna.execute(request);
+			
+			view = "common_alert.jsp";
+		
+		//qna 상세보기
+		}else if(gubun.equals("qna_view")) {
+			CommonExecute qna = new QnaView();
+			qna.execute(request);
+			
+			view = "qna/qna_view.jsp";
 		}else if(gubun.equals("qna_update")) {
 
 			view = "qna/qna_update.jsp";

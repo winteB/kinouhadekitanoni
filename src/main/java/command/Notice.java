@@ -9,6 +9,13 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import command.notice.NoticeDelete;
+import command.notice.NoticeSave;
+import command.notice.NoticeUpdate;
+import command.notice.NoticeView;
+import common.CommonExecute;
+import common.CommonUtil;
+
 /**
  * Servlet implementation class Notice
  */
@@ -45,16 +52,45 @@ public class Notice extends HttpServlet {
 		if(gubun.equals("list")) {
 
 			view = "notice/notice_list.jsp";
-		}
-		else if(gubun.equals("update")) {
-
-			view = "notice/notice_update.jsp";
-		}else if(gubun.equals("view")) {
-
-			view = "notice/notice_view.jsp";
+		//공지사항 글쓰기
 		}else if(gubun.equals("write")) {
-
+			request.setAttribute("toDay", CommonUtil.getToday());
+			
 			view = "notice/notice_write.jsp";
+		
+		//공지사항 글쓰기 저장
+		}else if(gubun.equals("save")) {
+			CommonExecute noti = new NoticeSave();
+			noti.execute(request);
+			
+			view = "common_alert.jsp";
+		
+		//공지사항 상세보기
+		}else if(gubun.equals("view")) {
+			CommonExecute noti = new NoticeView();
+			noti.execute(request);
+			
+			view = "notice/notice_view.jsp";
+			
+		//수정 폼
+		}else if(gubun.equals("updateForm")) {
+			CommonExecute noti = new NoticeUpdate();
+			noti.execute(request);
+			
+			view = "notice/notice_update.jsp";
+			
+		//수정 저장
+		}else if(gubun.equals("update")) {
+			CommonExecute noti = new NoticeUpdate();
+			noti.execute(request);
+			
+			view = "common_alert_view.jsp";
+		//삭제
+		}else if(gubun.equals("delete")) {
+			CommonExecute noti = new NoticeDelete();
+			noti.execute(request);
+			
+			view = "common_alert_view.jsp";
 		}
 		
 		RequestDispatcher rd = request.getRequestDispatcher(view);
