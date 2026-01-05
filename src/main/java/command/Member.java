@@ -82,7 +82,7 @@ public class Member extends HttpServlet {
          view = "member/member_myinfo.jsp";
       }else if(gubun.equals("myyoyaku")) {
 
-         view = "member/member_myyoyaku.jsp";
+         view = "member/member_myyoyaku_list.jsp";
        }
       
       RequestDispatcher rd = request.getRequestDispatcher(view);
