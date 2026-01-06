@@ -83,13 +83,6 @@
             <button class="tab-btn">낚시</button>
         </div>
 
-        <div class="filter-container">
-            <button class="btn-icon-only"><i class="fa-solid fa-filter"></i></button>
-            <div class="dropdown-trigger">
-                <span>종합</span>
-                <i class="fa-solid fa-chevron-down"></i>
-            </div>
-        </div>
     </div>
 
     <div class="cards-stack">
@@ -100,24 +93,22 @@
                     <i class="fa-brands fa-figma"></i>
                 </div>
                 <div class="p-info">
-                    <div class="p-title">캠핑 10-1 지역</div>
+                    <div class="p-title">글램핑 G-11</div>
                     <div class="p-meta">
-                        <span class="date"><i class="fa-regular fa-calendar"></i> Created Sep 12, 2023</span>
-                        <span class="badge medium"><i class="dot"></i> Medium</span>
+                        <span class="date"><i class="fa-regular fa-calendar"></i> 2025-01-01~2025-01-02</span>
                     </div>
                 </div>
             </div>
-
             <div class="p-middle">
-                <div class="data-label">예약 데이터</div>
+                <div class="data-label">결재 여부</div>
                 <div class="data-row">
                     <div class="data-col">
-                        <span class="lbl">All tasks</span>
-                        <span class="val">34</span>
+                        <span class="lbl">결재완료</span>
+                        <span class="val">Y</span>
                     </div>
                     <div class="data-col">
-                        <span class="lbl">Active tasks</span>
-                        <span class="val">13</span>
+                        <span class="lbl">미결재</span>
+                        <span class="val">N</span>
                     </div>
                 </div>
             </div>
@@ -125,87 +116,12 @@
             <div class="p-right">
                 <div class="data-label">예약자  </div>
                 <div class="avatar-group">
-                    <img src="https://i.pravatar.cc/150?img=33" alt="">
-                    <img src="https://i.pravatar.cc/150?img=47" alt="">
-                    <div class="avatar-more">+2</div>
+                	<span class="val">IDDDDD</span>
                 </div>
             </div>
         </div>
 
-        <div class="p-card">
-            <div class="p-left">
-                <div class="p-icon color-yellow">
-                    <i class="fa-solid fa-utensils"></i>
-                </div>
-                <div class="p-info">
-                    <div class="p-title">Food Delivery Service</div>
-                    <div class="p-meta">
-                        <span class="date"><i class="fa-regular fa-calendar"></i> Created Sep 14, 2023</span>
-                        <span class="badge medium"><i class="dot"></i> Medium</span>
-                    </div>
-                </div>
-            </div>
 
-            <div class="p-middle">
-                <div class="data-label">Project Data</div>
-                <div class="data-row">
-                    <div class="data-col">
-                        <span class="lbl">All tasks</span>
-                        <span class="val">50</span>
-                    </div>
-                    <div class="data-col">
-                        <span class="lbl">Active tasks</span>
-                        <span class="val">24</span>
-                    </div>
-                </div>
-            </div>
-
-            <div class="p-right">
-                <div class="data-label">Assignees</div>
-                <div class="avatar-group">
-                    <img src="https://i.pravatar.cc/150?img=12" alt="">
-                    <img src="https://i.pravatar.cc/150?img=5" alt="">
-                    <img src="https://i.pravatar.cc/150?img=9" alt="">
-                </div>
-            </div>
-        </div>
-
-        <div class="p-card">
-            <div class="p-left">
-                <div class="p-icon color-blue">
-                    <i class="fa-solid fa-layer-group"></i>
-                </div>
-                <div class="p-info">
-                    <div class="p-title">Internal Project</div>
-                    <div class="p-meta">
-                        <span class="date"><i class="fa-regular fa-calendar"></i> Created Sep 20, 2023</span>
-                        <span class="badge low"><i class="dot"></i> Low</span>
-                    </div>
-                </div>
-            </div>
-
-            <div class="p-middle">
-                <div class="data-label">Project Data</div>
-                <div class="data-row">
-                    <div class="data-col">
-                        <span class="lbl">All tasks</span>
-                        <span class="val">25</span>
-                    </div>
-                    <div class="data-col">
-                        <span class="lbl">Active tasks</span>
-                        <span class="val">20</span>
-                    </div>
-                </div>
-            </div>
-
-            <div class="p-right">
-                <div class="data-label">Assignees</div>
-                <div class="avatar-group">
-                    <img src="https://i.pravatar.cc/150?img=60" alt="">
-                    <img src="https://i.pravatar.cc/150?img=3" alt="">
-                    <div class="avatar-more check"><i class="fa-solid fa-check"></i></div>
-                </div>
-            </div>
         </div>
 
     </div>
