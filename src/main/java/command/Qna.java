@@ -40,7 +40,7 @@ public class Qna extends HttpServlet {
 		
 		//gubun 값 null/공백 처리
 		if(gubun == null) {
-			gubun = "";
+			gubun = "list";
 		}
 		if(gubun.equals("")) {
 			gubun = "write";
@@ -49,7 +49,7 @@ public class Qna extends HttpServlet {
 		//여기서부터 페이지로 보내는 용도
 		if(gubun.equals("list")) {
 
-			view = "qna/qna_list.jsp";
+			view = "qna/qna_list_imsi.jsp";
 			
 		//qna 글쓰기
 		}else if(gubun.equals("write")) {

@@ -10,6 +10,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import command.notice.NoticeDelete;
+import command.notice.NoticeList;
 import command.notice.NoticeSave;
 import command.notice.NoticeUpdate;
 import command.notice.NoticeView;
@@ -50,7 +51,9 @@ public class Notice extends HttpServlet {
 		
 		//여기서부터 페이지로 보내는 용도
 		if(gubun.equals("list")) {
-
+			CommonExecute noti = new NoticeList();
+			noti.execute(request);
+			
 			view = "notice/notice_list.jsp";
 		//공지사항 글쓰기
 		}else if(gubun.equals("write")) {

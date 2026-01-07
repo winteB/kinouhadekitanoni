@@ -4,6 +4,8 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.text.DecimalFormat;
+import java.util.ArrayList;
+import java.util.List;
 
 import common.CommonUtil;
 import common.DBConnection;
@@ -13,6 +15,64 @@ public class NoticeDao {
 	Connection 			con = null;
 	PreparedStatement 	ps 	= null;
 	ResultSet 			rs 	= null;	
+	
+	//페이지 전체 건수
+	public int getTotalCount(String select, String search) {
+		int count = 0;
+		String sql = "select count(*) as count\r\n" + "from notice\r\n" + "where " + select + " like '%"
+				+ search + "%'";
+
+		try {
+			con = DBConnection.getConnection();
+			ps = con.prepareStatement(sql);
+			rs = ps.executeQuery();
+
+			if (rs.next()) {
+				count = rs.getInt("count");
+			}
+		} catch (Exception e) {
+			System.out.println("getTotalCount() 오류 : " + sql);
+			e.printStackTrace();
+		} finally {
+			DBConnection.closeDB(con, ps, rs);
+		}
+		return count;
+	}
+	// 조회(검색)
+	public List<NoticeDto> getNoticeList(String select, String search, int start, int end) {
+		List<NoticeDto> list = new ArrayList<>();
+		String sql = "select * from(\r\n" + "    select rownum as rnum, tbl.*\r\n" + "    from(\r\n"
+				+ "        select n.no, n.title, m.name, n.attach,\r\n"
+				+ "                    to_char(n.reg_date,'yy-MM--dd') as reg_date, n.hit\r\n"
+				+ "        from notice n, member m\r\n" + "        where n.reg_id = m.id\r\n"
+				+ "        and n." + select + " like '%" + search + "%'\r\n" + "        order by n.important desc, n.no desc\r\n"
+				+ "    ) tbl\r\n" + ") where rnum >= " + start + " and rnum <=" + end + "";
+
+		try {
+			con = DBConnection.getConnection();
+			ps = con.prepareStatement(sql);
+			rs = ps.executeQuery();
+
+			while (rs.next()) {
+				String no = rs.getString("no");
+				String title = rs.getString("title");
+				String attach = rs.getString("attach");
+				String reg_name = rs.getString("name");
+				String reg_date = rs.getString("reg_date");
+				int hit = rs.getInt("hit");
+				NoticeDto dto = new NoticeDto(no, title, attach, reg_name, reg_date, hit);
+				list.add(dto);
+			}
+
+		} catch (Exception e) {
+			System.out.println("getNoticeList() 오류 : " + sql);
+			e.printStackTrace();
+		} finally {
+			DBConnection.closeDB(con, ps, rs);
+		}
+
+		return list;
+	}
 	
 	//게시글 번호 생성
 	public String getNoticeNo() {
@@ -179,7 +239,7 @@ public class NoticeDao {
 		
 		return dto;
 	}
-	//공지사하 업데이트
+	//공지사항 업데이트
 	public int noticeUpdate(NoticeDto dto) {
 		int result = 0;
 		String sql = "update notice\r\n"
@@ -218,6 +278,6 @@ public class NoticeDao {
 			DBConnection.closeDB(con, ps, rs);
 		}
 		return result;
-	}	
+	}
 
 }

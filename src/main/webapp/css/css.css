@@ -957,6 +957,10 @@ body {
 		height: 30px;
 		padding: 3px;
 	}
+	/*중요성 important*/
+	.important{
+		height: 30px;
+	}
 	.content-row.textarea_H250{
 		width:600px;
 		height:250px;

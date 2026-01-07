@@ -81,8 +81,8 @@
                         <tr>
                             <th>제목</th>
                             <td colspan="4">
-                            	<input type="text" name="t_title" class="content-row input150">
-                            	<select name="t_important">
+                            	<input type="text" name="t_title" class="content-row input600">
+                            	<select name="t_important" class="important">
                             		<option value="0">중요도</option>
                             		<option value="1">1</option>
                             		<option value="2">2</option>
