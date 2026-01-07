@@ -74,6 +74,9 @@ public class YoyakuCamping extends HttpServlet {
 			request.setAttribute("t_url", "Member");
 			request.setAttribute("t_msg", "로그인이 필요합니다");
 		}
+		
+	    request.setAttribute("sidemenu_active", "camping");
+
 		RequestDispatcher rd = request.getRequestDispatcher(view);
 		rd.forward(request, response);
 	}

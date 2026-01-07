@@ -149,7 +149,7 @@ public class CommonUtil {
 	public static String getFileSaveDir(HttpServletRequest request,String folderName) {
 		// 1. 현재 실행 중인 클래스의 위치를 가져옵니다. 
 		// 결과: /C:/Users/.../kinouhadekitanoni/build/classes/java/main/ (혹은 bin 폴더)
-		String classPath = CommonUtil.class.getResource("/").getPath();
+		String classPath = GetUrl.ownUrl();
 
 		// 2. 프로젝트 루트 경로까지만 자릅니다. (build 또는 bin 폴더 이전까지)
 		// .metadata 폴더가 아닌 실제 프로젝트 폴더명을 기준으로 자르는 것이 핵심입니다.

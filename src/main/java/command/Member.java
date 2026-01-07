@@ -85,6 +85,8 @@ public class Member extends HttpServlet {
          view = "member/member_myyoyaku_list.jsp";
        }
       
+      request.setAttribute("sidemenu_active", gubun);
+      
       RequestDispatcher rd = request.getRequestDispatcher(view);
       rd.forward(request, response);
    }
