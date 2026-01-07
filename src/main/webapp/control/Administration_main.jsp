@@ -12,25 +12,25 @@
 </head>
 <script>
     function goUser(){
-        controller.gubun.value="user";
+        controller.t_gubun.value="user";
         controller.method="post";
         controller.action = "/kinouhadekitanoni/Control";
         controller.submit();
     }
     function goSell(){
-        controller.gubun.value="sell";
+        controller.t_gubun.value="sell";
         controller.method="post";
         controller.action = "/kinouhadekitanoni/Control";
         controller.submit();
     }
     function goReservation(){
-        controller.gubun.value="reservation";
+        controller.t_gubun.value="reservation";
         controller.method="post";
         controller.action = "/kinouhadekitanoni/Control";
         controller.submit();
     }
     function goDesh(){
-        controller.gubun.value="desh";
+        controller.t_gubun.value="desh";
         controller.method="post";
         controller.action = "/kinouhadekitanoni/Control";
         controller.submit();
@@ -56,7 +56,7 @@
         </nav>
     </header>
     <FORM name="controller">
-        <input type="hidden" name="gubun">
+        <input type="hidden" name="t_gubun">
     <div class="dashboard-container">
         <aside class="sidebar">
             <nav class="menu-nav">

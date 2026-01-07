@@ -35,7 +35,7 @@ public class Control extends HttpServlet {
 		request.setCharacterEncoding("utf-8");
 
 		String view = "";
-		String gubun = request.getParameter("gubun");
+		String gubun = request.getParameter("t_gubun");
 		
 		
 		
