@@ -34,28 +34,9 @@
         <input type="hidden" name="t_gubun">
     <div class="dashboard-container">
         <aside class="sidebar">
-            <nav class="menu-nav">
-                <a href="javascript:goDesh()" class="menu-item active">
-                    <i class="fa-solid fa-chart-pie"></i> 
-                    <span>대쉬 보드</span>
-                </a>
-
-                <a href="javascript:goUser()" class="menu-item">
-                    <i class="fa-solid fa-users"></i> 
-                    <span>회원 관리</span>
-                </a>
-
-                <a href="javascript:goSell()" class="menu-item">
-                    <i class="fa-regular fa-credit-card"></i> 
-                    <span>매출 통계</span>
-                </a>
-
-                <a href="javascript:goReservation()" class="menu-item">
-                    <i class="fa-solid fa-calendar-check"></i> 
-                    <span>예약 관리</span>
-                </a>
-                
-            </nav>
+        <nav class="main-nav">
+            <%@include file = "control_side_menu.jsp"%>
+        </nav>
 
             <div class="logout-area">
                 <a href="#" class="menu-item logout-link">

@@ -47,13 +47,6 @@ public class Member extends HttpServlet {
          gubun = "login";
       }
       
-      if(CommonUtil.getSessionInfo(request)==null) {
-      }else if(CommonUtil.getSessionInfo(request)!=null) {
-    	  	gubun = "myinfo";
-      }else if(!CommonUtil.getSessionInfo(request).equals("")){
-			gubun = "myinfo";
-	  }
-      
       //여기서부터 페이지로 보내는 용도
       //로그인
       if(gubun.equals("login")) {
@@ -94,6 +87,15 @@ public class Member extends HttpServlet {
        }
       
       request.setAttribute("sidemenu_active", gubun);
+      
+
+      
+      if(CommonUtil.getSessionInfo(request)==null) {
+      }else if(CommonUtil.getSessionInfo(request)!=null) {
+    	  view = "member/member_myinfo.jsp";
+      }else if(!CommonUtil.getSessionInfo(request).equals("")){
+    	  view = "member/member_myinfo.jsp";
+	  }
       
       RequestDispatcher rd = request.getRequestDispatcher(view);
       rd.forward(request, response);
