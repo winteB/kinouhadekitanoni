@@ -9,6 +9,11 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import command.yoyaku.FishingPay;
+import command.yoyaku.FishingtoDetail;
+import common.CommonExecute;
+import common.CommonUtil;
+
 /**
  * Servlet implementation class YoyakuFishing
  */
@@ -50,11 +55,23 @@ public class YoyakuFishing extends HttpServlet {
 		
 		// 2. 예약 상세 페이지 로 (이동)
 		else if(gubun.equals("detail")) {
-
+			CommonExecute yoya = new FishingtoDetail();
+			yoya.execute(request);
 			view = "yoyaku_fishing/yoyaku_fishing_detail.jsp";
 		}
+		//3. 결제하기 버튼
+		else if(gubun.equals("pay")) {
+			CommonExecute yoya = new FishingPay();
+			yoya.execute(request);
+			view = "paymant/paymant.jsp";
+		}
 		
-		
+		request.setAttribute("sidemenu", "fishing");
+		if(CommonUtil.getSessionInfo(request)==null) {
+			view = "Member";
+		}else if(CommonUtil.getSessionInfo(request).equals("")){
+			view = "Member";
+		}
 		RequestDispatcher rd = request.getRequestDispatcher(view);
 		rd.forward(request, response);
 	}

@@ -1,5 +1,6 @@
 package common;
 
+import java.io.File;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 import java.text.ParseException;
@@ -130,18 +131,49 @@ public class CommonUtil {
 		return strList;
 	}
 	
-//	Notice의 첨부파일 경로 리턴
-	public static String getNoticeDir(HttpServletRequest request) {
-		String attachDir = request.getServletContext().getRealPath("/attach/notice/");
-		System.out.println(attachDir);
-		return attachDir;
-	   }	
-//	Review 첨부파일 경로 리턴
-	public static String getReviewDir(HttpServletRequest request) {
-		String attachDir = request.getServletContext().getRealPath("/attach/review/");
-		System.out.println(attachDir);
-		return attachDir;
-	   }	
+////	Notice의 첨부파일 경로 리턴
+//	public static String getNoticeDir(HttpServletRequest request) {
+//		String attachDir = request.getServletContext().getRealPath("/attach/notice/");
+//		System.out.println(attachDir);
+//		return attachDir;
+//	   }	
+////	Review 첨부파일 경로 리턴
+//	public static String getReviewDir(HttpServletRequest request) {
+//		String attachDir = request.getServletContext().getRealPath("/attach/review/");
+//		System.out.println(attachDir);
+//		return attachDir;
+//	   }
+	
+	
+//	공통으로 첨부파일 경로 가져오기
+	public static String getFileSaveDir(HttpServletRequest request,String folderName) {
+		// 1. 현재 실행 중인 클래스의 위치를 가져옵니다. 
+		// 결과: /C:/Users/.../kinouhadekitanoni/build/classes/java/main/ (혹은 bin 폴더)
+		String classPath = CommonUtil.class.getResource("/").getPath();
+
+		// 2. 프로젝트 루트 경로까지만 자릅니다. (build 또는 bin 폴더 이전까지)
+		// .metadata 폴더가 아닌 실제 프로젝트 폴더명을 기준으로 자르는 것이 핵심입니다.
+		String projectName = "kinouhadekitanoni";
+		String rootPath = classPath.substring(0, classPath.indexOf(projectName) + projectName.length());
+
+		// 3. Windows 환경의 경우 경로 맨 앞의 "/" 제거 및 경로 정규화
+		if (rootPath.startsWith("/")) {
+		    rootPath = rootPath.substring(1);
+		}
+
+		// 4. 최종 고정 경로 설정 (src/main/webapp/attach)
+		String savePath = rootPath + "/src/main/webapp/attach/"+folderName;
+		savePath = savePath.replace("/", File.separator); // OS에 맞게 슬래시 방향 자동 조절
+
+		System.out.println("고정 업로드 경로: " + savePath);
+
+		// 5. 폴더가 없다면 생성
+		File uploadDir = new File(savePath);
+		if (!uploadDir.exists()) {
+		    uploadDir.mkdirs();
+		}
+		return savePath;
+	}	
 	
 	
 	
@@ -156,4 +188,11 @@ public class CommonUtil {
 	      return value;
 	   }
 	
+//	기본 url 동적 생성 http://localhost:8080/kinouhadekitanoni 라거나 http://192.168.0.12:8080/kinouhadekitanoni 라거나.
+	public static String getBaseUrl(HttpServletRequest request) {
+	    return request.getScheme() + "://" +
+	           request.getServerName() +
+	           ":" + request.getServerPort() +
+	           request.getContextPath();
+	}
 }

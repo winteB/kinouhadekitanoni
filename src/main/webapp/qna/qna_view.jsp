@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html lang="ko">
 <head>
@@ -23,57 +24,88 @@
 
             <h2 class="n_title">Q & A 상세보기</h2>
 
-            <!-- 제목 -->
-            <div class="qna-title">
-                캠핑장 예약은 어떻게 하나요?
-            </div>
+            <!-- 질문 영역 -->
+            <div class="qna-form">
 
-            <!-- 정보 -->
-            <div class="qna-info">
-                <span>작성자: hong</span>
-                <span>2025-01-01</span>
-                <span>조회수 123</span>
-            </div>
-
-            <!-- 내용 -->
-            <div class="qna-content">
-                캠핑장 예약 방법이 궁금합니다.<br>
-                예약 페이지에서 날짜 선택 후 진행하면 되나요?
-            </div>
-
-            <!-- 답변 -->
-            <div class="qna-answer">
-                <h4>관리자 답변</h4>
-                <p>
-                    네, 예약 페이지에서 날짜와 구역을 선택하신 후
-                    결제까지 완료하시면 예약이 확정됩니다.
-                </p>
-            </div>
-
-            <!-- 버튼 -->
-            <div class="qna-btns">
-                <a href="#" class="btn">목록</a>
-                <a href="#" class="btn">수정</a>
-                <a href="#" class="btn danger">삭제</a>
-                <a href="#" class="btn primary">답변</a>
-            </div>
-
-            <!-- 답변 입력 -->
-            <div class="answerArea show">
-                <textarea placeholder="답변을 입력하세요"></textarea>
-                <div class="qna-btns">
-                    <a href="#" class="btn primary">저장</a>
-                    <a href="#" class="btn danger">삭제</a>
+                <div class="form-row">
+                    <label>제목</label>
+                    <input type="text" value="${dto.title}" readonly>
                 </div>
+
+                <div class="form-row">
+                    <label>내용</label>
+                    <textarea readonly>${dto.content}</textarea>
+                </div>
+
+                <div class="form-row">
+                    <label>작성자</label>
+                    <input type="text" value="${dto.reg_id}" readonly>
+                </div>
+
+                <div class="form-row">
+                    <label>작성일</label>
+                    <input type="text" value="${dto.reg_date}" readonly>
+                </div>
+
             </div>
 
-            <!-- 이전 / 다음 -->
-            <div class="prev-next">
-                <a href="#">← 이전글</a>
-                <a href="#">다음글 →</a>
+            <hr>
+
+            <h3>답변</h3>
+
+            <c:choose>
+                <c:when test="${not empty dto.answer}">
+                    <form method="post" action="Qna">
+                        <input type="hidden" name="t_gubun" value="answer_update">
+                        <input type="hidden" name="no" value="${dto.no}">
+
+                        <div class="form-row">
+                            <label>답변 내용</label>
+                            <textarea name="answer">${dto.answer}</textarea>
+                        </div>
+
+                        <div class="form-row">
+                            <label>답변자</label>
+                            <input type="text" value="${dto.answer_id}" readonly>
+                        </div>
+
+                        <div class="form-row">
+                            <label>답변일</label>
+                            <input type="text" value="${dto.answer_date}" readonly>
+                        </div>
+
+                        <div class="detail-btn-group">
+                            <button type="submit" class="btn">답변 수정</button>
+                            <a href="Qna?t_gubun=answer_delete&no=${dto.no}" class="btn">답변 삭제</a>
+                        </div>
+                    </form>
+                </c:when>
+                
+                <c:otherwise>
+                    <form method="post" action="Qna">
+                        <input type="hidden" name="t_gubun" value="answer_save">
+                        <input type="hidden" name="no" value="${dto.no}">
+
+                        <div class="form-row">
+                            <label>답변 내용</label>
+                            <textarea name="answer" placeholder="답변을 입력하세요"></textarea>
+                        </div>
+
+                        <div class="detail-btn-group">
+                            <button type="submit" class="btn">답변 등록</button>
+                        </div>
+                    </form>
+                </c:otherwise>
+
+            </c:choose>
+
+            <!-- 하단 버튼 -->
+            <div class="detail-btn-group">
+                <a href="Qna" class="btn">목록</a>
             </div>
 
         </div>
+        <!-- 본문 끝 -->
     </div>
 
     <footer>

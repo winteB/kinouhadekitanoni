@@ -15,7 +15,33 @@
         <aside class="side-menu">
             <%@ include file="../common_side_menu.jsp" %>
         </aside>
-
+<script type="text/javascript">
+	function goView(no){
+		view.t_gubun.value = "view";
+		view.t_no.value = no;
+		view.method = "post";
+		view.action = "Notice";
+		view.submit();
+	}
+	function goUpdateForm(){
+		view.t_gubun.value = "updateForm";
+		view.method = "post";
+		view.action = "Notice";
+		view.t_gubun.value = "updateForm";
+	}
+	function goDelete(){
+		if(confirm("정말 삭제하시겠습니까?")){
+			view.t_gubun.value = "delete";
+			view.method = "post";
+			view.action = "Notice";
+			view.submit();
+	}
+</script>
+<form name="view">
+	<input type="hidden" name="t_gubun">
+	<input type="hidden" name="t_no" value="${dto.getNo()}">
+	<input type="hidden" name="t_attach" value="${dto.getAttach()}">
+</form>
         <!-- 메인 콘텐츠 -->
         <main class="main-content">
             <div class="container">
@@ -30,67 +56,81 @@
                         <col width="35%">
                     </colgroup>
                     <tbody>
-                    	<tr style="display:none;">
-						    <th>NO</th>
-						    <td class="id-row" colspan="3">
-						        <input type="hidden" name="t_no">
-						    </td>
-						</tr>
-                    
-                    	<tr style="display:none;">
-						    <th>ID</th>
-						    <td class="id-row" colspan="3">
-						        <input type="hidden" name="t_id">
-						    </td>
-						</tr>
-                    
                         <tr>
                             <th>제목</th>
-                            <td></td>
-                            <th>조회수</th>
-                            <td></td>
+                            <td colspan="2" class="content-row">${dto.getTitle()}</td>
+                            <td class="content-row">${dto.getHit()}
+                            <c:if test="${sessionLevel eq 'top'}">
+                            	&nbsp;&nbsp;
+                            	중요도 : ${dto.getImportant()}
+                            </c:if>
+                            </td>
                         </tr>
-
                         <tr>
                            <th>내용</th>
-                            <td colspan="4" class="content-row"></td>
+                            <td colspan="3" class="content-row">
+                            	<textarea class="content-row textarea_H250">${dto.getContent()}</textarea>
+                            </td>
                         </tr>
-                        
-                        <tr>
-                           <th>중요도</th>
-                            <td colspan="4" class="content-row"></td>
-                        </tr>
-
-
                         <tr>
                         	<th>첨부파일</th>
-                            <td colspan="4" class="image-row">
-                                <img src="" class="detail-image">
-                                <p>이미지입니다</p>
+                            <td colspan="3" class="image-row">
+                            	<c:if test="${not empty dto.getAttach()}">
+                            		<a href="FileDownServlet?t_fileDir=notice&t_fileName=${dto.getAttach()}">${dto.getAttach()}</a>
+                            	</c:if>
                             </td>
                         </tr>
                         
                          <tr>
                             <th>작성자</th>
-                            <td></td>
+                            <td>${dto.getReg_id()}</td>
                             <th>작성일</th>
-                            <td></td>
-                        </tr>
-                        
-                        <tr>
-                            <th>이전글</th>
-                            <td></td>
-                            <th>다음글</th>
-                            <td></td>
+                            <td>${dto.getReg_date()}</td>
                         </tr>
                     </tbody>
                 </table>
+                <div class="preNext">
+			<c:if test="${not empty preDto}">
+				<a href="javascript:goView('${preDto.getNo()}')">
+					<p class="pre"><span><i class="fa-solid fa-circle-arrow-left"></i> 이전글</span> 
+						<span class="preNextTitle">
+							<c:choose>
+								<c:when test="${fn:length(preDto.getTitle()) > 20}">
+									${fn:substring(preDto.getTitle(),0,20)}...
+								</c:when>
+								<c:otherwise>
+									${preDto.getTitle()}
+								</c:otherwise>
+							</c:choose>						
+						</span>
+					</p>
+				</a>
+			</c:if>	
+			<c:if test="${not empty nextDto}">
+				<a href="javascript:goView('${nextDto.getNo()}')">
+					<p class="next"><span>다음글 <i class="fa-solid fa-circle-right"></i></span>
+						<span class="preNextTitle">
+							<c:choose>
+								<c:when test="${fn:length(nextDto.getTitle()) > 20}">
+									${fn:substring(nextDto.getTitle(),0,20)}...
+								</c:when>
+								<c:otherwise>
+									${nextDto.getTitle()}
+								</c:otherwise>
+							</c:choose>
+						</span>
+					</p>
+				</a>
+			</c:if>		
+			</div>
 
                 <!-- 버튼 영역 -->
                 <div class="detail-btn-group">
-                    <a href="BoardList" class="btn">목록</a>
-                    <a href="BoardUpdate?t_no=${dto.no}" class="btn">수정</a>
-                    <a href="BoardDelete?t_no=${dto.no}" class="btn danger">삭제</a>
+                    <a href="Notice" class="btn">목록</a>
+                    <c:if test="${sessionLevel eq 'top'}">
+                    	<a href="javascript:goUpdateForm()" class="btn">수정</a>
+                    	<a href="javascript:goDelete()" class="btn danger">삭제</a>
+                	</c:if>
                 </div>
 
             </div>

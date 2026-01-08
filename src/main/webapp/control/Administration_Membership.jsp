@@ -41,17 +41,9 @@
 <body class="admin-page">
     
     <header class="main-header" id="mainHeader">
-        <div class="brand-wrapper">
-            <div class="brand-text">niwacan</div>
-            <svg class="brand-logo-svg" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
-                <circle cx="50" cy="50" r="48" fill="#00ffcc" stroke="#1a1a1a" stroke-width="4"/>
-                <path d="M50 20 L80 80 L20 80 Z" fill="#e6ff00" stroke="#1a1a1a" stroke-width="3" stroke-linejoin="round"/>
-                <text x="50" y="72" font-family="Outfit, sans-serif" font-weight="900" font-size="36" text-anchor="middle" fill="#1a1a1a">nc</text>
-            </svg>
-        </div>
         
         <nav class="main-nav">
-            <%@ include file = "common_header_body.jsp" %>
+            <%@include file = "cover2.jsp"%>
         </nav>
     </header>
     <FORM name="controller">

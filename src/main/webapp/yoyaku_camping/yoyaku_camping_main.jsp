@@ -16,7 +16,7 @@
 <body>
      <form name="yoyaku">    	
         <input type="hidden" name="t_gubun" value="detail">
-        <input type="hidden" name="selected_area" id="selected-site-type" value="">
+        <input type="text" name="selected_area" id="selected-site-type" value="">
     	<input type="hidden" name="selected_date" id="selectedDate" value="">
     </form>
     <div class="wrapper">
@@ -246,7 +246,7 @@ document.addEventListener("DOMContentLoaded", () => {
             const day = String(cell.textContent.trim()).padStart(2, '0');
 
             // 최종 포맷: YYYY/MM/DD
-            const resultValue = year + "/" + month + "/" + day;
+            const resultValue = year + "-" + month + "-" + day;
 
             // 값 적용
             inputBox.value = resultValue;           // input

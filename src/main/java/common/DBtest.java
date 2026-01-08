@@ -2,6 +2,8 @@ package common;
 
 import java.sql.Connection;
 
+import dao.PaymantDao;
+
 public class DBtest {
 
 	public static void main(String[] args) {
@@ -9,9 +11,14 @@ public class DBtest {
 		
 		Connection con = DBConnection.getConnection();
 		
-		System.out.println(con);
+		PaymantDao dao = new PaymantDao();
+//		dao.getOrderNo();
+		dao.updatePreYoyaky("2026-01-04_00002");
+		
+		
 		
 		DBConnection.closeDB(con, null, null);
+		
 	}
 
 }

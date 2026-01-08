@@ -10,6 +10,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import command.member.MemberLogin;
+import command.member.MemberLogout;
 import command.member.MemberSave;
 import common.CommonExecute;
 
@@ -55,7 +56,14 @@ public class Member extends HttpServlet {
     	  CommonExecute mem = new MemberLogin();
     	  mem.execute(request);
           view = "common_alert.jsp";
-       }else if(gubun.equals("password")) {
+      }else if(gubun.equals("memberLogout")){
+    	  CommonExecute mem = new MemberLogout();
+    	  mem.execute(request);
+    	  view = "common_alert.jsp";
+		}
+      
+      
+      else if(gubun.equals("password")) {
 
          view = "member/member_password.jsp";
       }else if(gubun.equals("join")) {
@@ -74,7 +82,7 @@ public class Member extends HttpServlet {
          view = "member/member_myinfo.jsp";
       }else if(gubun.equals("myyoyaku")) {
 
-         view = "member/member_myyoyaku.jsp";
+         view = "member/member_myyoyaku_list.jsp";
        }
       
       RequestDispatcher rd = request.getRequestDispatcher(view);
