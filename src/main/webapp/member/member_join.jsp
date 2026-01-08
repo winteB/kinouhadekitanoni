@@ -142,7 +142,7 @@
                         <tr>
                             <th>이메일</th>
                             <td class="email-row">
-                                <input type="text" name="t_email_1">
+                                <input type="text" name="t_email_1" maxlength="20">
                                 @
                                 <select name="t_email_2">
                                     <option value="naver.com">naver.com</option>
