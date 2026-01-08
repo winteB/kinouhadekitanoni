@@ -47,7 +47,8 @@ public class Member extends HttpServlet {
          gubun = "login";
       }
       
-      if(CommonUtil.getSessionInfo(request)!=null) {
+      if(CommonUtil.getSessionInfo(request)==null) {
+      }else if(CommonUtil.getSessionInfo(request)!=null) {
     	  	gubun = "myinfo";
       }else if(!CommonUtil.getSessionInfo(request).equals("")){
 			gubun = "myinfo";
