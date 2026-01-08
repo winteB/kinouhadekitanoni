@@ -71,6 +71,9 @@
 		    -->
 		    <form name="reviewForm" action="Review?t_gubun=save" method="post" enctype="multipart/form-data">
 		    	<input type="hidden" name="t_rating" value="5"> <!-- 기본 별점 5점 -->
+		    	
+		    	<!-- ★★★ 중요: 세션이 끊길 경우를 대비해 ID를 히든으로 전송 ★★★ -->
+		    	<input type="hidden" name="t_user_id" value="${sessionId}">
 		
 			    <div class="review-card">
 			
