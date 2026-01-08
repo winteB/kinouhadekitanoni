@@ -67,11 +67,19 @@ public class YoyakuFishing extends HttpServlet {
 		}
 		
 		request.setAttribute("sidemenu", "fishing");
+		System.out.println("view = " + view);
 		if(CommonUtil.getSessionInfo(request)==null) {
-			view = "Member";
+	    	view = "common_alert.jsp";
+			request.setAttribute("t_url", "Member");
+			request.setAttribute("t_msg", "로그인이 필요합니다");
 		}else if(CommonUtil.getSessionInfo(request).equals("")){
-			view = "Member";
+	    	view = "common_alert.jsp";
+			request.setAttribute("t_url", "Member");
+			request.setAttribute("t_msg", "로그인이 필요합니다");
 		}
+		
+		request.setAttribute("sidemenu_active", "fishing");
+		
 		RequestDispatcher rd = request.getRequestDispatcher(view);
 		rd.forward(request, response);
 	}

@@ -26,9 +26,29 @@ public class MemberDto {
 		this.exit_date = exit_date;
 	}
 
+	
+	//관리자 페이지 회원목록
+
+	public MemberDto(String id, String name, String mobile_1, String mobile_2, String mobile_3, String email_1,
+			String email_2, String gender, String exit_date) {
+		super();
+		this.id = id;
+		this.name = name;
+		this.mobile_1 = mobile_1;
+		this.mobile_2 = mobile_2;
+		this.mobile_3 = mobile_3;
+		this.email_1 = email_1;
+		this.email_2 = email_2;
+		this.gender = gender;
+		this.exit_date = exit_date;
+	}
+	
+	
 	public String getId() {
 		return id;
 	}
+
+
 
 	public String getName() {
 		return name;

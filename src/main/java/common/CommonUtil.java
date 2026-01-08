@@ -110,23 +110,23 @@ public class CommonUtil {
 		//첫번째 페이지 인덱스 화면이 아닌경우
 		if(current_page > pagenumber){
 			curpage = startpage -1;  //시작페이지 번호보다 1적은 페이지로 이동
-			strList = strList +"<a href=javascript:goListPage('"+curpage+"') ><i class='fa fa-angle-double-left'></i></a>";
+			strList = strList +"";
 		}
 						
 		//시작페이지 번호부터 마지막 페이지 번호까지 화면에 표시
 		curpage = startpage;
 		while(curpage <= endpage){
 			if(curpage == current_page){
-				strList = strList +"<a class='active'>"+current_page+"</a>";
+				strList = strList +"<span class='active' onclick=\"goListPage('"+current_page+"')\">"+current_page+"</span>";
 			} else {
-				strList = strList +"<a href=javascript:goListPage('"+curpage+"')>"+curpage+"</a>";
+				strList = strList +"<span onclick=\"goListPage('"+curpage+"')>"+curpage+"</span>";
 			}
 			curpage++;
 		}
 		//뒤에 페이지가 더 있는 경우
 		if(total_page > endpage){
-			curpage = endpage+1;
-			strList = strList + "<a href=javascript:goListPage('"+curpage+"') ><i class='fa fa-angle-double-right'></i></a>";
+			curpage = total_page;
+			strList = strList + "<span class=\"dots\">...</span><span onclick=\"goListPage('"+curpage+"') >"+curpage+"</span>";
 		}
 		return strList;
 	}

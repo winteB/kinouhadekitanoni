@@ -66,10 +66,17 @@ public class YoyakuCamping extends HttpServlet {
 		System.out.println("view = " + view);
 		request.setAttribute("sidemenu", "camping");
 		if(CommonUtil.getSessionInfo(request)==null) {
-			view = "Member";
+	    	view = "common_alert.jsp";
+			request.setAttribute("t_url", "Member");
+			request.setAttribute("t_msg", "로그인이 필요합니다");
 		}else if(CommonUtil.getSessionInfo(request).equals("")){
-			view = "Member";
+	    	view = "common_alert.jsp";
+			request.setAttribute("t_url", "Member");
+			request.setAttribute("t_msg", "로그인이 필요합니다");
 		}
+		
+	    request.setAttribute("sidemenu_active", "camping");
+
 		RequestDispatcher rd = request.getRequestDispatcher(view);
 		rd.forward(request, response);
 	}

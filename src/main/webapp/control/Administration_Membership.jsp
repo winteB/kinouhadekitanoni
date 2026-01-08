@@ -14,29 +14,98 @@
 </head>
 <script>
     function goUser(){
-        controller.gubun.value="user";
+        controller.t_gubun.value="user";
         controller.method="post";
-        controller.action = "/kinouhadekitanoni/Control";
+        controller.action = "Control";
         controller.submit();
     }
     function goSell(){
-        controller.gubun.value="sell";
+        controller.t_gubun.value="sell";
         controller.method="post";
-        controller.action = "/kinouhadekitanoni/Control";
+        controller.action = "Control";
         controller.submit();
     }
     function goReservation(){
-        controller.gubun.value="reservation";
+        controller.t_gubun.value="reservation";
         controller.method="post";
-        controller.action = "/kinouhadekitanoni/Control";
+        controller.action = "Control";
         controller.submit();
     }
     function goDesh(){
-        controller.gubun.value="desh";
+        controller.t_gubun.value="desh";
         controller.method="post";
-        controller.action = "/kinouhadekitanoni/Control";
+        controller.action = "Control";
         controller.submit();
     }
+
+	function goSearch(){
+		search.t_gubun.value="user";
+		search.method="post";
+		search.action="Control";
+		search.submit();
+	}
+    
+	function goListPage(pageNumber){
+		search.t_nowPage.value=pageNumber;
+		search.t_gubun.value="user";
+		search.method="post";
+		search.action="Control";
+		search.submit();
+	}
+	
+	function goCheckAll(){
+		var arrayGubun = Object.prototype.toString.call(mana.t_checkBox);
+		var tf = search.checkAll.checked;
+		if(arrayGubun=="[object RadioNodeList]"){//배열일 때
+			var len = mana.t_checkBox.length;
+				for(var k=0; k<len; k++){
+					mana.t_checkBox[k].checked=tf;
+				}
+// 			alert(len);
+		} else {//배열이 아닐 때
+			mana.t_checkBox.checked = tf;
+		}
+	}
+	
+	function goStatus(status){
+		var arrayGubun = Object.prototype.toString.call(search.t_checkBox);
+// 		alert(arrayGubun);
+// 		[object RadioNodeList] 배열일떄
+// 		[object HTMLInputElement] 배열이 아닐때
+		var going = false;
+		if(arrayGubun=="[object RadioNodeList]"){//배열일 때
+			var len = mana.t_checkBox.length;
+			for(var k=0; k<len; k++){
+				var tf = mana.t_checkBox[k].checked;
+// 				alert(tf);
+				if(tf){
+					going=tf;
+				}
+			}
+// 			alert(len);
+		} else {//배열이 아닐 때
+			var tf = mana.t_checkBox.checked;
+			if(tf){
+				going=tf;
+			}
+		}
+		
+		if(going) {
+			alert("가라");
+			mana.t_gubun.value = "OrderStatus";
+			mana.t_status.value = status;
+			mana.method = "post";
+			mana.action = "Manager";
+			mana.submit();
+		} else{
+			alert("하나 이상 체크해야합니다.");
+			return;
+		}
+
+
+
+// 		alert(tf);
+	} 
 </script>
 <body class="admin-page">
     
@@ -47,7 +116,8 @@
         </nav>
     </header>
     <FORM name="controller">
-        <input type="hidden" name="gubun">
+        <input type="hidden" name="t_gubun">
+    </FORM>
     <div class="dashboard-container">
        <aside class="sidebar">
            <nav class="menu-nav">
@@ -73,12 +143,15 @@
         </aside>
 
         <main class="main-content">
+     <form name="search">
+        <input type="hidden" name="t_gubun">
+        <input type="hidden" name="t_nowPage">
             <div class="content-wrapper">
                 
                 <div class="page-top-bar">
                     <div class="title-area">
-                        <h2>Contacts</h2>
-                        <span class="count-badge"><i class="fa-solid fa-pen"></i> 20,003 contacts</span>
+                        <h2>Members</h2>
+                        <span class="count-badge"><i class="fa-solid fa-pen"></i> ${totalCount} 명</span>
                     </div>
                 </div>
 
@@ -87,74 +160,92 @@
     <div class="left-tools">
         <button class="btn-primary"><i class="fa-solid fa-plus"></i> Add</button>
     </div>
-
+	
     <div class="right-tools">
-        <select class="filter-select">
-            <option value="" disabled selected>Filter</option> 
-            <option value="newest">전체회원</option>
-            <option value="oldest">현재회원</option>
-            <option value="popular">탈퇴회원</option>
+        <select name="t_select" class="filter-select">
+            <option <c:if test="${select eq 'all' }">selected</c:if> value="all">전체회원</option>
+            <option <c:if test="${select eq 'now' }">selected</c:if> value="now">현재회원</option>
+            <option <c:if test="${select eq 'exit' }">selected</c:if> value="exit">탈퇴회원</option>
         </select>
-
+		
+		<select name="t_colum" class="filter-select">
+            <option <c:if test="${colum eq 'id' }">selected</c:if> value="id">ID</option>
+            <option <c:if test="${colum eq 'name' }">selected</c:if> value="name">이름</option>
+            <option <c:if test="${colum eq 'email_1' }">selected</c:if> value="email_1">이메일</option>
+        </select>
+        
         <div class="search-box">
-            <input type="text" placeholder="Search">
+            <input name="t_search" type="text" value="${search }" placeholder="Search" 
+            onkeydown="if(event.key==='Enter'){event.preventDefault(); goSearch();}">
             <i class="fa-solid fa-magnifying-glass"></i>
         </div>
     </div>
-
+	
 </div>
 
                 <div class="table-container">
                     <table class="data-table">
                         <thead>
                             <tr>
-                                <th width="5%"><input type="checkbox"></th>
+                                <th width="5%"><input type="checkbox" name="checkAll" onclick="goCheck()"></th>
                                 <th width="15%">이름</th>
-                                <th width="15%">닉네임</th>
+                                <th width="15%">ID</th>
                                 <th width="20%">전화 번호</th>
                                 <th width="25%">이메일</th>
                                 <th width="5%">성별</th>
                                 <th></th> </tr>
                         </thead>
                         <tbody>
+                        	<c:forEach items="${mlist }" var="dto">
                             <tr>
-                                <td><input type="checkbox"></td>
-                                <td>Wan</td>
-                                <td>Gengen</td>
-                                <td>731-787-1344</td>
-                                <td>arianna.tillman@hotmail.com</td>
-                                <td><span class="badge-list">23</span></td>
+                                <td><input type="checkbox" name="memcheck" value="${dto.getId() }"></td>
+                                <td>${dto.getId() }</td>
+                                <td>${dto.getName() }</td>
+                                <td>${dto.getMobile_1() }-${dto.getMobile_2() }-${dto.getMobile_3() }</td>
+                                <td>${dto.getEmail_1() }@${dto.getEmail_2() }</td>
+                                <td>
+                                	<span class="badge-list">
+                                	<c:if test="${dto.getGender() eq 'M'}">남성</c:if>
+                                	<c:if test="${dto.getGender() eq 'F'}">여성</c:if>
+                                	</span>
+                                </td>
                                
                                 <td class="actions">
-                                    <button class="btn-icon"><i class="fa-solid fa-pen"></i></button>
-                                    <button class="btn-icon"><i class="fa-solid fa-trash"></i></button>
+                                    <button class="btn-icon" onclick ="goYoyakuList('${dto.getId() }')";><i class="fa-solid fa-calendar-check"></i></button>
+                                    <button class="btn-icon" onclick ="goDeleteMember('${dto.getId() }')";><i class="fa-solid fa-trash"></i></button>
                                 </td>
                             </tr>
-                            
-                            
-                           
-                             
+                            </c:forEach>
                         </tbody>
+                        <tfoot>
+                        	<tr>
+                        		<td colspan='7' class="actions" style='text-align: right'>
+                                    <button class="btn-icon" onclick=""><i class="fa-solid fa-trash"> &ensp; 선택 삭제</i></button>
+                                </td>
+                            </tr>
+                        </tfoot>
                     </table>
                 </div>
 
                 <div class="pagination">
-                    <button class="page-nav"><i class="fa-solid fa-chevron-left"></i> Previous</button>
+                    <button class="page-nav" onclick="goListPage('1')"><i class="fa-solid fa-chevron-left"> </i>Previous</button>
                     <div class="page-numbers">
-                        <span>1</span>
-                        <span class="active">2</span>
-                        <span>3</span>
-                        <span>4</span>
-                        <span class="dots">...</span>
-                        <span>126</span>
+                    	${pageDisplay }
+<!--                         <span onclick="goListPage('1')">1</span> -->
+<!--                         <span class="active">2</span> -->
+<!--                         <span>3</span> -->
+<!--                         <span>4</span> -->
+<!--                         <span class="dots">...</span> -->
+<!--                         <span>126</span> -->
                     </div>
-                    <button class="page-nav">Next <i class="fa-solid fa-chevron-right"></i></button>
+                    <button class="page-nav" onclick="goListPage('1')">Next <i class="fa-solid fa-chevron-right"></i></button>
                 </div>
 
             </div>
+            
+		</form>
         </main>
     </div>
-    </FORM>
     
     <script>
         // 스크롤 시 헤더 디자인 변경
