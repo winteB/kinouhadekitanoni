@@ -122,7 +122,7 @@
                         
                         <tr>
                             <th>나이</th>
-                            <td><input type="text" name="t_age"></td>
+                            <td><input type="text" name="t_age" maxlength="3" oninput="this.value = this.value.replace(/[^0-9]/g, '');"></td>
                         </tr>
 
                         <tr>
@@ -133,9 +133,9 @@
                         <tr>
                             <th>연락처</th>
                             <td class="phone-row">
-                                <input type="text" name="t_mobile_1" value="010"> -
-                                <input type="text" name="t_mobile_2"> -
-                                <input type="text" name="t_mobile_3">
+                                <input type="text" name="t_mobile_1" value="010" maxlength="3" oninput="this.value = this.value.replace(/[^0-9]/g, '');"> -
+                                <input type="text" name="t_mobile_2" maxlength="4" oninput="this.value = this.value.replace(/[^0-9]/g, '');"> -
+                                <input type="text" name="t_mobile_3" maxlength="4" oninput="this.value = this.value.replace(/[^0-9]/g, '');">
                             </td>
                         </tr>
 
