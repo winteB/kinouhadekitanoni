@@ -266,6 +266,7 @@ body.admin-page {
 
 /* 툴바 (버튼들) */
 .toolbar-row { display: flex; justify-content: space-between; margin-bottom: 20px; }
+.toolbar-rigth { display: flex; justify-content: space-between; margin-bottom: 20px; }
 .left-tools { display: flex; gap: 10px; }
 
 .btn-primary {
@@ -343,7 +344,34 @@ body.admin-page {
 .project-header { margin-bottom: 30px; }
 .header-top { display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 40px; }
 .title-group h1 { font-size: 32px; font-weight: 700; margin: 10px 0; }
-.logo-box { width: 40px; height: 40px; background: #1a1a1a; color: #fff; border-radius: 10px; display: flex; justify-content: center; align-items: center; float: left; margin-right: 15px; margin-top: 5px; }
+.logo-box {
+    /* 기존 크기 및 디자인 유지 */
+    width: 40px; 
+    height: 40px; 
+    background: #1a1a1a; 
+    color: #fff; 
+    border-radius: 10px; 
+    display: flex; 
+    justify-content: center; 
+    align-items: center; 
+    
+    /* 🚨 중요: 기존의 float와 margin은 삭제하거나 덮어씌움 */
+    float: none !important; 
+    margin: 0 !important;   
+}
+/* 내부 h태그 수정 */
+.title-group h1 {
+    margin: 0;              /* 위아래 여백 제거하여 높이 맞춤 */
+    padding: 0;
+    font-size: 24px;        /* 글자 크기 적절히 조절 */
+    line-height: 1;         /* 줄 간격 타이트하게 */
+    color: #1a1a1a;         /* 글자색 명시 */
+}
+.title-group {
+    display: flex;          /* 가로 배치 시작 */
+    align-items: center;    /* 세로 중앙 정렬 (핵심!) */
+    gap: 15px;              /* 아이콘과 글자 사이 간격 */
+}
 .tags { display: flex; gap: 15px; align-items: center; }
 .user-tag { font-size: 13px; font-weight: 600; background: #fdf5d3; padding: 6px 12px; border-radius: 20px; color: #5c4e08; display: flex; align-items: center; gap: 6px; }
 .time-tag { background: #fff; border: 1px solid #eee; color: #888; }
@@ -398,9 +426,15 @@ body.admin-page {
     color: #ccc; font-size: 12px; font-weight: 600; min-width: 30px;
 }
 .bars-wrapper {
-    flex: 1; position: relative; border-bottom: 1px solid #eee;
-    display: flex; align-items: flex-end; justify-content: space-around;
-    padding-top: 10px; height: 100% !important; /* 높이 상속 */
+    flex: 1;
+    position: relative;
+    border-bottom: 1px solid #eee;
+    display: flex;
+    justify-content: space-around; /* 7개 항목을 균등하게 배분 */
+    align-items: flex-end;         /* 아래쪽 라인에 맞춤 */
+    padding-top: 10px;
+    height: 100% !important;
+    padding-bottom: 25px; /* 글자가 들어갈 공간 확보 */
 }
 .grid-line { position: absolute; left: 0; right: 0; height: 1px; background: #f5f5f5; z-index: 0; width: 100%; }
 .top-line { top: 0; } .mid-line { top: 50%; }
@@ -411,8 +445,14 @@ body.admin-page {
     height: 100% !important; width: 45%;
 }
 .bar-col {
-    width: 14px; height: 100% !important;
-    display: flex; align-items: flex-end; justify-content: center;
+    display: flex;
+    flex-direction: column;    /* 위: 막대, 아래: 글자 (세로 배치) */
+    justify-content: flex-end; /* 바닥에 붙이기 */
+    align-items: center;       /* 가운데 정렬 */
+    height: 100%;
+    width: 100%;               /* 공간 꽉 채우기 */
+    position: relative;
+    z-index: 10;
 }
 .chart-container .bar {
     width: 100%; border-radius: 4px 4px 0 0;
@@ -424,7 +464,15 @@ body.admin-page {
 .bar.black { background-color: #1a1a1a; }
 .bar.gray { background-color: #dcdcdc; }
 
-.month-label { position: absolute; bottom: -25px; left: 0; width: 100%; text-align: left; font-size: 11px; font-weight: 600; color: #888; }
+.month-label {
+    font-size: 12px;
+    font-weight: 600;
+    color: #888;
+    text-align: center;
+    /* 기존의 position: absolute 제거 -> 자연스럽게 막대 밑으로 옴 */
+    position: static !important; 
+    width: 100%;
+}
 
 /* 4. 프로젝트 리스트 스타일 */
 .project-list-block { font-family: 'Outfit', sans-serif; background-color: #f4f7fc; padding: 30px; box-sizing: border-box; width: 100%; border-radius: 24px; margin-top: 40px; }
@@ -444,6 +492,11 @@ body.admin-page {
 }
 
 .filter-container { display: flex; align-items: center; gap: 15px; }
+.filter-rigth {
+        display: flex;
+        justify-content: flex-end; /* 핵심: 오른쪽 끝으로 밀기 */
+        padding: 10px;
+    }
 .btn-icon-only {
     border: 1px solid #ddd !important;
     color: #555 !important;
@@ -538,6 +591,48 @@ body.admin-page {
     overflow-x: auto;            /* 내용이 넘치면 가로 스크롤 생성 */
     padding-bottom: 10px;        /* 스크롤바 공간 확보 */
     background-color: #f0eeea;
+}
+.filter-container {
+        display: flex;             /* 플렉스 박스 사용 */
+        justify-content: flex-end; /* 내부 요소를 우측 끝으로 정렬 */
+        padding: 10px;             /* 여백 (선택사항) */
+    }
+
+    /* 셀렉트 박스 스타일 (이쁘게 꾸미기) */
+.filter-select {
+        padding: 8px 12px;
+        border: 1px solid #ccc;
+        border-radius: 5px;        /* 모서리 둥글게 */
+        background-color: white;
+        cursor: pointer;
+        
+        float: right;
+        }
+        /* 1. 새로 만든 오른쪽 그룹 스타일 */
+.right-tools {
+    display: flex;       /* 옆으로 나란히 배치 */
+    align-items: center; /* 세로 중앙 정렬 */
+    gap: 10px;           /* 필터와 검색창 사이 간격 */
+}
+
+/* 2. 필터 셀렉트 박스 스타일 (float 삭제, 깔끔하게 정리) */
+.filter-select {
+    padding: 8px 12px;
+    border: 1px solid #ddd; /* 색상 조정 */
+    border-radius: 6px;     /* 검색창과 둥글기 맞춤 */
+    background-color: white;
+    cursor: pointer;
+    font-size: 14px;
+    height: 40px;           /* 검색창과 높이 맞춤 (선택사항) */
+    color: #555;
+    /* float: right;  <-- 이거 있으면 안 됩니다. 지우세요! */
+}
+
+/* 3. (참고) toolbar-row는 기존 그대로 두시면 됩니다 */
+.toolbar-row {
+    display: flex;
+    justify-content: space-between; /* 왼쪽 그룹과 오른쪽 그룹을 양끝으로 밀어냄 */
+    margin-bottom: 20px;
 }
 
 
