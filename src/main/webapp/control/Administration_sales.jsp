@@ -85,31 +85,31 @@
                                     <div class="header-top">
                                         <div class="title-group">
                                             <div class="logo-box"><i class="fa-solid fa-layer-group"></i></div>
-            								<h1>좌대 1-1</h1>
+            								<h1>매출 통계</h1>
                                         </div>
                                        
                                         	
                                         
                                     </div>
-
+									
                                     <div class="metrics-row">
                                         <div class="metric-item">
-                                            <span class="label">년간 예약률</span>
-                                            <div class="value">60.00</div>
+                                            <span class="label">캠핑 월간 매출</span>
+                                            <div class="value">${campMonth}원</div>
                                         </div>
                                         <div class="metric-item">
-                                            <span class="label">주간 예약률</span>
-                                            <div class="value">16.00</div>
+                                            <span class="label">낚시 월간 매출</span>
+                                            <div class="value">${fishMonth}원</div>
                                             <div class="progress-container">
                                             </div>
                                         </div>
                                         <div class="metric-item">
-                                            <span class="label">년간 매출</span>
-                                            <div class="value">$1,222.75</div>
+                                            <span class="label">캠핑 년간 매출</span>
+                                            <div class="value">${campYear}원</div>
                                         </div>
                                         <div class="metric-item">
-                                            <span class="label">주간 매출</span>
-                                            <div class="value">$3,432.75</div>
+                                            <span class="label">낚씨 년간 매출</span>
+                                            <div class="value">${fishYear}원</div>
                                         </div>
                                     </div>
                                 </div>
@@ -132,8 +132,8 @@
                                             </div>
                                         </div>
                                     </div>
-
-                                    <div class="card graph-card">
+									
+    <div class="card graph-card">
     <div class="card-header flex-between">
         <h3>매출 그래프</h3>
         <div class="toggle-pill">
@@ -181,6 +181,8 @@
         </div>
     </div>
 </div>
+
+
                                 
                         </div>
                     </main>
