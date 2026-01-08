@@ -85,44 +85,27 @@
                                     <div class="header-top">
                                         <div class="title-group">
                                             <div class="logo-box"><i class="fa-solid fa-layer-group"></i></div>
-                                            <h1>좌대 1-1</h1>
-                                            <div class="tags">
-                                                <span class="user-tag"><i class="fa-solid fa-circle user-dot"></i> 구별 태그</span>
-                                                <span class="user-tag time-tag"><i class="fa-regular fa-clock"></i> 1시간 전</span>
-                                            </div>
+            								<h1>좌대 1-1</h1>
                                         </div>
-                                        <div class="action-group">
-                                            <button class="btn-white"><i class="fa-regular fa-pen-to-square"></i> Edit Project</button>
-                                            <button class="btn-black"><i class="fa-solid fa-plus"></i> Actions</button>
-                                        </div>
+                                       
+                                        	
+                                        
                                     </div>
 
                                     <div class="metrics-row">
                                         <div class="metric-item">
                                             <span class="label">년간 예약률</span>
                                             <div class="value">60.00</div>
-                                            <div class="sub-info">
-                                                <span class="muted">Billable</span> <span class="right">40.00</span><br>
-                                                <span class="muted">Non-Billable</span> <span class="right">20.00</span>
-                                            </div>
                                         </div>
                                         <div class="metric-item">
                                             <span class="label">주간 예약률</span>
                                             <div class="value">16.00</div>
                                             <div class="progress-container">
-                                                <div class="sub-info flex-between">
-                                                    <span class="muted">Total Budget</span> <span class="muted">$0.00</span>
-                                                </div>
-                                                <div class="progress-bar-bg"><div class="progress-fill" style="width: 32%;"></div></div>
                                             </div>
                                         </div>
                                         <div class="metric-item">
                                             <span class="label">년간 매출</span>
                                             <div class="value">$1,222.75</div>
-                                            <div class="sub-info">
-                                                <span class="muted">Time</span> <span class="right">$1,190.00</span><br>
-                                                <span class="muted">Expenses</span> <span class="right">$32.75</span>
-                                            </div>
                                         </div>
                                         <div class="metric-item">
                                             <span class="label">주간 매출</span>
@@ -138,14 +121,9 @@
                                             <div class="week-header"><span>Week 5</span><span class="total-h">8h 30m</span></div>
                                             
                                             <div class="time-row">
-                                                <div class="date-col"><span class="day-name">Mon</span><span class="date-num">July 24</span></div>
-                                                <div class="input-group"><span class="input-box placeholder">From</span><span class="input-box placeholder">To</span></div>
-                                                <div class="total-col"><span class="label-mini">Total</span><span class="time-val">0h 00m</span></div>
-                                            </div>
-                                            <div class="time-row">
-                                                <div class="date-col"><span class="day-name">Tue</span><span class="date-num">July 24</span></div>
-                                                <div class="input-group"><span class="input-box">15:00</span><span class="input-box">18:30</span></div>
-                                                <div class="total-col"><span class="label-mini">Total</span><span class="time-val">2h 30m</span></div>
+                                                <div class="date-col"><span class="day-name">날짜</span><span class="date-num">7월 23일</span></div>
+                                                <div class="input-group"><span class="input-box placeholder">12:00</span><span class="input-box placeholder">15:00</span></div>
+                                                <div class="total-col"><span class="label-mini">Total</span><span class="time-val">300,000원</span></div>
                                             </div>
                                             <div class="time-row active">
                                                 <div class="date-col"><span class="day-name">Wed</span><span class="date-num">July 24</span></div>
@@ -156,31 +134,53 @@
                                     </div>
 
                                     <div class="card graph-card">
-                                        <div class="card-header flex-between">
-                                            <h3>매출 그래프</h3>
-                                            <div class="toggle-pill"><button class="active">Project Progress</button><button>Hours Per Week</button></div>
-                                        </div>
-                                        <div class="chart-container">
-                                            <div class="y-axis"><span>40</span><span>30</span><span>20</span><span>10</span></div>
-                                            <div class="bars-wrapper">
-                                                <div class="grid-line top-line"></div>
-                                                <div class="grid-line mid-line"></div>
-                                                <div class="bar-group">
-                                                    <div class="bar-col"><div class="bar yellow" style="height: 75%;"></div></div>
-                                                    <div class="bar-col"><div class="bar yellow-light" style="height: 50%;"></div></div>
-                                                    <div class="bar-col"><div class="bar yellow-light" style="height: 70%;"></div></div>
-                                                    <div class="month-label">June 2023</div>
-                                                </div>
-                                                <div class="bar-group">
-                                                    <div class="bar-col"><div class="bar yellow-light" style="height: 85%;"></div></div>
-                                                    <div class="bar-col"><div class="bar orange" style="height: 60%;"></div></div>
-                                                    <div class="bar-col"><div class="bar black" style="height: 40%;"></div></div>
-                                                    <div class="bar-col"><div class="bar orange" style="height: 78%;"></div></div>
-                                                    <div class="month-label">July 2023</div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
+    <div class="card-header flex-between">
+        <h3>매출 그래프</h3>
+        <div class="toggle-pill">
+            <button class="active">캠핑년간</button>
+            <button>낚시년간</button>
+            <button>캠핑월간</button>
+            <button>낚시월간</button>
+        </div>
+    </div>
+    <div class="chart-container">
+        <div class="y-axis"><span>40</span><span>30</span><span>20</span><span>10</span></div>
+        
+        <div class="bars-wrapper">
+            <div class="grid-line top-line"></div>
+            <div class="grid-line mid-line"></div>
+
+            <div class="bar-col">
+                <div class="bar yellow" style="height: 40%;"></div>
+                <div class="month-label">월</div>
+            </div>
+            <div class="bar-col">
+                <div class="bar yellow-light" style="height: 60%;"></div>
+                <div class="month-label">화</div>
+            </div>
+            <div class="bar-col">
+                <div class="bar yellow" style="height: 30%;"></div>
+                <div class="month-label">수</div>
+            </div>
+            <div class="bar-col">
+                <div class="bar orange" style="height: 80%;"></div>
+                <div class="month-label">목</div>
+            </div>
+            <div class="bar-col">
+                <div class="bar black" style="height: 50%;"></div>
+                <div class="month-label">금</div>
+            </div>
+            <div class="bar-col">
+                <div class="bar orange" style="height: 70%;"></div>
+                <div class="month-label">토</div>
+            </div>
+            <div class="bar-col">
+                <div class="bar yellow" style="height: 90%;"></div>
+                <div class="month-label">일</div>
+            </div>
+        </div>
+    </div>
+</div>
                                 
                         </div>
                     </main>

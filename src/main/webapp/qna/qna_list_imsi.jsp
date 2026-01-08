@@ -173,16 +173,16 @@
             border-color: #0f172a;
         }
         .paging .write {
-            position: absolute;          
-		    right: 0;                   
-		    top: 50%;
-		    transform: translateY(-50%);
-		    background: #0f172a;
-		    color: #fff;
-		    padding: 8px 20px;
-		    border-radius: 6px;
-		    font-weight: 600;
-		    border: none;
+            position: static;
+            right: 0;
+            top: 50%;
+            transform: translateY(-50%);
+            background: #0f172a;
+            color: #fff;
+            padding: 8px 20px;
+            border-radius: 6px;
+            font-weight: 600;
+            border: none;
         }
 
         /* 모바일 반응형 */
@@ -190,47 +190,72 @@
             .layout { flex-direction: column; }
             .side-menu { width: 100%; position: static; margin-bottom: 20px; }
             #b_right { padding: 20px; }
-            .paging .write {
-            	position: static;
-            	transform: none;
-            	display: block;
-            	width: 100%;
-            	text-align: center;
-            	margin-top: 15px;
-            }
+            .paging .write { position: static; transform: none; display: block; width: 100%; text-align: center; margin-top: 15px; }
             .select_box { flex-wrap: wrap; }
             .sel_text { width: 100%; }
         }
+        * ============================= */
+/* QNA LIST */
+/* ============================= */
+.qna-desc {
+	font-size: 14px;
+	color: #666;
+	margin-bottom: 20px;
+}
+
+.qna-list .boardList td, .qna-list .boardList th {
+	text-align: center;
+}
+
+.qna-list .boardList .t_left {
+	text-align: left;
+}
+
+/* 상태 뱃지 */
+.status {
+	display: inline-block;
+	padding: 6px 12px;
+	border-radius: 999px;
+	font-size: 12px;
+	font-weight: 700;
+}
+
+.status.done {
+	background: #dcfce7;
+	color: #166534;
+}
+
+.status.wait {
+	background: #fef3c7;
+	color: #92400e;
+}
+
+/* 하단 영역 */
+.qna-bottom {
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+}
+
+.qna-bottom .page-center a {
+	padding: 8px 14px;
+	border-radius: 8px;
+	border: 1px solid #ddd;
+	font-size: 13px;
+}
+
+.qna-bottom .page-center a.active {
+	background: #0f172a;
+	color: #fff;
+	border-color: #0f172a;
+}
+/* QNA 조회수 */
+.qna-list .boardList td:nth-child(5) {
+	color: #475569;
+	font-weight: 600;
+}
     </style>
 </head>
-<script type="text/javascript">
-	function goWriteForm(){
-		work.t_gubun.value = "write";
-		work.method = "post";
-		work.action = "Notice";
-		work.submit();
-		
-	}
-	function goSearch(){
-		noti.method="post";
-		noti.action="Notice";
-		noti.submit();
-		
-	}
-	function goListPage(pageNumber){
-		noti.t_nowPage.value = pageNumber;
-		noti.method="post";
-		noti.action="Notice";
-		noti.submit();
-	}
-	function goView(no){
-		view.t_gubun.value = "view";
-		view.t_no.value = no;
-		view.method = "post";
-		view.action = "Notice";
-		view.submit();
-	}
-</script>
 <body>
 
 <div class="wrapper">
@@ -245,13 +270,13 @@
 
         <!-- 오른쪽 게시판 영역 -->
         <div id="b_right">
-            <p class="n_title">NOTICE</p>
+            <p class="n_title">Q & A</p>
             
             <form name="noti" action="notice_list" method="get">
                 <input type="hidden" name="t_nowPage" >
                 
                 <div class="record_group">
-                    <p><i class="fa-solid fa-bell"></i> 총 게시글<span> ${totalCount } </span>건</p>
+                    <p><i class="fa-solid fa-bell"></i> 질문 합계<span> ${totalCount } </span>건</p>
                 </div>
 
                 <div class="select_box">
@@ -276,11 +301,11 @@
                 <thead>
                     <tr>
                         <th>No</th>
-                        <th>Title</th>
-                        <th>File</th>
-                        <th>Writer</th>
-                        <th>Date</th>
-                        <th>Hit</th>
+                        <th>제목</th>
+                        <th>작성자</th>
+                        <th>작성일</th>
+                        <th>조회수</th>
+                        <th>상태</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -294,24 +319,56 @@
                             <td class="t_left">
                                 <a href="javascript:goView('${dto.getNo()}')">${dto.getTitle() }</a>
                             </td>
-                            <td>
-                                <c:if test="${not empty dto.getAttach()}">
-                                    <img src="${pageContext.request.contextPath}/images/clip.png" alt="file">
-                                </c:if>
-                            </td>
                             <td>${dto.getReg_name() }</td>
                             <td>${dto.getReg_date() }</td>
                             <td>${dto.getHit() }</td>
+                            <td><span class="status done">답변완료</span></td>
                         </tr>
                     </c:forEach>
+                    
+                    <!-- 데이터 없을 때 예시 -->
+                    <c:if test="${empty list}">
+                        <tr>
+                            <td>3</td>
+                            <td class="t_left"><a href="#">사이트 이용 안내 공지사항입니다.</a></td>
+                            <td>-</td>
+                            <td>관리자</td>
+                            <td>2025-01-01</td>
+                            <td>12</td>
+                        </tr>
+                        <tr>
+                            <td>2</td>
+                            <td class="t_left"><a href="#">겨울 시즌 휴무 일정 안내</a></td>
+                            <td><img src="${pageContext.request.contextPath}/images/clip.png" alt="file"></td>
+                            <td>관리자</td>
+                            <td>2024-12-20</td>
+                            <td>34</td>
+                        </tr>
+                        <tr>
+                            <td>1</td>
+                            <td class="t_left"><a href="#">서비스 오픈 이벤트 당첨자 발표</a></td>
+                            <td>-</td>
+                            <td>관리자</td>
+                            <td>2024-12-01</td>
+                            <td>102</td>
+                        </tr>
+                    </c:if>
                 </tbody>
             </table>
             
             <div class="paging">
                 ${pageDisplay}
-                <c:if test="${sessionLevel eq 'top' }">
-					<a href="javascript:goWriteForm()" class="write">글쓰기</a>
-				</c:if>
+                
+                <c:if test="${empty pageDisplay}">
+                    <a href="#" class="active">1</a>
+                    <a href="#">2</a>
+                    <a href="#">3</a>
+                    <a href="#">&gt;</a>
+                </c:if>
+
+                <c:if test="${sessionLevel ne 'top' }">
+                    <a href="javascript:goPage('Notice','write')" class="write">글쓰기</a>
+                </c:if>
             </div>
         </div>
     </div>   

@@ -80,22 +80,29 @@
                         <h2>Contacts</h2>
                         <span class="count-badge"><i class="fa-solid fa-pen"></i> 20,003 contacts</span>
                     </div>
-                    <div class="top-settings">
-                        <button class="btn-settings">Settings <i class="fa-solid fa-chevron-down"></i></button>
-                    </div>
                 </div>
 
                 <div class="toolbar-row">
-                    <div class="left-tools">
-                        <button class="btn-primary"><i class="fa-solid fa-plus"></i> Add</button>
-                        <button class="btn-outline"><i class="fa-solid fa-upload"></i> Upload</button>
-                        <button class="btn-outline"><i class="fa-solid fa-filter"></i> Filter</button>
-                    </div>
-                    <div class="search-box">
-                        <input type="text" placeholder="Search">
-                        <i class="fa-solid fa-magnifying-glass"></i>
-                    </div>
-                </div>
+    
+    <div class="left-tools">
+        <button class="btn-primary"><i class="fa-solid fa-plus"></i> Add</button>
+    </div>
+
+    <div class="right-tools">
+        <select class="filter-select">
+            <option value="" disabled selected>Filter</option> 
+            <option value="newest">전체회원</option>
+            <option value="oldest">현재회원</option>
+            <option value="popular">탈퇴회원</option>
+        </select>
+
+        <div class="search-box">
+            <input type="text" placeholder="Search">
+            <i class="fa-solid fa-magnifying-glass"></i>
+        </div>
+    </div>
+
+</div>
 
                 <div class="table-container">
                     <table class="data-table">
@@ -106,8 +113,7 @@
                                 <th width="15%">닉네임</th>
                                 <th width="20%">전화 번호</th>
                                 <th width="25%">이메일</th>
-                                <th width="5%">나이</th>
-                                <th width="15%">태그</th>
+                                <th width="5%">성별</th>
                                 <th></th> </tr>
                         </thead>
                         <tbody>
@@ -118,86 +124,16 @@
                                 <td>731-787-1344</td>
                                 <td>arianna.tillman@hotmail.com</td>
                                 <td><span class="badge-list">23</span></td>
-                                <td>
-                                    <div class="tags-group">
-                                        <span class="tag blue">Development</span>
-                                        <span class="tag gray">Marketing</span>
-                                    </div>
-                                </td>
+                               
                                 <td class="actions">
                                     <button class="btn-icon"><i class="fa-solid fa-pen"></i></button>
                                     <button class="btn-icon"><i class="fa-solid fa-trash"></i></button>
                                 </td>
                             </tr>
-                            <tr>
-                                <td><input type="checkbox"></td>
-                                <td>James</td>
-                                <td>Harden</td>
-                                <td>010-1234-5678</td>
-                                <td>james.h@niwacan.com</td>
-                                <td><span class="badge-list">11</span></td>
-                                <td>
-                                    <div class="tags-group">
-                                        <span class="tag blue">Design</span>
-                                    </div>
-                                </td>
-                                <td class="actions">
-                                    <button class="btn-icon"><i class="fa-solid fa-pen"></i></button>
-                                    <button class="btn-icon"><i class="fa-solid fa-trash"></i></button>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td><input type="checkbox"></td>
-                                <td>Sarah</td>
-                                <td>Connor</td>
-                                <td>888-999-0000</td>
-                                <td>s.connor@sky.net</td>
-                                <td><span class="badge-list">5</span></td>
-                                <td>
-                                    <div class="tags-group">
-                                        <span class="tag gray">Marketing</span>
-                                    </div>
-                                </td>
-                                <td class="actions">
-                                    <button class="btn-icon"><i class="fa-solid fa-pen"></i></button>
-                                    <button class="btn-icon"><i class="fa-solid fa-trash"></i></button>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td><input type="checkbox"></td>
-                                <td>Michael</td>
-                                <td>Jordan</td>
-                                <td>232-232-2323</td>
-                                <td>mj@bulls.com</td>
-                                <td><span class="badge-list">45</span></td>
-                                <td>
-                                    <div class="tags-group">
-                                        <span class="tag blue">Development</span>
-                                        <span class="tag gray">Sales</span>
-                                    </div>
-                                </td>
-                                <td class="actions">
-                                    <button class="btn-icon"><i class="fa-solid fa-pen"></i></button>
-                                    <button class="btn-icon"><i class="fa-solid fa-trash"></i></button>
-                                </td>
-                            </tr>
-                             <tr>
-                                <td><input type="checkbox"></td>
-                                <td>Emily</td>
-                                <td>Blunt</td>
-                                <td>555-123-4567</td>
-                                <td>emily.b@movie.com</td>
-                                <td><span class="badge-list">8</span></td>
-                                <td>
-                                    <div class="tags-group">
-                                        <span class="tag blue">Acting</span>
-                                    </div>
-                                </td>
-                                <td class="actions">
-                                    <button class="btn-icon"><i class="fa-solid fa-pen"></i></button>
-                                    <button class="btn-icon"><i class="fa-solid fa-trash"></i></button>
-                                </td>
-                            </tr>
+                            
+                            
+                           
+                             
                         </tbody>
                     </table>
                 </div>
