@@ -9,6 +9,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import command.control.ControlTotalSales;
 import command.control.ControlUser;
 import common.CommonExecute;
 
@@ -51,6 +52,7 @@ public class Control extends HttpServlet {
 
 		if(gubun.equals("desh")) {
 			
+			
 			view="/control/Administration_main.jsp";
 		}
 		//여기서부터 페이지로 보내는 용도
@@ -60,11 +62,12 @@ public class Control extends HttpServlet {
 			view="/control/Administration_Membership.jsp";
 		}
 		else if(gubun.equals("sell")) {
-
+			CommonExecute control=new ControlTotalSales();
+			control.execute(request);
 			view="/control/Administration_sales.jsp";
 		}
 		else if(gubun.equals("reservation")) {
-
+			
 			view="/control/Administration_reservations.jsp";
 		}
 		

@@ -5,16 +5,15 @@ import java.util.List;
 import javax.servlet.http.HttpServletRequest;
 
 import common.CommonExecute;
-import dao.ControlDAO;
-import dto.ControlDTO;
+import dao.ControlSalesDAO;
+import dto.ControlSalesDTO;
 
 public class ControlUser implements CommonExecute {
 
 	@Override
 	public void execute(HttpServletRequest request) {
-		ControlDAO dao=new ControlDAO();
+		ControlSalesDAO dao=new ControlSalesDAO();
 		
-		List<ControlDTO> list=dao.getUserList();
 
 	}
 
