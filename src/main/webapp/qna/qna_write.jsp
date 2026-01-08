@@ -7,12 +7,12 @@
     <link rel="stylesheet" href="${pageContext.request.contextPath}/css/css.css">
 </head>
 <script type="text/javascript">
-	function qnaSave(){
+	function goSave(){
 		if(checkEmpty(qna.t_title, "제목 입력!")) return;
 		if(checkEmpty(qna.t_content, "내용 입력!")) return;
 		
 		qna.method = "post";
-		qna.action = "Qna?t_gubun=qna_save";
+		qna.action = "Qna?t_gubun=save";
 		qna.submit();
 		
 	}
@@ -63,7 +63,7 @@
             <!-- 버튼 -->
             <div class="detail-btn-group">
                 <a href="Qna" class="btn">목록</a>
-                <a href="javascript:qnaSave()" class="btn">등록</a>
+                <a href="javascript:goSave()" class="btn">등록</a>
             </div>
         </div>
         </form>

@@ -6,10 +6,18 @@ public class NoticeDto {
 	private int hit;
 	
 	
+	//목록 조회 
+	public NoticeDto(String no, String title, String attach, String reg_name, String reg_date, int hit) {
+		this.no = no;
+		this.title = title;
+		this.attach = attach;
+		this.reg_name = reg_name;
+		this.reg_date = reg_date;
+		this.hit = hit;
+	}	
 	
 	//이전글, 다음글
 	public NoticeDto(String no, String title) {
-		super();
 		this.no = no;
 		this.title = title;
 	}

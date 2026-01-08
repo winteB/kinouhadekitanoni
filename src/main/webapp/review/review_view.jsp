@@ -6,6 +6,10 @@
 <html lang="ko">
 <head>
     <%@ include file="../common_header_head.jsp" %>
+    
+    <!-- CSS 파일 연결 -->
+    <link rel="stylesheet" href="css.css">
+    
     <script type="text/javascript">
         function goUpdate() {
             location.href = "Review?t_gubun=update&t_no=${t_dto.no}";
@@ -44,9 +48,6 @@
         <main class="main-content">
             <div class="container">
                 
-                <!-- 만약 이 빨간 글씨가 보이면 JSP가 정상적으로 연결된 것입니다 -->
-                <!-- <h1 style="color:red; text-align:center;">★ VIEW PAGE CONNECTED ★</h1> -->
-
                 <h2 class="detail-title">게시글 상세보기</h2>
 
                 <!-- 게시글 상세 테이블 -->
@@ -86,7 +87,8 @@
                             <th>첨부파일</th>
                             <td colspan="3" class="image-row" style="text-align: center; padding: 20px;">
                                 <c:if test="${not empty t_dto.attach}">
-                                    <img src="file_room/${t_dto.attach}" class="detail-image" style="max-width: 100%; border-radius: 8px;">
+                                    <!-- ★★★ 스타일 수정: max-height(세로 최대길이) 추가 및 width: auto로 변경 ★★★ -->
+                                    <img src="${pageContext.request.contextPath}/attach/review/${t_dto.attach}" class="detail-image" style="max-width: 600px; max-height: 400px; width: auto; border-radius: 8px;">
                                 </c:if>
                                 <c:if test="${empty t_dto.attach}">
                                     <span style="color:#aaa;">첨부된 이미지가 없습니다.</span>
@@ -106,22 +108,25 @@
                         💬 댓글 <span class="comment-count">(${fn:length(t_comment_list)})</span>
                     </h3>
                 
-                   
-                        <form name="commentForm" action="Review" method="post">
-                            <input type="hidden" name="t_gubun" value="save_comment">
-                            <input type="hidden" name="t_no" value="${t_dto.no}">
-                            
+                    <!-- 로그인 상태일 때만 댓글 작성 가능 -->
+                    <c:choose>
+                        <c:when test="${not empty sessionId}">
+                            <form name="commentForm" action="Review" method="post">
+                                <input type="hidden" name="t_gubun" value="save_comment">
+                                <input type="hidden" name="t_no" value="${t_dto.no}">
+                                
+                                <div class="comment-write">
+                                    <textarea name="t_comment_content" placeholder="댓글을 입력하세요"></textarea>
+                                    <button type="button" onclick="goCommentSave()">등록</button>
+                                </div>
+                            </form>
+                        </c:when>
+                        <c:otherwise>
                             <div class="comment-write">
-                                <textarea name="t_comment_content" placeholder="댓글을 입력하세요"></textarea>
-                                <button type="button" onclick="goCommentSave()">등록</button>
+                                <textarea placeholder="로그인 후 댓글을 작성할 수 있습니다." readonly onclick="alert('로그인이 필요합니다.'); location.href='Member?t_gubun=login'"></textarea>
                             </div>
-                        </form>
-                   
-                   
-                        <div class="comment-write">
-                            <textarea placeholder="서로가 훈훈해지는 댓글 부탁드립니다."></textarea>
-                        </div>
-                   
+                        </c:otherwise>
+                    </c:choose>
                 
                     <div class="comment-list">
                         <c:forEach items="${t_comment_list}" var="comm">
@@ -133,7 +138,8 @@
                                 <div class="comment-body">
                                     ${comm.content}
                                 </div>
-                                <c:if test="${session_id eq comm.user_id}">
+                                <!-- 댓글 삭제: 본인 댓글이거나 관리자일 때 -->
+                                <c:if test="${sessionId eq comm.user_id}">
                                     <div class="comment-actions">
                                         <a href="javascript:goCommentDelete('${comm.c_no}')">삭제</a>
                                     </div>
@@ -148,7 +154,9 @@
                 
                 <div class="detail-btn-group">
                     <a href="Review?t_gubun=list" class="btn">목록</a>
-                    <c:if test="${session_id eq t_dto.user_id}">
+                    
+                    <!-- 수정/삭제 버튼 표시 조건 -->
+                    <c:if test="${sessionId eq t_dto.user_id or t_dto.user_id eq 'Guest'}">
                         <a href="javascript:goUpdate()" class="btn">수정</a>
                         <a href="javascript:goDelete()" class="btn danger">삭제</a>
                     </c:if>

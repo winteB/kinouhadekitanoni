@@ -6,19 +6,7 @@
 <head>
 	<%@ include file = "../common_header_head.jsp" %>
 	
-	<!-- [추가] 긴 제목을 깔끔하게 처리하기 위한 스타일 -->
-	<style>
-		.item-title {
-			/* 제목이 길어지면 말줄임표(...) 처리 */
-			white-space: nowrap;
-			overflow: hidden;
-			text-overflow: ellipsis;
-			display: block;
-			width: 100%;
-			padding: 0 5px; /* 양옆 여백 살짝 */
-			box-sizing: border-box;
-		}
-	</style>
+	<link rel="stylesheet" href="${pageContext.request.contextPath}/css/css.css">
 	
 	<script type="text/javascript">
 		function goWrite() {
@@ -30,12 +18,10 @@
  <div class="wrapper">
         <%@ include file = "../common_header_body.jsp" %>
 	<div class="layout">
-        <!-- ⭐ 사이드바 -->
         <aside class="side-menu">
             <%@ include file="../common_side_menu.jsp" %>
         </aside>
 
-        <!-- ⭐ 메인 콘텐츠 -->
         <main class="main-content">
         <div class="container">
    		<div class="product-section-wrapper list-page-wrapper">
@@ -46,55 +32,70 @@
                 <p class="page-desc">niwacan 이용 고객님들의 소중한 후기입니다.</p>
             </div>
 
+            <!-- 카테고리 필터 영역 -->
             <div class="category-filter">
-                <button class="filter-btn active" onclick="location.href='Review'">ALL</button>
-                <button class="filter-btn">낚시</button>
-                <button class="filter-btn">글램핑</button>
-                <button class="filter-btn">오토캠핑</button>
-                <button class="filter-btn">카라반</button>
+                <button class="filter-btn ${empty param.t_search ? 'active' : ''}" 
+                        onclick="location.href='Review?t_gubun=list'">ALL</button>
+                <button class="filter-btn ${param.t_search eq '좌대낚시' ? 'active' : ''}" 
+                        onclick="location.href='Review?t_gubun=list&t_search=좌대낚시'">낚시</button>
+                <button class="filter-btn ${param.t_search eq '글램핑' ? 'active' : ''}" 
+                        onclick="location.href='Review?t_gubun=list&t_search=글램핑'">글램핑</button>
+                <button class="filter-btn ${param.t_search eq '오토캠핑' ? 'active' : ''}" 
+                        onclick="location.href='Review?t_gubun=list&t_search=오토캠핑'">오토캠핑</button>
+                <button class="filter-btn ${param.t_search eq '카라반' ? 'active' : ''}" 
+                        onclick="location.href='Review?t_gubun=list&t_search=카라반'">카라반</button>
             </div>
         </section>
 
         <!-- 리스트 그리드 시작 -->
         <div class="product-grid list-grid">
-        
-        	<!-- 게시물이 없을 경우 -->
+        	
         	<c:if test="${empty t_list}">
-        		<div style="width:100%; text-align:center; grid-column: 1 / -1; padding: 50px;">
+        		<div style="width:100%; text-align:center; grid-column: 1 / -1; padding: 50px; color:#666;">
         			등록된 리뷰가 없습니다.
         		</div>
         	</c:if>
 
-			<!-- 게시물 반복 출력 -->
 			<c:forEach items="${t_list}" var="dto">
 	            <a href="Review?t_gubun=view&t_no=${dto.no}" class="product-card">
 	                <div class="card-img-box">
 	                	<c:choose>
-	                		<c:when test="${not empty dto.attach}">
-	                			<img src="${pageContext.request.contextPath}/file_room/${dto.attach}" alt="review image" style="width:100%; height:100%; object-fit:cover;">
+	                		<c:when test="${not empty dto.attach and dto.attach ne 'null' and dto.attach ne ''}">
+	                			<!-- 이미지가 있을 때 -->
+	                			<img src="${pageContext.request.contextPath}/attach/review/${dto.attach}" 
+	                			     alt="review image" 
+	                			     style="width: 100%; height: 100%; object-fit: cover; display: block;">
 	                		</c:when>
 	                		<c:otherwise>
-	                    		<img src="images/default_review.png" alt="no image">
+	                    		<!-- 
+	                    			[수정] 이미지가 없을 때: 깔끔한 빈 박스 + 아이콘 
+	                    			배경색(#f8f9fa)과 카메라 아이콘으로 심플하게 표현했습니다.
+	                    		-->
+	                    		<div style="width:100%; height:100%; background:#f8f9fa; display:flex; align-items:center; justify-content:center;">
+	                    			<i class="fa-solid fa-camera" style="font-size:40px; color:#e1e1e1;"></i>
+	                    		</div>
 	                		</c:otherwise>
 	                	</c:choose>
 	                    <span class="card-badge badge-mint">${dto.target_id}</span>
 	                </div>
 	                
-	                <!-- 제목 부분 (CSS 적용됨) -->
+	                <!-- 제목 -->
 	                <p class="item-title">${dto.title}</p>
 	                
-	                <div style="display:flex; justify-content:space-between; padding:0 10px;">
-		                <p class="item-price" style="font-size:14px; color:#666;">${dto.user_id}</p>
-		                <p class="item-rating" style="color:#FFD700;">
+	                <div class="item-info">
+		                <p class="item-price">${dto.user_id}</p>
+		                <p class="item-rating" style="color:#FFD700; margin:0;">
 		                	<c:forEach begin="1" end="${dto.rating}">★</c:forEach>
 		                </p>
 	                </div>
-	                <p style="text-align:right; font-size:12px; color:#999; padding-right:10px;">${dto.reg_date}</p>
+	                
+	                <!-- 날짜 -->
+	                <p class="item-date">${dto.reg_date}</p>
 	            </a>
             </c:forEach>
             
         </div>
-        <!-- 리스트 그리드 끝 -->
+        
 
         <div class="pagination-area">
             <a href="#" class="page-btn prev"><i class="fa-solid fa-chevron-left"></i></a>
@@ -104,9 +105,7 @@
         </div>
                         
        <div class="detail-btn-group">
-     		 
-                <a href="Review?t_gubun=write" class="btn">리뷰 작성</a>
-            
+            <a href="javascript:goWrite()" class="btn">리뷰 작성</a>
         </div>
     </div>
     </div>

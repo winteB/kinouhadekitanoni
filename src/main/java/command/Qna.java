@@ -40,52 +40,37 @@ public class Qna extends HttpServlet {
 		
 		//gubun 값 null/공백 처리
 		if(gubun == null) {
-			gubun = "";
+			gubun = "list";
 		}
 		if(gubun.equals("")) {
-			gubun = "faq_list";
+			gubun = "write";
 		}
 		
 		//여기서부터 페이지로 보내는 용도
-		if(gubun.equals("faq_list")) {
+		if(gubun.equals("list")) {
 
-			view = "qna/faq_list.jsp";
-		}
-		else if(gubun.equals("faq_view")) {
-
-			view = "qna/faq_view.jsp";
-		}else if(gubun.equals("faq_write")) {
-
-			view = "qna/faq_write.jsp";
-		}else if(gubun.equals("faq_update")) {
-
-			view = "qna/faq_update.jsp";
-		
-		//qna 목록
-		}else if(gubun.equals("qna_list")) {
-
-			view = "qna/qna_list.jsp";
-		
+			view = "qna/qna_list_imsi.jsp";
+			
 		//qna 글쓰기
-		}else if(gubun.equals("qna_write")) {
+		}else if(gubun.equals("write")) {
 			request.setAttribute("toDay", CommonUtil.getToday());
 			
 			view = "qna/qna_write.jsp";
 		
 		//qna 글쓰기 저장
-		}else if(gubun.equals("qna_save")) {
+		}else if(gubun.equals("save")) {
 			CommonExecute qna = new QnaSave();
 			qna.execute(request);
 			
 			view = "common_alert.jsp";
 		
 		//qna 상세보기
-		}else if(gubun.equals("qna_view")) {
+		}else if(gubun.equals("view")) {
 			CommonExecute qna = new QnaView();
 			qna.execute(request);
 			
 			view = "qna/qna_view.jsp";
-		}else if(gubun.equals("qna_update")) {
+		}else if(gubun.equals("update")) {
 
 			view = "qna/qna_update.jsp";
 		}

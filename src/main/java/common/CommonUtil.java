@@ -64,26 +64,26 @@ public class CommonUtil {
 //	DB에 저장할때 escapeHtml 적용해서 저장. 
 //	수정 저장할 땐 CommonUtil.escapeHtml(CommonUtil.unescapeHtml(String content))하기.
 	public static String escapeHtml(String str) {
-	    if (str == null) return "";
-	    return str.replace("&", "&amp;")
-	    		  .replace("<", "&lt;")
-	    		  .replace(">", "&gt;")
-	              .replace("\"", "&quot;")
-	              .replace("'", "&#39;")
-	              .replace("/", "&#x2F;")
-	    		  .replace("\r\n", "<br>")  // 1. Windows 줄바꿈(\r\n) 처리
-	    		  .replace("\n", "<br>");   // 2. Unix/Mac 줄바꿈(\n) 처리
+		if (str == null) return "";
+		return str.replace("&", "&amp;")
+				  .replace("<", "&lt;")
+				  .replace(">", "&gt;")
+				  .replace("\"", "&quot;")
+				  .replace("'", "&#39;")
+				  .replace("/", "&#x2F;")
+				  .replace("\r\n", "<br>")  // 1. Windows 줄바꿈(\r\n) 처리
+				  .replace("\n", "<br>");   // 2. Unix/Mac 줄바꿈(\n) 처리
 	}
 	
 	public static String unescapeHtml(String str) {
-	    if (str == null) return "";
-	    return str.replaceAll("(?i)<br\\s*/?>", "\n")
-	    		  .replace("&amp;", "&")
-	              .replace("&lt;", "<")
-	              .replace("&gt;", ">")
-	              .replace("&quot;", "\"")
-	              .replace("&#39;", "'")
-	              .replace("&#x2F;", "/");
+		if (str == null) return "";
+		return str.replaceAll("(?i)<br\\s*/?>", "\n")
+				  .replace("&amp;", "&")
+				  .replace("&lt;", "<")
+				  .replace("&gt;", ">")
+				  .replace("&quot;", "\"")
+				  .replace("&#39;", "'")
+				  .replace("&#x2F;", "/");
 	}
 	
 	
@@ -131,68 +131,57 @@ public class CommonUtil {
 		return strList;
 	}
 	
-////	Notice의 첨부파일 경로 리턴
-//	public static String getNoticeDir(HttpServletRequest request) {
-//		String attachDir = request.getServletContext().getRealPath("/attach/notice/");
-//		System.out.println(attachDir);
-//		return attachDir;
-//	   }	
-////	Review 첨부파일 경로 리턴
-//	public static String getReviewDir(HttpServletRequest request) {
-//		String attachDir = request.getServletContext().getRealPath("/attach/review/");
-//		System.out.println(attachDir);
-//		return attachDir;
-//	   }
-	
-	
-//	공통으로 첨부파일 경로 가져오기
+	/**
+	 * [수정됨] 파일 저장 경로 설정 (공용 호환용)
+	 * 1. 로컬 경로(규원 PC)가 존재하는지 확인합니다.
+	 * 2. 존재하면 로컬 경로(소스 폴더)에 저장합니다. -> 이클립스에서 보임
+	 * 3. 존재하지 않으면(팀원 PC 등) 서버 배포 경로에 저장합니다. -> 에러 방지
+	 */
 	public static String getFileSaveDir(HttpServletRequest request,String folderName) {
-		// 1. 현재 실행 중인 클래스의 위치를 가져옵니다. 
-		// 결과: /C:/Users/.../kinouhadekitanoni/build/classes/java/main/ (혹은 bin 폴더)
-		String classPath = GetUrl.ownUrl();
+	      // 1. 현재 실행 중인 클래스의 위치를 가져옵니다. 
+	      // 결과: /C:/Users/.../kinouhadekitanoni/build/classes/java/main/ (혹은 bin 폴더)
+	      String classPath = GetUrl.ownUrl();
 
-		// 2. 프로젝트 루트 경로까지만 자릅니다. (build 또는 bin 폴더 이전까지)
-		// .metadata 폴더가 아닌 실제 프로젝트 폴더명을 기준으로 자르는 것이 핵심입니다.
-		String projectName = "kinouhadekitanoni";
-		String rootPath = classPath.substring(0, classPath.indexOf(projectName) + projectName.length());
+	      // 2. 프로젝트 루트 경로까지만 자릅니다. (build 또는 bin 폴더 이전까지)
+	      // .metadata 폴더가 아닌 실제 프로젝트 폴더명을 기준으로 자르는 것이 핵심입니다.
+	      String projectName = "kinouhadekitanoni";
+	      String rootPath = classPath.substring(0, classPath.indexOf(projectName) + projectName.length());
 
-		// 3. Windows 환경의 경우 경로 맨 앞의 "/" 제거 및 경로 정규화
-		if (rootPath.startsWith("/")) {
-		    rootPath = rootPath.substring(1);
-		}
+	      // 3. Windows 환경의 경우 경로 맨 앞의 "/" 제거 및 경로 정규화
+	      if (rootPath.startsWith("/")) {
+	          rootPath = rootPath.substring(1);
+	      }
 
-		// 4. 최종 고정 경로 설정 (src/main/webapp/attach)
-		String savePath = rootPath + "/src/main/webapp/attach/"+folderName;
-		savePath = savePath.replace("/", File.separator); // OS에 맞게 슬래시 방향 자동 조절
+	      // 4. 최종 고정 경로 설정 (src/main/webapp/attach)
+	      String savePath = rootPath + "/src/main/webapp/attach/"+folderName;
+	      savePath = savePath.replace("/", File.separator); // OS에 맞게 슬래시 방향 자동 조절
 
-		System.out.println("고정 업로드 경로: " + savePath);
+	      System.out.println("고정 업로드 경로: " + savePath);
 
-		// 5. 폴더가 없다면 생성
-		File uploadDir = new File(savePath);
-		if (!uploadDir.exists()) {
-		    uploadDir.mkdirs();
-		}
-		return savePath;
-	}	
-	
-	
+	      // 5. 폴더가 없다면 생성
+	      File uploadDir = new File(savePath);
+	      if (!uploadDir.exists()) {
+	          uploadDir.mkdirs();
+	      }
+	      return savePath;
+	   }
 	
 	
 	
 //	아이디 가져오기
 	public static String getSessionInfo(HttpServletRequest request) {
-	      
-	      HttpSession session = request.getSession();
-	      String value= (String)session.getAttribute("sessionId");
-	      
-	      return value;
-	   }
+		
+		HttpSession session = request.getSession();
+		String value= (String)session.getAttribute("sessionId");
+		
+		return value;
+	}
 	
 //	기본 url 동적 생성 http://localhost:8080/kinouhadekitanoni 라거나 http://192.168.0.12:8080/kinouhadekitanoni 라거나.
 	public static String getBaseUrl(HttpServletRequest request) {
-	    return request.getScheme() + "://" +
-	           request.getServerName() +
-	           ":" + request.getServerPort() +
-	           request.getContextPath();
+		return request.getScheme() + "://" +
+			   request.getServerName() +
+			   ":" + request.getServerPort() +
+			   request.getContextPath();
 	}
 }

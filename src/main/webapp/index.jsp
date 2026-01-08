@@ -67,7 +67,7 @@ function goPage(servlet,gubun){
         <div class="hot-grid-container">
             <a href="#" class="hot-card">
                 <div class="card-thumb-box">
-                    <img src="images/meat.png">
+                    <img src="images/글램핑_인덱스.png">
                     <span class="category-label">글램핑</span>
                 </div>
                 <div class="card-text-chunk">
@@ -85,7 +85,7 @@ function goPage(servlet,gubun){
             </a>
             <a href="#" class="hot-card">
                 <div class="card-thumb-box">
-                    <img src="https://niwacan.jp/wp-content/uploads/2025/10/0930-2224.webp" alt="raised bed">
+                    <img src="images/오토캠핑_인덱스.png" alt="raised bed">
                     <span class="category-label">오토캠핑</span>
                 </div>
                 <div class="card-text-chunk">
@@ -94,7 +94,7 @@ function goPage(servlet,gubun){
             </a>
             <a href="#" class="hot-card">
                 <div class="card-thumb-box">
-                    <img src="https://niwacan.jp/wp-content/uploads/2025/05/131A1120.webp" alt="niwacan brand">
+                    <img src="images/카라반_인덱스.png" alt="niwacan brand">
                     <span class="category-label">카라반</span>
                 </div>
                 <div class="card-text-chunk">
