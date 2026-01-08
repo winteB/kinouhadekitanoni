@@ -14,6 +14,32 @@
 			work.submit();
 		}
 	</script>
+	<script>
+    function goUser(){
+        controller.t_gubun.value="user";
+        controller.method="post";
+        controller.action = "/kinouhadekitanoni/Control";
+        controller.submit();
+    }
+    function goSell(){
+        controller.t_gubun.value="sell";
+        controller.method="post";
+        controller.action = "/kinouhadekitanoni/Control";
+        controller.submit();
+    }
+    function goReservation(){
+        controller.t_gubun.value="reservation";
+        controller.method="post";
+        controller.action = "/kinouhadekitanoni/Control";
+        controller.submit();
+    }
+    function goDesh(){
+        controller.t_gubun.value="desh";
+        controller.method="post";
+        controller.action = "/kinouhadekitanoni/Control";
+        controller.submit();
+    }
+</script>
 </head>
 
     <form name = "work">
@@ -21,8 +47,7 @@
 	</form>
 	<header class="main-header" id="mainHeader">
             <div class="brand-wrapper">
-                <img src="${pageContext.request.contextPath}/images/F5.png" alt="company 로고" class="brand-logo-img" />
-
+                <img src="${pageContext.request.contextPath}/images/F5.png" alt="company 로고" class="brand-logo-img" onclick="goPage('Index')" />
                 <svg class="brand-logo-svg" ...>
                 ...
                 </svg>

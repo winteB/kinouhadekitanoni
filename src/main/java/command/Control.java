@@ -12,6 +12,7 @@ import javax.servlet.http.HttpServletResponse;
 import command.control.ControlTotalSales;
 import command.control.ControlUser;
 import common.CommonExecute;
+import common.CommonUtil;
 
 
 /**
@@ -69,6 +70,17 @@ public class Control extends HttpServlet {
 		else if(gubun.equals("reservation")) {
 			
 			view="/control/Administration_reservations.jsp";
+		}
+		
+		System.out.println("view = " + view);
+		if(CommonUtil.getSessionInfo(request)==null) {
+	    	view = "common_alert.jsp";
+			request.setAttribute("t_url", "Member");
+			request.setAttribute("t_msg", "관리자 페이지입니다.");
+		}else if(CommonUtil.getSessionInfo(request).equals("")){
+	    	view = "common_alert.jsp";
+			request.setAttribute("t_url", "Member");
+			request.setAttribute("t_msg", "관리자 페이지입니다.");
 		}
 		
 		RequestDispatcher rd = request.getRequestDispatcher(view);

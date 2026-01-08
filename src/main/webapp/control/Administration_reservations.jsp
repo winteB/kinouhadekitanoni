@@ -11,32 +11,7 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link rel="stylesheet" href="${pageContext.request.contextPath}/control/Administration.css"> 
 </head>
-<script>
-    function goUser(){
-        controller.gubun.value="user";
-        controller.method="post";
-        controller.action = "/kinouhadekitanoni/Control";
-        controller.submit();
-    }
-    function goSell(){
-        controller.gubun.value="sell";
-        controller.method="post";
-        controller.action = "/kinouhadekitanoni/Control";
-        controller.submit();
-    }
-    function goReservation(){
-        controller.gubun.value="reservation";
-        controller.method="post";
-        controller.action = "/kinouhadekitanoni/Control";
-        controller.submit();
-    }
-    function goDesh(){
-        controller.gubun.value="desh";
-        controller.method="post";
-        controller.action = "/kinouhadekitanoni/Control";
-        controller.submit();
-    }
-</script>
+
 <body class="admin-page">
     <FORM name="controller">
         <input type="hidden" name="gubun">

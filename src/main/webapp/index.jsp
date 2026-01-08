@@ -45,7 +45,7 @@ function goPage(servlet,gubun){
 				<a href="javascript:goPage('Member','memberLogout')" class="nav-item">Logout</a>
       		</c:if>
       		<c:if test="${sessionLevel eq 'top'}">
-            	<a href="javascript:goPage('Control','main')" class="nav-item">관리자</a>
+            	<a href="javascript:goPage('Control')" class="nav-item">관리자</a>
         	</c:if>
         </nav>
     </header>

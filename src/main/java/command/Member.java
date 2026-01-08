@@ -13,6 +13,7 @@ import command.member.MemberLogin;
 import command.member.MemberLogout;
 import command.member.MemberSave;
 import common.CommonExecute;
+import common.CommonUtil;
 
 /**
  * Servlet implementation class Member
@@ -45,6 +46,12 @@ public class Member extends HttpServlet {
       if(gubun.equals("")) {
          gubun = "login";
       }
+      
+      if(CommonUtil.getSessionInfo(request)!=null) {
+    	  	gubun = "myinfo";
+      }else if(!CommonUtil.getSessionInfo(request).equals("")){
+			gubun = "myinfo";
+	  }
       
       //여기서부터 페이지로 보내는 용도
       //로그인

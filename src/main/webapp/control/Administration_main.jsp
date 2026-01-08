@@ -10,32 +10,7 @@
     <link rel="stylesheet" href="${pageContext.request.contextPath}/control/Administration.css"> 
     <link rel="stylesheet" href="admin_style.css">
 </head>
-<script>
-    function goUser(){
-        controller.t_gubun.value="user";
-        controller.method="post";
-        controller.action = "/kinouhadekitanoni/Control";
-        controller.submit();
-    }
-    function goSell(){
-        controller.t_gubun.value="sell";
-        controller.method="post";
-        controller.action = "/kinouhadekitanoni/Control";
-        controller.submit();
-    }
-    function goReservation(){
-        controller.t_gubun.value="reservation";
-        controller.method="post";
-        controller.action = "/kinouhadekitanoni/Control";
-        controller.submit();
-    }
-    function goDesh(){
-        controller.t_gubun.value="desh";
-        controller.method="post";
-        controller.action = "/kinouhadekitanoni/Control";
-        controller.submit();
-    }
-</script>
+
 <body class="admin-page">
     
     <header class="main-header" id="mainHeader">
