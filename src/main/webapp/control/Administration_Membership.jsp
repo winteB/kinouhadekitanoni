@@ -30,49 +30,46 @@
 	}
 	
 	function goCheckAll(){
-		var arrayGubun = Object.prototype.toString.call(mana.t_checkBox);
+		var arrayGubun = Object.prototype.toString.call(search.memcheck);
 		var tf = search.checkAll.checked;
 		if(arrayGubun=="[object RadioNodeList]"){//배열일 때
-			var len = mana.t_checkBox.length;
+			var len = search.memcheck.length;
 				for(var k=0; k<len; k++){
-					mana.t_checkBox[k].checked=tf;
+					search.memcheck[k].checked=tf;
 				}
 // 			alert(len);
 		} else {//배열이 아닐 때
-			mana.t_checkBox.checked = tf;
+			search.memcheck.checked = tf;
 		}
 	}
 	
-	function goStatus(status){
-		var arrayGubun = Object.prototype.toString.call(search.t_checkBox);
-// 		alert(arrayGubun);
+	function goDeleteAll(){
+		var arrayGubun = Object.prototype.toString.call(search.memcheck);
+// 		alert(arrayGubun);checkAll
 // 		[object RadioNodeList] 배열일떄
 // 		[object HTMLInputElement] 배열이 아닐때
 		var going = false;
 		if(arrayGubun=="[object RadioNodeList]"){//배열일 때
-			var len = mana.t_checkBox.length;
+			var len = search.memcheck.length;
 			for(var k=0; k<len; k++){
-				var tf = mana.t_checkBox[k].checked;
-// 				alert(tf);
+				var tf = search.memcheck[k].checked;
 				if(tf){
 					going=tf;
 				}
 			}
-// 			alert(len);
 		} else {//배열이 아닐 때
-			var tf = mana.t_checkBox.checked;
+			var tf = search.memcheck.checked;
 			if(tf){
 				going=tf;
 			}
 		}
 		
 		if(going) {
-			alert("가라");
-			mana.t_gubun.value = "OrderStatus";
-			mana.t_status.value = status;
-			mana.method = "post";
-			mana.action = "Manager";
-			mana.submit();
+			alert("정말 회원 데이터를 삭제하시겠습니까?");
+			search.t_gubun.value = "memberDeleteAll";
+			search.method = "post";
+			search.action = "Control";
+// 			search.submit();
 		} else{
 			alert("하나 이상 체크해야합니다.");
 			return;
@@ -152,13 +149,14 @@
                     <table class="data-table">
                         <thead>
                             <tr>
-                                <th width="5%"><input type="checkbox" name="checkAll" onclick="goCheck()"></th>
+                                <th width="5%"><input type="checkbox" name="checkAll" onclick="goCheckAll()"></th>
                                 <th width="15%">이름</th>
                                 <th width="15%">ID</th>
                                 <th width="20%">전화 번호</th>
                                 <th width="25%">이메일</th>
-                                <th width="5%">성별</th>
-                                <th></th> </tr>
+                                <th width="10%">성별</th>
+                                <th></th>
+                            </tr>
                         </thead>
                         <tbody>
                         	<c:forEach items="${mlist }" var="dto">
@@ -185,7 +183,7 @@
                         <tfoot>
                         	<tr>
                         		<td colspan='7' class="actions" style='text-align: right'>
-                                    <button class="btn-icon" onclick=""><i class="fa-solid fa-trash"> &ensp; 선택 삭제</i></button>
+                                    <button class="btn-icon" onclick="goDeleteAll()"><i class="fa-solid fa-trash"> &ensp; 선택 삭제</i></button>
                                 </td>
                             </tr>
                         </tfoot>
