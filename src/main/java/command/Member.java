@@ -13,6 +13,7 @@ import command.member.MemberLogin;
 import command.member.MemberLogout;
 import command.member.MemberSave;
 import common.CommonExecute;
+import common.CommonUtil;
 
 /**
  * Servlet implementation class Member
@@ -51,6 +52,12 @@ public class Member extends HttpServlet {
       if(gubun.equals("login")) {
 
          view = "member/member_login.jsp";
+         if(CommonUtil.getSessionInfo(request)==null) {
+         }else if(CommonUtil.getSessionInfo(request)!=null) {
+       	  view = "member/member_myinfo.jsp";
+         }else if(!CommonUtil.getSessionInfo(request).equals("")){
+       	  view = "member/member_myinfo.jsp";
+   	  }
       }//로그인 시도
       else if(gubun.equals("memberLogin")) {
     	  CommonExecute mem = new MemberLogin();
@@ -67,8 +74,14 @@ public class Member extends HttpServlet {
 
          view = "member/member_password.jsp";
       }else if(gubun.equals("join")) {
-    	  
+         
          view = "member/member_join.jsp";
+         if(CommonUtil.getSessionInfo(request)==null) {
+         }else if(CommonUtil.getSessionInfo(request)!=null) {
+       	  view = "member/member_myinfo.jsp";
+         }else if(!CommonUtil.getSessionInfo(request).equals("")){
+       	  view = "member/member_myinfo.jsp";
+   	  }
       
       //회원등록
       }else if(gubun.equals("save")){
@@ -86,6 +99,10 @@ public class Member extends HttpServlet {
        }
       
       request.setAttribute("sidemenu_active", gubun);
+      
+
+      
+
       
       RequestDispatcher rd = request.getRequestDispatcher(view);
       rd.forward(request, response);

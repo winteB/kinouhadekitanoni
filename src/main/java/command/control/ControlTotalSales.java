@@ -7,6 +7,7 @@ import java.util.List;
 import javax.servlet.http.HttpServletRequest;
 
 import common.CommonExecute;
+import common.CommonUtil;
 import dao.ControlSalesDAO;
 import dto.ControlSalesDTO;
 
@@ -15,10 +16,6 @@ public class ControlTotalSales implements CommonExecute {
 	@Override
 	public void execute(HttpServletRequest request) {
 		ControlSalesDAO dao=new ControlSalesDAO();
-		
-		System.out.println("now=" + new Date());
-		System.out.println("millis=" + System.currentTimeMillis());
-		System.out.println("tz=" + TimeZone.getDefault());
 
 		
 		List<ControlSalesDTO> list=dao.getTotalSales();
@@ -28,20 +25,17 @@ public class ControlTotalSales implements CommonExecute {
 		int campYear=0;
 		int fishYear=0;
 		
-		SimpleDateFormat yearFormat  = new SimpleDateFormat("yyyy");
-		SimpleDateFormat monthFormat=new SimpleDateFormat("MM");
-		
-		String thisYear = yearFormat.format(new Date());
-		String thisMonth = monthFormat.format(new Date());
-		
+		String thisYear = CommonUtil.getTodayTime();
+		thisYear=thisYear.substring(0,4);
+		String thisMonth = CommonUtil.getTodayTime();
+		thisMonth=thisMonth.substring(4,7);
 		
 		String dataYear="";
 		for(ControlSalesDTO dto:list) {
 			if(dto.getPaydate() == null) continue;
 			
-			dataYear=yearFormat.format(dto.getPaydate());
-			String datamonth=monthFormat.format(dto.getPaydate());
-			
+			String yearFormat=dto.getPaydate().substring(0,4);
+			String monthFormat=dto.getPaydate().substring(4,7);
 			
 			String isCamp="";
 			String isFish="";
@@ -52,15 +46,15 @@ public class ControlTotalSales implements CommonExecute {
 				isFish="fi";
 			}
 			
-			if(dataYear.equals(thisYear)) {
-				if(isCamp.equals("")) {
+			if(yearFormat.equals(thisYear)) {
+				if(isCamp.equals("fi")) {
 					fishYear+=dto.getPrice();
 				}else {
 					campYear+=dto.getPrice();
 				}
 			}
 			
-			if(dataYear.equals(thisYear) && thisMonth.equals(datamonth)) {
+			if(yearFormat.equals(thisYear) && monthFormat.equals(thisMonth)) {
 				if(isCamp.equals("")) {
 					fishMonth+=dto.getPrice();
 				}else {
@@ -70,7 +64,6 @@ public class ControlTotalSales implements CommonExecute {
 			
 			
 		}
-		System.out.println("______+++++++"+dataYear);
 		request.setAttribute("campMonth", campMonth);
 		request.setAttribute("fishMonth", fishMonth);
 		request.setAttribute("campYear", campYear);
