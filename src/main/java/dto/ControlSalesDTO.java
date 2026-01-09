@@ -1,7 +1,5 @@
 package dto;
 
-import java.util.Date;
-
 public class ControlSalesDTO {
 	
 	
@@ -11,7 +9,7 @@ public class ControlSalesDTO {
 	private String kind;
 	private String spot;
 	private String river;
-	private Date paydate;
+	private String paydate;
 	private int price;
 	private String startdate;
 	private String enddate;
@@ -29,9 +27,6 @@ public class ControlSalesDTO {
 	private String camno;
 	private String camtype;
 	private String camname;
-	
-	
-	
 	public String getNo() {
 		return no;
 	}
@@ -61,6 +56,12 @@ public class ControlSalesDTO {
 	}
 	public void setRiver(String river) {
 		this.river = river;
+	}
+	public String getPaydate() {
+		return paydate;
+	}
+	public void setPaydate(String paydate) {
+		this.paydate = paydate;
 	}
 	public int getPrice() {
 		return price;
@@ -134,14 +135,13 @@ public class ControlSalesDTO {
 	public void setCamname(String camname) {
 		this.camname = camname;
 	}
-	public Date getPaydate() {
-		return paydate;
-	}
-	public void setPaydate(Date paydate) {
-		this.paydate = paydate;
-	}
 	
 	
+	
+	
+	
+	
+
 
 	
     

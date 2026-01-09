@@ -29,11 +29,10 @@ public class ControlSalesDAO {
 		String sql="SELECT\r\n"
 				+ "    y.KIND, \r\n"
 				+ "    y.PRICE, \r\n"
-				+ "    TO_DATE(y.PAY_DATE,'yyyy-MM-dd hh24:mi:ss') AS PAY_DATE,\r\n"
+				+ "    to_char(y.PAY_DATE,'yyyy-MM-dd hh24:mi:ss'),\r\n"
 				+ "    NVL(f.FISH_NAME, c.CAM_NAME) AS PLACE_NAME,\r\n"
-				+ "    y.START_DATE,\r\n"
-				+ "    y.END_DATE\r\n"
-				+ "\r\n"
+				+ "    to_char(y.START_DATE,'yyyy-MM-dd hh24:mi:ss'),\r\n"
+				+ "    to_char(y.END_DATE,'yyyy-MM-dd hh24:mi:ss')\r\n"
 				+ "FROM YOYAKU y\r\n"
 				+ "LEFT JOIN FISHING f ON y.SPOT = f.FISH_NO\r\n"
 				+ "LEFT JOIN CAMPING c ON y.SPOT = c.CAM_NO\r\n"
@@ -53,7 +52,7 @@ public class ControlSalesDAO {
 				
 				dto.setKind(rs.getString("KIND"));
 				dto.setPrice(rs.getInt("PRICE"));
-				dto.setPaydate(rs.getTimestamp("PAY_DATE"));
+				dto.setPaydate(rs.getString("PAY_DATE"));
 				dto.setPlacename(rs.getString("PLACE_NAME"));
 				dto.setStartdate(rs.getString("START_DATE"));
 				dto.setEnddate(rs.getString("END_DATE"));
@@ -67,8 +66,6 @@ public class ControlSalesDAO {
 		}finally {
 			db.closeDB(conn, pstmt, rs);
 		}
-		
-		
 		return list;
 	}
 	
