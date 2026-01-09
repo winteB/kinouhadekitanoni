@@ -49,7 +49,7 @@ public class ControlUser implements CommonExecute {
 		int orderNo = totalCount - start +1;
 		
 		List<MemberDto> list = dao.getUserList(select,colum,search,start,end);
-		String pageDisplay = CommonUtil.getPageSetting(current_page, total_page, pageNumber_count);
+		String pageDisplay = CommonUtil.getManagerPageSetting(current_page, total_page, pageNumber_count);
 		
 		request.setAttribute("mlist", list);
 		request.setAttribute("order", orderNo);
