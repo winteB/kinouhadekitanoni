@@ -6,27 +6,32 @@ import javax.servlet.http.HttpServletRequest;
 
 import common.CommonExecute;
 import common.CommonUtil;
-import dao.ControlDAO;
+import dao.YoyakuDao;
 import dto.MemberDto;
+import dto.YoyakuDto;
 
-public class ControlUser implements CommonExecute {
+public class ControlYoyaku implements CommonExecute {
 
 	@Override
 	public void execute(HttpServletRequest request) {
-		ControlDAO dao=new ControlDAO();
+		
+		YoyakuDao dao = new YoyakuDao();
 		
 		String select = request.getParameter("t_select");
-		String colum = request.getParameter("t_colum");
 		String search = request.getParameter("t_search");
+		String pay = request.getParameter("t_pay");
+		String kind = request.getParameter("t_kind");
+		
 		if(select==null){
 			select="all";
-			colum="id";
 			search="";
+			pay="all";
+			kind="all";
 		}
 		search=CommonUtil.escapeHtml(search);
 		
 		/* paging 설정 start*/
-		int totalCount = dao.getTotalCount(select,colum,search);
+		int totalCount = dao.getManagerListTotalCount(select,search,kind,pay);
 		System.out.println(totalCount);
 		int list_setup_count = 10;  //한페이지당 출력 행수 
 		int pageNumber_count = 5;  //한페이지당 출력 페이지 갯수
@@ -48,16 +53,18 @@ public class ControlUser implements CommonExecute {
 		/* order 설정 */
 		int orderNo = totalCount - start +1;
 		
-		List<MemberDto> list = dao.getUserList(select,colum,search,start,end);
+		List<YoyakuDto> list = dao.getManagerYoyakuList(select,search,kind,pay,start,end);
 		String pageDisplay = CommonUtil.getManagerPageSetting(current_page, total_page, pageNumber_count);
 		
-		request.setAttribute("mlist", list);
+		request.setAttribute("ylist", list);
 		request.setAttribute("order", orderNo);
 		request.setAttribute("totalCount", totalCount);
 		request.setAttribute("nowpage", current_page);
 		request.setAttribute("pageDisplay", pageDisplay);
 		request.setAttribute("select", select);
 		request.setAttribute("search", search);
+		request.setAttribute("pay", pay);
+		request.setAttribute("kind", kind);
 	}
 
 }

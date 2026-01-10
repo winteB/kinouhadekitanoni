@@ -7,16 +7,47 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>niwacan Admin - List View</title>
+    <title>F5 - 예약관리</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link rel="stylesheet" href="${pageContext.request.contextPath}/control/Administration.css"> 
+	<script type="text/javascript">
+		function checkPay(pay){
+			search.t_pay.value=pay;
+			goSearch();
+		}
+		function checkKind(kind){
+			search.t_kind.value=kind;
+			goSearch();
+		}
+		
+		function goSearch(){
+			search.t_gubun.value="reservation";
+			search.method="post";
+			search.action="Control";
+			search.submit();
+		}
+		
+		function goListPage(pageNumber){
+			search.t_nowPage.value=pageNumber;
+			search.t_gubun.value="reservation";
+			search.method="post";
+			search.action="Control";
+			search.submit();
+		}
+	
+	
+	
+	
+	</script>
+
 </head>
+    <FORM name="controller">
+        <input type="hidden" name="t_gubun">
+    </FORM>
 
 <body class="admin-page">
-    <FORM name="controller">
-        <input type="hidden" name="gubun">
-        <header class="main-header" id="mainHeader">
-        
+    
+    <header class="main-header" id="mainHeader">    
         <nav class="main-nav">
             <%@include file = "cover2.jsp"%>
         </nav>
@@ -36,59 +67,154 @@
         </aside>
 
         <main class="main-content">
+        <FORM name="search">
+        <input type="hidden" name="t_gubun">
+        <input type="hidden" name="t_nowPage">
+        <input type="hidden" name="t_pay" value="${pay }">
+        <input type="hidden" name="t_kind"value="${kind }">
+
             <div class="content-wrapper">
                 <!-- 집어넣기 -->
                  <div class="project-list-block">
     
     <div class="list-top-bar">
         <div class="tab-container">
-            <button class="tab-btn active">종합</button>
-            <button class="tab-btn">캠핑</button>
-            <button class="tab-btn">낚시</button>
+            <button onclick="checkPay('all')" class="tab-btn <c:if test="${pay eq 'all' }">active</c:if>"  >전체</button>
+            <button onclick="checkPay('Y')" class="tab-btn <c:if test="${pay eq 'Y' }">active</c:if>"  >결제됨</button>
+            <button onclick="checkPay('N')" class="tab-btn <c:if test="${pay eq 'N' }">active</c:if>"  >미결제</button>
         </div>
-
+        <div class="tab-container">
+            <button onclick="checkKind('all')" class="tab-btn <c:if test="${kind eq 'all' }">active</c:if>" >종합</button>
+            <button onclick="checkKind('ca')" class="tab-btn <c:if test="${kind eq 'ca' }">active</c:if>" >캠핑</button>
+            <button onclick="checkKind('fi')" class="tab-btn <c:if test="${kind eq 'fi' }">active</c:if>" >낚시</button>
+        </div>
+        
+        <div class="right-tools">
+        <select name="t_select" class="filter-select">
+            <option <c:if test="${select eq 'NO' }">selected</c:if> value="NO">예약번호</option>
+            <option <c:if test="${select eq 'USER_ID' }">selected</c:if> value="USER_ID">회원ID</option>
+            <option <c:if test="${select eq 'name' }">selected</c:if> value="name">예약자명</option>
+        </select>
+        
+        <div class="search-box">
+            <input name="t_search" type="text" value="${search }" placeholder="Search" 
+            onkeydown="if(event.key==='Enter'){event.preventDefault(); goSearch();}">
+            <i class="fa-solid fa-magnifying-glass"></i>
+        </div>
     </div>
+    </div>
+    
+    
 
     <div class="cards-stack">
+    	<div class="date-cell">
+	     	<input type="date" class="sel_text" name="t_order_start" value="${orderStart }"> 
+			~
+			<input type="date" class="sel_text" name="t_order_end" value="${orderEnd }"> 
+     	</div>  
         
-        <div class="p-card">
-            <div class="p-left">
-                <div class="p-icon color-purple">
-                    <i class="fa-brands fa-figma"></i>
-                </div>
-                <div class="p-info">
-                    <div class="p-title">글램핑 G-11</div>
-                    <div class="p-meta">
-                        <span class="date"><i class="fa-regular fa-calendar"></i> 2025-01-01~2025-01-02</span>
-                    </div>
-                </div>
-            </div>
-            <div class="p-middle">
-                <div class="data-label">결재 여부</div>
-                <div class="data-row">
-                    <div class="data-col">
-                        <span class="lbl">결재완료</span>
-                        <span class="val">Y</span>
-                    </div>
-                    <div class="data-col">
-                        <span class="lbl">미결재</span>
-                        <span class="val">N</span>
-                    </div>
-                </div>
-            </div>
-
-            <div class="p-right">
-                <div class="data-label">예약자  </div>
-                <div class="avatar-group">
-                	<span class="val">IDDDDD</span>
-                </div>
-            </div>
-        </div>
-
-
+        
+        <c:forEach items="${ylist }" var="dto">
+	        <div class="p-card">
+	            <div class="p-left">
+	           		<c:choose>
+						<c:when test="${dto.getCam_type() eq '글램핑' }">
+							<div class="p-icon color-purple">
+			                    <i class="fa-solid fa-house"></i>
+			                </div>
+						</c:when>
+						<c:when test="${dto.getCam_type() eq '오토캠핑' }">
+							<div class="p-icon color-green">
+			                    <i class="fa-solid fa-campground"></i>
+			                </div>
+						</c:when>
+						<c:when test="${dto.getCam_type() eq '카라반' }">
+							<div class="p-icon color-orange">
+			                    <i class="fa-solid fa-caravan"></i>
+			                </div>
+						</c:when>
+						<c:otherwise>
+							<div class="p-icon color-blue">
+			                    <i class="fa-solid fa-fish"></i>
+			                </div>
+						</c:otherwise>
+					</c:choose>
+	                
+	                <div class="p-info">
+						<c:choose>
+							<c:when test="${dto.getKind() eq 'fi' }">
+								<div class="p-title">${dto.getRiver() } ${dto.getFish_name() }</div>
+			                    <div class="p-meta">
+			                        <span class="date">${dto.getNo() } </span>
+			                        <span class="date"><i class="fa-regular fa-calendar"></i> ${dto.getStart_date() } ~ ${dto.getEnd_date() }</span>
+			                    </div>
+							</c:when>
+							<c:otherwise>
+								<div class="p-title">${dto.getCam_type() } ${dto.getCam_name() }</div>
+			                    <div class="p-meta">
+			                        <span class="date">${dto.getNo() } </span>
+			                        <span class="date"><i class="fa-regular fa-calendar"></i> ${dto.getStart_date() } ~ ${dto.getEnd_date() }</span>
+			                    </div>
+							</c:otherwise>
+						</c:choose>
+	                    
+	                </div>
+	            </div>
+	            <div class="p-middle">
+	                <div class="data-label">예약자  </div>
+	                <div class="avatar-group">
+	                	<span class="val">${dto.getUser_id() }</span>
+	                	<span class="val">${dto.getUsername() }</span>
+	                </div>
+	            </div>
+				
+				
+				<c:choose>
+					<c:when test="${dto.getPaymant() eq 'Y' }">
+						<div class="p-right">
+			                <div class="data-label">결재 여부</div>
+			                <div class="data-row">
+			                    <div class="data-col">
+			                        <span class="don">결재완료</span>
+			                    </div>
+			                </div>
+			            </div>
+			            <div class="p-right2">
+			            	<button type="button" onclick="goCancle(${dto.getNo()})"> 예약 취소 </button>
+			            </div>
+					</c:when>
+					<c:otherwise>
+			            <div class="p-right">
+			                <div class="data-label">결재 여부</div>
+			                <div class="data-row">
+			                    <div class="data-col">
+			                        <span class="non">미결재</span>
+			                    </div>
+			                </div>
+			            </div>
+			            <div class="p-right2">
+			            	<button type="button"  onclick="goPay(${dto.getNo()})"> 결제확인 </button>
+			            	<button type="button"  onclick="goCancle(${dto.getNo()})"> 예약취소 </button>
+			            </div>				
+					</c:otherwise>
+				</c:choose>
+	            
+	        </div>
+        </c:forEach>
+        
+        
+        
+        	<button type="button" class="btn-icon" onclick="goDeleteAll()" style="text-align: right;"><i class="fa-solid fa-trash"> &ensp; 미결제 예약 일괄 삭제</i></button>	
         </div>
 
     </div>
+                <div class="pagination">
+                    <button class="page-nav" onclick="goListPage('${(nowpage-1) lt 1 ? 1 : (nowpage-1)}')"><i class="fa-solid fa-chevron-left"> </i>Previous</button>
+                    <div class="page-numbers">
+                    	${pageDisplay }
+                    </div>
+                    <button class="page-nav" onclick="goListPage('${nowpage+1}')">Next <i class="fa-solid fa-chevron-right"></i></button>
+                </div>
 </div>
 </FORM>
               

@@ -3,6 +3,7 @@ package dao;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -31,7 +32,7 @@ public class ControlDAO {
 				+ "       gender,\r\n"
 				+ "       exit_date\r\n"
 				+ "FROM (\r\n"
-				+ "    SELECT ROWNUM rnum, mem.*\r\n"
+				+ "    SELECT mem.*, ROWNUM rnum\r\n"
 				+ "    FROM (\r\n"
 				+ "        SELECT name,\r\n"
 				+ "               id,\r\n"
@@ -64,8 +65,8 @@ public class ControlDAO {
 			rs=pstmt.executeQuery();
 			
 			while(rs.next()) {
-				String name		= rs.getString("id");
-				String id       = rs.getString("name");
+				String id		= rs.getString("id");
+				String name       = rs.getString("name");
 				String mobile_1 = rs.getString("mobile_1");
 				String mobile_2 = rs.getString("mobile_2");
 				String mobile_3 = rs.getString("mobile_3");
@@ -114,9 +115,89 @@ public class ControlDAO {
 		}
 		return count;
 	}
+
+//관리자의 유저 한명 삭제
+	public int deleteUser(String id) {
+		int result = 0;
+		String sql = "DELETE FROM member WHERE id = '"+id+"'";
+		
+		System.out.println(sql);
+		try {
+			conn = DBConnection.getConnection();
+			pstmt = conn.prepareStatement(sql);
+			result = pstmt.executeUpdate();
+			
+		}catch(Exception e) {
+			System.out.println("deleteUser 에러 : " + sql);
+		}finally {
+			DBConnection.closeDB(conn, pstmt, rs);
+		}	
+		return result;
+	}
+
+
+//	관리자의 유저 여러명 삭제
+	public int deleteUserAll(String[] id) {
+		int result = 0;
+		try {
+			conn = DBConnection.getConnection();
+			
+			for(int i=0;i<id.length;i++) {
+				String sql = "DELETE FROM member WHERE id = '"+id[i]+"'";
+				
+				System.out.println("setOrderStatusUpdate sql : "+sql);
+				pstmt = conn.prepareStatement(sql);
+				int cnt = pstmt.executeUpdate();
+				if (cnt == 1) {
+	                result++;
+	            } else {
+	                // 만약 삭제된 행이 없다면 예외를 발생시켜 롤백으로 유도할 수도 있습니다.
+	                throw new Exception("ID : " + id[i] + " 삭제 실패");
+	            }
+			}
+		}catch (Exception e) {
+			try {
+	            if (conn != null) {
+	                // 3. 오류 발생 시 롤백
+	                conn.rollback();
+	                System.out.println("작업 중 오류 발생, 롤백 실행");
+	            }
+	        } catch (SQLException se) {
+				System.out.println("deleteUserAll rollback 에러");
+	            se.printStackTrace();
+	        }
+			e.printStackTrace();
+			System.out.println("deleteUserAll 에러");
+		}finally {
+			try {
+	            // 다시 자동 커밋을 true로 돌려주는 것이 관례입니다.
+	            if (conn != null) conn.setAutoCommit(true);
+	        } catch (Exception e) {}
+			DBConnection.closeDB(conn, pstmt, rs);
+		}
+	
+		
+		
+		return result;
+	}
 	
 	
 	
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+
 	
 	
 }

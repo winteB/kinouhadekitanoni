@@ -11,6 +11,9 @@ import javax.servlet.http.HttpServletResponse;
 
 import command.control.ControlTotalSales;
 import command.control.ControlUser;
+import command.control.ControlUserDelete;
+import command.control.ControlUserDeleteAll;
+import command.control.ControlYoyaku;
 import common.CommonExecute;
 import common.CommonUtil;
 
@@ -57,10 +60,20 @@ public class Control extends HttpServlet {
 			view="/control/Administration_main.jsp";
 		}
 		//여기서부터 페이지로 보내는 용도
-		if(gubun.equals("user")) {
+		else if(gubun.equals("user")) {
 			CommonExecute control=new ControlUser();
 			control.execute(request);
 			view="/control/Administration_Membership.jsp";
+		}
+		else if(gubun.equals("userDelete")) {
+			CommonExecute control=new ControlUserDelete();
+			control.execute(request);
+			view="common_alert.jsp";
+		}
+		else if(gubun.equals("userDeleteAll")) {
+			CommonExecute control=new ControlUserDeleteAll();
+			control.execute(request);
+			view="common_alert.jsp";
 		}
 		else if(gubun.equals("sell")) {
 			CommonExecute control=new ControlTotalSales();
@@ -68,7 +81,8 @@ public class Control extends HttpServlet {
 			view="/control/Administration_sales.jsp";
 		}
 		else if(gubun.equals("reservation")) {
-			
+			CommonExecute control=new ControlYoyaku();
+			control.execute(request);
 			view="/control/Administration_reservations.jsp";
 		}
 		
