@@ -231,6 +231,10 @@
 		view.submit();
 	}
 </script>
+<form name="view">
+	<input type="hidden" name="t_gubun">
+	<input type="hidden" name="t_no">
+</form>
 <body>
 
 <div class="wrapper">
@@ -247,7 +251,7 @@
         <div id="b_right">
             <p class="n_title">NOTICE</p>
             
-            <form name="noti" action="notice_list" method="get">
+            <form name="noti">
                 <input type="hidden" name="t_nowPage" >
                 
                 <div class="record_group">
