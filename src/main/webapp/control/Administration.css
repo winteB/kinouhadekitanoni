@@ -510,11 +510,25 @@ body.admin-page {
 }
 
 .cards-stack { display: flex; flex-direction: column; gap: 15px; }
+.cards-stack_upper {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding : 15px;
+  padding-top: 0px;
+}
+
 .date-cell {
   font-size: 0.85rem;   /* 글자 크기를 조금 줄임 */
   text-align: right;    /* 오른쪽 정렬 */
   color: #555;          /* 필요하다면 색상도 조정 */
   padding-right: 8px;   /* 오른쪽 여백 */
+}
+.date-cell_left {
+  font-size: 0.85rem;   /* 글자 크기를 조금 줄임 */
+  text-align: left;    /* 오른쪽 정렬 */
+  color: #555;          /* 필요하다면 색상도 조정 */
+  padding-left: 8px;   /* 오른쪽 여백 */
 }
 .date-cell .sel_text{ border: none;}
 .p-card { background: #fff; border-radius: 16px; padding: 20px 25px; display: flex; align-items: center; box-shadow: 0 4px 15px rgba(0,0,0,0.02); transition: transform 0.2s; }

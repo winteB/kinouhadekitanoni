@@ -61,7 +61,7 @@ public class PaymantDao {
 				+ "    end_date,\r\n"
 				+ "    paymant,party) \r\n"
 				+ "    VALUES('"+dto.getNo()+"','"+dto.getUser_id()+"','"+dto.getKind()+"','"+dto.getSpot()+"','"+dto.getRiver()+"',\r\n"
-				+ "    TO_DATE('"+dto.getPay_date()+"', 'YYYY-MM-DD'),'"+dto.getPrice()+"',\r\n"
+				+ "    TO_DATE('"+dto.getPay_date()+"', 'YYYY-MM-DD hh24:mi:ss'),'"+dto.getPrice()+"',\r\n"
 				+ "    TO_DATE('"+dto.getStart_date()+"', 'YYYY-MM-DD'),\r\n"
 				+ "    TO_DATE('"+dto.getEnd_date()+"', 'YYYY-MM-DD'),\r\n"
 				+ "    '"+dto.getPaymant()+"','"+dto.getParty()+"')";

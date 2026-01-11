@@ -23,10 +23,12 @@
 		          failUrl: "${failUrl}"
 		        })
 		}
+		   
+			  
 		window.onfocus = function () {
 		    if (isFinished) {
 		      // 결제창 닫힘 → 메인으로 이동
-		      location.href = "Index";
+		      location.href = "Member?t_gubun=myinfo";
 		    }
 		  };
 	</script>

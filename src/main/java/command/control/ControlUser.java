@@ -18,6 +18,7 @@ public class ControlUser implements CommonExecute {
 		String select = request.getParameter("t_select");
 		String colum = request.getParameter("t_colum");
 		String search = request.getParameter("t_search");
+
 		if(select==null){
 			select="all";
 			colum="id";

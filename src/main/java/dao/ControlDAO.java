@@ -17,7 +17,7 @@ public class ControlDAO {
 	PreparedStatement pstmt=null;
 	ResultSet rs=null;
 	
-	
+//	멤버 관리
 	public List<MemberDto> getUserList(String select, String colum, String search, int start, int end) {
 		
 		List<MemberDto> list=new ArrayList<MemberDto>();
@@ -88,7 +88,7 @@ public class ControlDAO {
 		return list;
 	}
 
-
+//	멤버 관리 토탈 카운트
 	public int getTotalCount(String select,String colum, String search) {
 		int count=0;
 		String sql = "select count(*) count from member\r\n"

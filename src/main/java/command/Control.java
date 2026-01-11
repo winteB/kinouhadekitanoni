@@ -14,6 +14,9 @@ import command.control.ControlUser;
 import command.control.ControlUserDelete;
 import command.control.ControlUserDeleteAll;
 import command.control.ControlYoyaku;
+import command.control.ControlYoyakuCancle;
+import command.control.ReservationCancle;
+import command.control.ReservationComplt;
 import common.CommonExecute;
 import common.CommonUtil;
 
@@ -85,14 +88,37 @@ public class Control extends HttpServlet {
 			control.execute(request);
 			view="/control/Administration_reservations.jsp";
 		}
+		else if(gubun.equals("notPayedDelete")) {
+			CommonExecute control=new ControlYoyakuCancle();
+			control.execute(request);
+			control=new ControlYoyaku();
+			control.execute(request);
+			view="/control/Administration_reservations.jsp";
+		}
+		else if(gubun.equals("reservationComplt")) {
+			CommonExecute control=new ReservationComplt();
+			control.execute(request);
+			control=new ControlYoyaku();
+			control.execute(request);
+			view="/control/Administration_reservations.jsp";
+		}
+		else if(gubun.equals("reservationCancle")) {
+			CommonExecute control=new ReservationCancle();
+			control.execute(request);
+			control=new ControlYoyaku();
+			control.execute(request);
+			view="/control/Administration_reservations.jsp";
+		}
 		
 		System.out.println("view = " + view);
 		if(CommonUtil.getSessionInfo(request)==null) {
+			System.out.println("로그인 안됨");
 	    	view = "common_alert.jsp";
 			request.setAttribute("t_url", "Member");
 			request.setAttribute("t_msg", "관리자 페이지입니다.");
-		}else if(CommonUtil.getSessionInfo(request).equals("")){
-	    	view = "common_alert.jsp";
+		}else if(!"top".equals(CommonUtil.getSessionLevel(request))){
+			System.out.println("top 아님");
+			view = "common_alert.jsp";
 			request.setAttribute("t_url", "Member");
 			request.setAttribute("t_msg", "관리자 페이지입니다.");
 		}

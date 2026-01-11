@@ -9,7 +9,6 @@ import java.util.List;
 import common.DBConnection;
 import dto.CampingDto;
 import dto.FishingDto;
-import dto.MemberDto;
 import dto.YoyakuDto;
 
 public class YoyakuDao {
@@ -135,7 +134,7 @@ public class YoyakuDao {
 
 //	관리자 페이지 리스트
 	public List<YoyakuDto> getManagerYoyakuList(String select, String search, String kind, String pay, int start,
-			int end) {
+			int end, String orderStart, String orderEnd) {
 		List<YoyakuDto> list = new ArrayList<YoyakuDto>();
 		String sql = "SELECT *\r\n"
 				+ "FROM (\r\n"
@@ -161,26 +160,45 @@ public class YoyakuDao {
 				+ "        left join camping c on y.spot=c.cam_no \r\n"
 				+ "        left join fishing f on y.spot=f.fish_no\r\n";
 		
-				
-				if(!kind.equals("all")||!pay.equals("all")) {
+				if(!kind.equals("all")||!pay.equals("all")||!orderStart.equals("")||!orderEnd.equals("")) {
 					String where="where ";
-					if(!kind.equals("all")&&!pay.equals("all")) {
-						where+="y.kind = '"+kind+"' and y.paymant='"+pay+"' ";
+					if(!kind.equals("all")||!pay.equals("all")) {
+						
+						if(!kind.equals("all")&&!pay.equals("all")) {
+							where+="y.kind = '"+kind+"' and y.paymant='"+pay+"' ";
+						}
+						else if(!kind.equals("all")) {
+							where+="y.kind = '"+kind+"' ";
+						}
+						else if(!pay.equals("all")) {
+							where+=" y.paymant='"+pay+"'";
+						}
+						if(!orderStart.equals("")||!orderEnd.equals("")) {
+							where+=" and";
+						}
 					}
-					else if(!kind.equals("all")) {
-						where+="y.kind = '"+kind+"' ";
+					if(!orderStart.equals("")||!orderEnd.equals("")) {
+						
+						if(!orderStart.equals("")&&!orderEnd.equals("")) {
+							where+=" y.start_date >= '"+orderStart+"' and y.start_date <='"+orderEnd+"' ";
+						}
+						else if(!orderStart.equals("")) {
+							where+=" y.start_date >= to_date('"+orderStart+"','yyyy-MM-dd') ";
+						}
+						else if(!orderEnd.equals("")) {
+							where+=" y.start_date <=to_date('"+orderEnd+"','yyyy-MM-dd') ";
+						}
 					}
-					else if(!pay.equals("all")) {
-						where+=" y.paymant='"+pay+"'";
-					}
+
 					sql=sql+where;
 				}
 				
-		sql = sql + "        ORDER BY no\r\n"
+				
+		sql = sql + "        ORDER BY no desc\r\n"
 				+ "    ) mem\r\n"
-				+ "    WHERE ROWNUM <= 6\r\n"
+				+ "    WHERE ROWNUM <= "+end+"\r\n"
 				+ ")\r\n"
-				+ "WHERE rnum >= 1";
+				+ "WHERE rnum >= "+start;
 		
 		System.out.println(sql);
 		try {
@@ -217,7 +235,8 @@ public class YoyakuDao {
 		}
 		return list;
 	}
-	public int getManagerListTotalCount(String select, String search, String kind, String pay) {
+//	관리자 페이지 리스트 토탈 카운트
+	public int getManagerListTotalCount(String select, String search, String kind, String pay, String orderStart, String orderEnd) {
 		int count=0;
 		String sql = "SELECT count(*) count \r\n"
 				+ "        FROM yoyaku y\r\n"
@@ -226,18 +245,39 @@ public class YoyakuDao {
 				+ "        left join fishing f on y.spot=f.fish_no\r\n";
 		
 				
-				if(!kind.equals("all")||!pay.equals("all")) {
-					String where="where ";
-					if(!kind.equals("all")) {
-						where+="y.kind = '"+kind+"' ";
-					}
-					if(!pay.equals("all")) {
-						where+=" y.paymant='"+pay+"'";
-					}
-					sql=sql+where;
-				}
+		if(!kind.equals("all")||!pay.equals("all")||!orderStart.equals("")||!orderEnd.equals("")) {
+			String where="where ";
+			if(!kind.equals("all")||!pay.equals("all")) {
 				
-		sql = sql + "        ORDER BY no\r\n";
+				if(!kind.equals("all")&&!pay.equals("all")) {
+					where+="y.kind = '"+kind+"' and y.paymant='"+pay+"' ";
+				}
+				else if(!kind.equals("all")) {
+					where+="y.kind = '"+kind+"' ";
+				}
+				else if(!pay.equals("all")) {
+					where+=" y.paymant='"+pay+"'";
+				}
+				if(!orderStart.equals("")||!orderEnd.equals("")) {
+					where+=" and";
+				}
+			}
+			if(!orderStart.equals("")||!orderEnd.equals("")) {
+				
+				if(!orderStart.equals("")&&!orderEnd.equals("")) {
+					where+=" y.start_date >= '"+orderStart+"' and y.start_date <='"+orderEnd+"' ";
+				}
+				else if(!orderStart.equals("")) {
+					where+=" y.start_date >= to_date('"+orderStart+"','yyyy-MM-dd') ";
+				}
+				else if(!orderEnd.equals("")) {
+					where+=" y.start_date <=to_date('"+orderEnd+"','yyyy-MM-dd') ";
+				}
+			}
+
+			sql=sql+where;
+		}
+				
 		
 		System.out.println(sql);
 		
@@ -250,10 +290,69 @@ public class YoyakuDao {
 			}
 		}catch(Exception e) {
 			System.out.println("getManagerListTotalCount 에러 : " + sql);
+			e.printStackTrace();
 		}finally {
 			DBConnection.closeDB(conn, ps, rs);
 		}
 		return count;
+	}
+	public int setNotPayedDelete(String todayTime) {
+		int result = 0;
+		String sql = "DELETE from yoyaku "
+				+ "where PAY_DATE<to_date('"+todayTime+"','YYYY-MM-DD hh24:mi:ss')-1 "
+				+ "and paymant='N'";
+		System.out.println(sql);
+		
+		try {
+			conn = DBConnection.getConnection();
+			ps = conn.prepareStatement(sql);
+			result = ps.executeUpdate();
+			
+		}catch(Exception e) {
+			System.out.println("setNotPayedDelete 에러 : " + sql);
+			e.printStackTrace();
+		}finally {
+			DBConnection.closeDB(conn, ps, rs);
+		}
+		return result;
+	}
+	//예약 1건에 대한 취소
+	public int setYoyakuCancle(String orderNo) {
+		int result = 0;
+		String sql = "DELETE from yoyaku where no='"+orderNo+"'";
+		System.out.println(sql);
+		
+		try {
+			conn = DBConnection.getConnection();
+			ps = conn.prepareStatement(sql);
+			result = ps.executeUpdate();
+			
+		}catch(Exception e) {
+			System.out.println("setYoyakuCancle 에러 : " + sql);
+			e.printStackTrace();
+		}finally {
+			DBConnection.closeDB(conn, ps, rs);
+		}
+		return result;
+	}
+	//예약 1건에 대한 결제 확인
+	public int setYoyakuComplt(String orderNo) {
+		int result = 0;
+		String sql = "UPDATE yoyaku SET paymant = 'Y'  where no='"+orderNo+"'";
+		System.out.println(sql);
+		
+		try {
+			conn = DBConnection.getConnection();
+			ps = conn.prepareStatement(sql);
+			result = ps.executeUpdate();
+			
+		}catch(Exception e) {
+			System.out.println("setYoyakuComplt 에러 : " + sql);
+			e.printStackTrace();
+		}finally {
+			DBConnection.closeDB(conn, ps, rs);
+		}
+		return result;
 	}
 	
 

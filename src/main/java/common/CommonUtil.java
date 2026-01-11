@@ -223,6 +223,15 @@ public class CommonUtil {
 		return value;
 	}
 	
+//	관리자인지 확인하기
+	public static String getSessionLevel(HttpServletRequest request) {
+		
+		HttpSession session = request.getSession();
+		String value= (String)session.getAttribute("sessionLevel");
+		
+		return value;
+	}
+	
 //	기본 url 동적 생성 http://localhost:8080/kinouhadekitanoni 라거나 http://192.168.0.12:8080/kinouhadekitanoni 라거나.
 	public static String getBaseUrl(HttpServletRequest request) {
 		return request.getScheme() + "://" +

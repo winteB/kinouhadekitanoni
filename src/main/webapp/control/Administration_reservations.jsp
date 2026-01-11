@@ -27,9 +27,34 @@
 			search.submit();
 		}
 		
+		function goDeleteAll(){
+			if(confirm("미결제 상태로 24시간 이상 경과한 예약을 전부 삭제합니다.")){
+				search.t_gubun.value="notPayedDelete";
+				search.method="post";
+				search.action="Control";
+				search.submit();
+			}
+		}
+		
 		function goListPage(pageNumber){
 			search.t_nowPage.value=pageNumber;
 			search.t_gubun.value="reservation";
+			search.method="post";
+			search.action="Control";
+			search.submit();
+		}
+		
+		function goCancle(no){
+			search.t_yno.value=no;
+			search.t_gubun.value="reservationCancle";
+			search.method="post";
+			search.action="Control";
+			search.submit();
+		}
+		
+		function goComplt(no){
+			search.t_yno.value=no;
+			search.t_gubun.value="reservationComplt";
 			search.method="post";
 			search.action="Control";
 			search.submit();
@@ -40,6 +65,7 @@
 	
 	</script>
 
+	
 </head>
     <FORM name="controller">
         <input type="hidden" name="t_gubun">
@@ -65,11 +91,14 @@
                 </a>
             </div>
         </aside>
-
+	<c:if test="${not empty msg}">
+		<script>alert('${msg}');</script>
+	</c:if>
         <main class="main-content">
         <FORM name="search">
         <input type="hidden" name="t_gubun">
         <input type="hidden" name="t_nowPage">
+        <input type="hidden" name="t_yno">
         <input type="hidden" name="t_pay" value="${pay }">
         <input type="hidden" name="t_kind"value="${kind }">
 
@@ -104,15 +133,21 @@
     </div>
     </div>
     
-    
-
-    <div class="cards-stack">
+    <div class="cards-stack_upper">
+    	<div class="date-cell_left">
+    		총 예약수 ${totalCount } 건
+    	</div>
     	<div class="date-cell">
+    		입실일&nbsp;&nbsp;:&nbsp;&nbsp;
 	     	<input type="date" class="sel_text" name="t_order_start" value="${orderStart }"> 
 			~
 			<input type="date" class="sel_text" name="t_order_end" value="${orderEnd }"> 
      	</div>  
         
+    </div>
+
+    <div class="cards-stack">
+    	
         
         <c:forEach items="${ylist }" var="dto">
 	        <div class="p-card">
@@ -180,7 +215,7 @@
 			                </div>
 			            </div>
 			            <div class="p-right2">
-			            	<button type="button" onclick="goCancle(${dto.getNo()})"> 예약 취소 </button>
+			            	<button type="button" onclick="goCancle('${dto.getNo()}')"> 예약 취소 </button>
 			            </div>
 					</c:when>
 					<c:otherwise>
@@ -193,8 +228,8 @@
 			                </div>
 			            </div>
 			            <div class="p-right2">
-			            	<button type="button"  onclick="goPay(${dto.getNo()})"> 결제확인 </button>
-			            	<button type="button"  onclick="goCancle(${dto.getNo()})"> 예약취소 </button>
+			            	<button type="button"  onclick="goComplt('${dto.getNo()}')"> 결제확인 </button>
+			            	<button type="button"  onclick="goCancle('${dto.getNo()}')"> 예약취소 </button>
 			            </div>				
 					</c:otherwise>
 				</c:choose>
@@ -213,7 +248,7 @@
                     <div class="page-numbers">
                     	${pageDisplay }
                     </div>
-                    <button class="page-nav" onclick="goListPage('${nowpage+1}')">Next <i class="fa-solid fa-chevron-right"></i></button>
+                    <button class="page-nav" onclick="goListPage('${(nowpage+1) lt total_page ? (nowpage+1) : total_page}')">Next <i class="fa-solid fa-chevron-right"></i></button>
                 </div>
 </div>
 </FORM>
