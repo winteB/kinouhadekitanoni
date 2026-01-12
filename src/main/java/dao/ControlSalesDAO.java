@@ -29,10 +29,10 @@ public class ControlSalesDAO {
 		String sql="SELECT\r\n"
 				+ "    y.KIND, \r\n"
 				+ "    y.PRICE, \r\n"
-				+ "    to_char(y.PAY_DATE,'yyyy-MM-dd hh24:mi:ss'),\r\n"
+				+ "    to_char(y.PAY_DATE,'yyyy-MM-dd') as PAY_DATE,\r\n"
 				+ "    NVL(f.FISH_NAME, c.CAM_NAME) AS PLACE_NAME,\r\n"
-				+ "    to_char(y.START_DATE,'yyyy-MM-dd hh24:mi:ss'),\r\n"
-				+ "    to_char(y.END_DATE,'yyyy-MM-dd hh24:mi:ss')\r\n"
+				+ "    to_char(y.START_DATE,'yyyy-MM-dd hh24:mi:ss') as START_DATE,\r\n"
+				+ "    to_char(y.END_DATE,'yyyy-MM-dd hh24:mi:ss') as END_DATE\r\n"
 				+ "FROM YOYAKU y\r\n"
 				+ "LEFT JOIN FISHING f ON y.SPOT = f.FISH_NO\r\n"
 				+ "LEFT JOIN CAMPING c ON y.SPOT = c.CAM_NO\r\n"
@@ -68,6 +68,78 @@ public class ControlSalesDAO {
 		}
 		return list;
 	}
+
+
+
+
+
+	public List<ControlSalesDTO> getCampGraph(String Switch) {
+		DBConnection db=new DBConnection();
+		ControlSalesDTO dto=null;
+		List<ControlSalesDTO> list=new ArrayList<ControlSalesDTO>();
+		
+		String sql="SELECT\r\n"
+				+ "    price,pay_date FROM yoyaku WHERE kind=?";
+		
+		try {
+			conn=db.getConnection();
+			pstmt=conn.prepareStatement(sql);
+			pstmt.setString(1,Switch);
+			rs=pstmt.executeQuery();
+			
+			while(rs.next()) {
+				dto=new ControlSalesDTO();
+				
+				dto.setPaydate(rs.getString("paydate"));
+				dto.setPrice(rs.getInt("price"));
+				
+				list.add(dto);
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+			System.out.println("DAO : getCampGraph()");
+		}finally {
+			db.closeDB(conn, pstmt, rs);
+		}
+		
+		
+		return list;
+	}
+	
+	
+	
+	public List<ControlSalesDTO> getFishGraph(String Switch) {
+		DBConnection db=new DBConnection();
+		ControlSalesDTO dto=null;
+		List<ControlSalesDTO> list=new ArrayList<ControlSalesDTO>();
+		
+		String sql="SELECT\r\n"
+				+ "    price,pay_date FROM yoyaku WHERE kind=?";
+		
+		try {
+			conn=db.getConnection();
+			pstmt=conn.prepareStatement(sql);
+			pstmt.setString(1,Switch);
+			rs=pstmt.executeQuery();
+			
+			while(rs.next()) {
+				dto=new ControlSalesDTO();
+				
+				dto.setPaydate(rs.getString("paydate"));
+				dto.setPrice(rs.getInt("price"));
+				
+				list.add(dto);
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+			System.out.println("DAO : getCampGraph()");
+		}finally {
+			db.closeDB(conn, pstmt, rs);
+		}
+		return list;
+	}
+	
+	
 	
 	
 	
