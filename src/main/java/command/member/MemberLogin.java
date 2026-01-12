@@ -37,7 +37,7 @@ public class MemberLogin implements CommonExecute {
 			url = "Member";
 		}else {
 			msg = name+"님 로그인 되었습니다.";
-			url = "Index";
+			url = "Cover";
 			
 			session = request.getSession();
 			

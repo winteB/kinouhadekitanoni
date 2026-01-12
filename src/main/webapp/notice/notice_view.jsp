@@ -69,7 +69,7 @@
                         <tr>
                            <th>내용</th>
                             <td colspan="3" class="content-row">
-                            	<textarea class="content-row textarea_H250">${dto.getContent()}</textarea>
+                            	<textarea class="content-row textarea_H250" readonly>${dto.getContent()}</textarea>
                             </td>
                         </tr>
                         <tr>

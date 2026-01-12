@@ -26,7 +26,9 @@
 	<header class="main-header" id="mainHeader">
         <div class="brand-wrapper">
             <div class="brand-wrapper">
-			    <img src="images/F5.png" alt="company 로고" class="brand-logo" />
+				<a href="javascript:goPage('Index')">
+				    <img src="images/F5.png" alt="company 로고" class="brand-logo" />
+	            </a>
 			</div>
             <svg class="brand-logo-svg" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
                 <circle cx="50" cy="50" r="48" fill="#00ffcc" stroke="#1a1a1a" stroke-width="4"/>
@@ -59,8 +61,8 @@
     </header>
     <section class="intro-top">
         <div class="top-content">
-            <div class="brand-subtitle">The Hybrid Life</div>
-            <h1 class="brand-title">NIWACAN</h1>
+            <div class="brand-subtitle">The Hybrid Holiday</div>
+            <h1 class="brand-title">F5&nbsp;&nbsp;</h1>
         </div>
     </section>
 
