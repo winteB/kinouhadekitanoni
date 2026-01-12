@@ -6,6 +6,9 @@
     <%@ include file="../common_header_head.jsp" %>
 </head>
 <script type="text/javascript">
+	function goPassword(){
+		mem.t_password.focus();
+	}
 	function goLogin(){
 		if(checkEmpty(mem.t_id,"ID 입력!")) return;
 		if(checkEmpty(mem.t_password,"비밀번호 입력!")) return;
@@ -46,13 +49,13 @@
                         <tr>
                             <th>ID</th>
                             <td class="id-row">
-                                <input type="text" name="t_id" oninput="setEmpty()">
+                                <input type="text" name="t_id" oninput="setEmpty()" onkeydown="if(event.key==='Enter'){goPassword()}">
                             </td>
                         </tr>
 
                         <tr>
                             <th>비밀번호</th>
-                            <td><input type="password" name="t_password"></td>
+                            <td><input type="password" name="t_password" onkeydown="if(event.key==='Enter'){goLogin()}"></td>
                         </tr>
 
                         </tbody>

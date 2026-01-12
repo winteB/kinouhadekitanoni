@@ -6,10 +6,11 @@
 
 	// DTO가 null인 경우(비정상 접근/세션 만료 등)
 	if(dto == null) {
+		session.invalidate();
 %>
 	<script>
 		alert("로그인이 필요하거나 정보가 없습니다.");
-		location.href="Member?t_gubun=login";
+		location.href="Member";
 	</script>
 <%
 		return;
