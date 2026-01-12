@@ -1,16 +1,17 @@
 <%@ page pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
  <aside class="sidebar">
             <nav class="menu-nav">
-                <a href="javascript:goDesh()" class="menu-item">
+                <a href="javascript:goDesh()" class="menu-item <c:if test="${sidemenu_active eq 'desh' }">active</c:if>">
                     <i class="fa-solid fa-chart-pie"></i> <span>대쉬 보드</span>
                 </a>
-                <a href="javascript:goUser()" class="menu-item">
+                <a href="javascript:goUser()" class="menu-item <c:if test="${sidemenu_active eq 'user' }">active</c:if>">
                     <i class="fa-solid fa-chart-line"></i> <span>회원 관리 </span>
                 </a>
-                <a href="javascript:goSell()" class="menu-item active">
+                <a href="javascript:goSell()" class="menu-item <c:if test="${sidemenu_active eq 'sell' }">active</c:if>">
                     <i class="fa-regular fa-credit-card"></i> <span>매출 통계</span>
                 </a>
-                <a href="javascript:goReservation()" class="menu-item">
+                <a href="javascript:goReservation()" class="menu-item <c:if test="${sidemenu_active eq 'reservation' }">active</c:if>">
                     <i class="fa-solid fa-box-open"></i> <span>예약 관리</span>
                 </a>
             </nav>
