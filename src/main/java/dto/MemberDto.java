@@ -5,7 +5,48 @@ public class MemberDto {
 					age, address, mobile_1, mobile_2, mobile_3,
 					email_1, email_2, gender,
 					reg_date, update_date, exit_date;
+	
+	
+	
+	public MemberDto(String id, String name, String password, String age, String address, String mobile_1,
+			String mobile_2, String mobile_3, String email_1, String email_2, String gender) {
+		super();
+		this.id = id;
+		this.name = name;
+		this.password = password;
+		this.age = age;
+		this.address = address;
+		this.mobile_1 = mobile_1;
+		this.mobile_2 = mobile_2;
+		this.mobile_3 = mobile_3;
+		this.email_1 = email_1;
+		this.email_2 = email_2;
+		this.gender = gender;
+	}
 
+
+
+	// MemberDto.java 파일 내부에 추가할 생성자
+	public MemberDto(String id, String name, String password, String age, String address, 
+	                 String mobile_1, String mobile_2, String mobile_3, 
+	                 String email_1, String email_2, String gender, String reg_date, String update_date) {
+	    this.id = id;
+	    this.name = name;
+	    this.password = password;
+	    this.age = age;
+	    this.address = address;
+	    this.mobile_1 = mobile_1;
+	    this.mobile_2 = mobile_2;
+	    this.mobile_3 = mobile_3;
+	    this.email_1 = email_1;
+	    this.email_2 = email_2;
+	    this.gender = gender;
+	    this.reg_date = reg_date;
+	    this.update_date = update_date;
+	}
+	
+	
+	
 	public MemberDto(String id, String name, String password, String password_length, String age, String address,
 			String mobile_1, String mobile_2, String mobile_3, String email_1, String email_2, String gender,
 			String reg_date, String update_date, String exit_date) {
