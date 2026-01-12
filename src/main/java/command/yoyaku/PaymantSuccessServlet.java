@@ -42,7 +42,7 @@ request.setCharacterEncoding("utf-8");
 		String msg = result==1?"결제 완료":"오류 발생";
 		
 		request.setAttribute("t_msg", msg);
-		request.setAttribute("t_url", "index");
+		request.setAttribute("t_url", "Index");
 		
 		RequestDispatcher rd = request.getRequestDispatcher("common_alert.jsp");
 		rd.forward(request, response);
