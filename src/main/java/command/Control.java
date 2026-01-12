@@ -9,6 +9,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import command.control.ControlGraphCamp;
 import command.control.ControlTotalSales;
 import command.control.ControlUser;
 import common.CommonExecute;
@@ -70,6 +71,30 @@ public class Control extends HttpServlet {
 		else if(gubun.equals("reservation")) {
 			
 			view="/control/Administration_reservations.jsp";
+		}else if(gubun.equals("yca")) {
+			CommonExecute control=new ControlTotalSales();
+			control.execute(request);
+			control=new ControlGraphCamp();
+			control.execute(request);
+			view="/control/Administration_sales.jsp";
+		}else if(gubun.equals("yfi")) {
+			CommonExecute control=new ControlTotalSales();
+			control.execute(request);
+			control=new ControlGraphCamp();
+			control.execute(request);
+			view="/control/Administration_sales.jsp";
+		}else if(gubun.equals("mca")) {
+			CommonExecute control=new ControlTotalSales();
+			control.execute(request);
+			control=new ControlGraphCamp();
+			control.execute(request);
+			view="/control/Administration_sales.jsp";
+		}else if(gubun.equals("mfi")) {
+			CommonExecute control=new ControlTotalSales();
+			control.execute(request);
+			control=new ControlGraphCamp();
+			control.execute(request);
+			view="/control/Administration_sales.jsp";
 		}
 		
 		System.out.println("view = " + view);
@@ -86,7 +111,7 @@ public class Control extends HttpServlet {
 		RequestDispatcher rd = request.getRequestDispatcher(view);
 		rd.forward(request, response);
 	}
-
+	
 	/**
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
