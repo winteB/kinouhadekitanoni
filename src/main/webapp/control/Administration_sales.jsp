@@ -3,7 +3,6 @@
 
 
 
-
     
     <!-- 매출 관리 -->
 <!DOCTYPE html>
@@ -15,9 +14,17 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link rel="stylesheet" href="${pageContext.request.contextPath}/control/Administration.css"> 
 </head>
-
+<script type="text/javascript">
+	function goGraphCampFish(gubun) {
+		sales.t_gubun.value=gubun;
+		sales.method="post";
+		sales.action="/kinouhadekitanoni/Control";
+		sales.submit();
+	}
+	f
+</script>
 <body class="admin-page">
-    <FORM name="controller">
+ 
         <input type="hidden" name="gubun">
        <header class="main-header" id="mainHeader">
         
@@ -31,7 +38,6 @@
 
         <main class="main-content">
             
-                <!-- 집어넣기 -->
                 
 
                 <div class="content-section dashboard-section">
@@ -45,94 +51,100 @@
                                         	
                                         
                                     </div>
-									
                                     <div class="metrics-row">
                                         <div class="metric-item">
                                             <span class="label">캠핑 월간 매출</span>
-                                            <div class="value">${campMonth}원</div>
+                                            <div class="value"><fmt:formatNumber value="${campMonth}" currencySymbol="###,###"/>원</div>
                                         </div>
                                         <div class="metric-item">
                                             <span class="label">낚시 월간 매출</span>
-                                            <div class="value">${fishMonth}원</div>
+                                            <div class="value"><fmt:formatNumber value="${fishMonth}" currencySymbol="###,###"/>원</div>
                                             <div class="progress-container">
                                             </div>
                                         </div>
                                         <div class="metric-item">
                                             <span class="label">캠핑 년간 매출</span>
-                                            <div class="value">${campYear}원</div>
+                                            <div class="value"><fmt:formatNumber value="${campYear}" currencySymbol="###,###"/>원</div>
                                         </div>
                                         <div class="metric-item">
                                             <span class="label">낚씨 년간 매출</span>
-                                            <div class="value">${fishYear}원</div>
+                                            <div class="value"><fmt:formatNumber value="${fishYear}" currencySymbol="###,###"/>원</div>
                                         </div>
                                     </div>
                                 </div>
-
+                                
+                                
                                 <div class="content-split-row">
                                     <div class="card time-card">
                                         <div class="card-header"><h3>최근 매출</h3></div>
                                         <div class="time-list">
                                             <div class="week-header"><span>Week 5</span><span class="total-h">8h 30m</span></div>
-                                            
+                                            <c:forEach items="${list}" var="dto" end="6">
                                             <div class="time-row">
-                                                <div class="date-col"><span class="day-name">날짜</span><span class="date-num">7월 23일</span></div>
-                                                <div class="input-group"><span class="input-box placeholder">12:00</span><span class="input-box placeholder">15:00</span></div>
-                                                <div class="total-col"><span class="label-mini">Total</span><span class="time-val">300,000원</span></div>
+                                                <div class="date-col"><span class="day-name">날짜</span><span class="date-num">${dto.getPaydate()}</span></div>
+                                                <div class="input-group"><span class="input-box placeholder"><span class="date-num">${fn:substring(dto.getStartdate(), 11, 16)}</span></span><span class="input-box placeholder"><span class="date-num">${fn:substring(dto.getEnddate(), 11, 16)}</span></span></div>
+                                                <div class="total-col"><span class="label-mini">Total</span><span class="time-val"><fmt:formatNumber value="${dto.getPrice()}" currencySymbol="###,###"/>원</span></div>
                                             </div>
-                                            <div class="time-row active">
-                                                <div class="date-col"><span class="day-name">Wed</span><span class="date-num">July 24</span></div>
-                                                <div class="input-group"><span class="input-box">12:00</span><span class="input-box">14:30</span></div>
-                                                <div class="check-opt"><i class="fa-solid fa-check"></i> Applied</div>
-                                            </div>
+                                           </c:forEach>
                                         </div>
                                     </div>
 									
     <div class="card graph-card">
     <div class="card-header flex-between">
         <h3>매출 그래프</h3>
+        
+        <form name="sales">
+        	<input type="hidden" name="t_gubun">
+        
         <div class="toggle-pill">
-            <button class="active">캠핑년간</button>
-            <button>낚시년간</button>
-            <button>캠핑월간</button>
-            <button>낚시월간</button>
+			<button type="submit" onclick="javascript:goGraphCampFish('yca')" name="t_gubun" value="yca">캠핑년간</button>
+			<button type="submit" onclick="javascript:goGraphCampFish('yfi')" name="t_gubun" value="yfi">낚시년간</button>
+			<button type="submit" onclick="javascript:goGraphCampFish('wca')" name="t_gubun" value="wca">캠핑주간</button>
+			<button type="submit" onclick="javascript:goGraphCampFish('wfi')" name="t_gubun" value="wfi">낚시주간</button>
         </div>
+        </form>
     </div>
     <div class="chart-container">
         <div class="y-axis"><span>40</span><span>30</span><span>20</span><span>10</span></div>
         
-        <div class="bars-wrapper">
-            <div class="grid-line top-line"></div>
-            <div class="grid-line mid-line"></div>
+		<div class="bars-wrapper">
 
-            <div class="bar-col">
-                <div class="bar yellow" style="height: 40%;"></div>
-                <div class="month-label">월</div>
-            </div>
-            <div class="bar-col">
-                <div class="bar yellow-light" style="height: 60%;"></div>
-                <div class="month-label">화</div>
-            </div>
-            <div class="bar-col">
-                <div class="bar yellow" style="height: 30%;"></div>
-                <div class="month-label">수</div>
-            </div>
-            <div class="bar-col">
-                <div class="bar orange" style="height: 80%;"></div>
-                <div class="month-label">목</div>
-            </div>
-            <div class="bar-col">
-                <div class="bar black" style="height: 50%;"></div>
-                <div class="month-label">금</div>
-            </div>
-            <div class="bar-col">
-                <div class="bar orange" style="height: 70%;"></div>
-                <div class="month-label">토</div>
-            </div>
-            <div class="bar-col">
-                <div class="bar yellow" style="height: 90%;"></div>
-                <div class="month-label">일</div>
-            </div>
-        </div>
+		  <!-- 주간 -->
+		  <c:if test="${r_gubun eq 'wca' || r_gubun eq 'wfi'}">
+		    <c:set var="labels" value="월,화,수,목,금,토,일" />
+		    <c:forEach items="${graphPercent}" var="p" varStatus="s">
+		      <div class="bar-col">
+		        <div class="bar yellow"
+		             style="height:${p}%;"
+		             title="${graphArray[s.index]}원"></div>
+		        <div class="month-label">
+		          <c:choose>
+		            <c:when test="${s.index==0}">월</c:when>
+		            <c:when test="${s.index==1}">화</c:when>
+		            <c:when test="${s.index==2}">수</c:when>
+		            <c:when test="${s.index==3}">목</c:when>
+		            <c:when test="${s.index==4}">금</c:when>
+		            <c:when test="${s.index==5}">토</c:when>
+		            <c:otherwise>일</c:otherwise>
+		          </c:choose>
+		        </div>
+		      </div>
+		    </c:forEach>
+		  </c:if>
+		
+		  <!-- 년간 -->
+		  <c:if test="${r_gubun eq 'yca' || r_gubun eq 'yfi' || empty r_gubun}">
+		    <c:forEach items="${graphPercent}" var="p" varStatus="s">
+		      <div class="bar-col">
+		        <div class="bar yellow"
+		             style="height:${p}%;"
+		             title="${graphArray[s.index]}원"></div>
+		        <div class="month-label">${s.index + 1}월</div>
+		      </div>
+		    </c:forEach>
+		  </c:if>
+		
+		</div>
     </div>
 </div>
 
@@ -141,7 +153,6 @@
                         </div>
                     </main>
                 </div>
-                </FORM>
     <script>
         // 스크롤 시 헤더 디자인 변경 스크립트 (기존 유지)
         const mainContent = document.querySelector('.main-content');

@@ -9,7 +9,13 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import command.qna.QnaAnswerDelete;
+import command.qna.QnaAnswerSave;
+import command.qna.QnaAnswerUpdate;
+import command.qna.QnaDelete;
+import command.qna.QnaList;
 import command.qna.QnaSave;
+import command.qna.QnaUpdate;
 import command.qna.QnaView;
 import common.CommonExecute;
 import common.CommonUtil;
@@ -40,16 +46,17 @@ public class Qna extends HttpServlet {
 		
 		//gubun 값 null/공백 처리
 		if(gubun == null) {
-			gubun = "list";
+			gubun = "";
 		}
 		if(gubun.equals("")) {
-			gubun = "write";
+			gubun = "list";
 		}
 		
 		//여기서부터 페이지로 보내는 용도
 		if(gubun.equals("list")) {
-
-			view = "qna/qna_list_imsi.jsp";
+			CommonExecute qna = new QnaList();
+			qna.execute(request);
+			view = "qna/qna_list.jsp";
 			
 		//qna 글쓰기
 		}else if(gubun.equals("write")) {
@@ -70,9 +77,40 @@ public class Qna extends HttpServlet {
 			qna.execute(request);
 			
 			view = "qna/qna_view.jsp";
-		}else if(gubun.equals("update")) {
-
+		//qna 수정 화면
+		}else if(gubun.equals("update_form")) {
+			CommonExecute qna = new QnaView();
+			qna.execute(request);
 			view = "qna/qna_update.jsp";
+		//qna 수정 저장
+		}else if(gubun.equals("update_save")) {
+			CommonExecute qna = new QnaUpdate();
+			qna.execute(request);
+			view = "common_alert.jsp";
+
+		//qna 삭제
+		}else if(gubun.equals("delete")) {
+			CommonExecute qna = new QnaDelete();
+			qna.execute(request);
+			view = "common_alert.jsp";
+
+		//qna 답변 등록
+		}else if(gubun.equals("answer_save")) {
+			CommonExecute qna = new QnaAnswerSave();
+			qna.execute(request);
+			view = "common_alert.jsp";
+
+		//qna 답변 수정
+		}else if(gubun.equals("answer_update")) {
+			CommonExecute qna = new QnaAnswerUpdate();
+			qna.execute(request);
+			view = "common_alert.jsp";
+		
+		//qna 답변 삭제
+		}else if(gubun.equals("answer_delete")) {
+			CommonExecute qna = new QnaAnswerDelete();
+			qna.execute(request);
+			view = "common_alert.jsp";
 		}
 		
 		RequestDispatcher rd = request.getRequestDispatcher(view);

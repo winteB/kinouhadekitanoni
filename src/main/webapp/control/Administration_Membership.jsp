@@ -7,7 +7,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>niwacan Admin - Membership</title>
+    <title>F5 - 회원관리</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link rel="stylesheet" href="${pageContext.request.contextPath}/control/Administration.css"> 
     <link rel="stylesheet" href="Administration.css">
@@ -43,6 +43,26 @@
 		}
 	}
 	
+	function goDeleteAll() {
+	    // 선택된 체크박스만 가져오기
+	    const checked = document.querySelectorAll('form[name="search"] input[name="memcheck"]:checked');
+	    console.log(checked);
+
+	    if (checked.length === 0) {
+	        alert("하나 이상 체크해야합니다.");
+	        return;
+	    }
+
+	    if (confirm("정말 회원 데이터를 삭제하시겠습니까?")) {
+	        search.t_gubun.value = "userDeleteAll";
+	        search.method = "post";
+	        search.action = "Control";
+	        search.submit();
+	    }
+	}
+
+	
+	/*
 	function goDeleteAll(){
 		var arrayGubun = Object.prototype.toString.call(search.memcheck);
 // 		alert(arrayGubun);checkAll
@@ -53,6 +73,7 @@
 			var len = search.memcheck.length;
 			for(var k=0; k<len; k++){
 				var tf = search.memcheck[k].checked;
+				alert(search.memcheck[k].value)
 				if(tf){
 					going=tf;
 				}
@@ -66,19 +87,27 @@
 		
 		if(going) {
 			alert("정말 회원 데이터를 삭제하시겠습니까?");
-			search.t_gubun.value = "memberDeleteAll";
+			search.t_gubun.value = "userDeleteAll";
 			search.method = "post";
 			search.action = "Control";
-// 			search.submit();
+			search.submit();
 		} else{
 			alert("하나 이상 체크해야합니다.");
 			return;
 		}
 
-
-
-// 		alert(tf);
 	} 
+	*/
+	function goDeleteMember(no){
+		if(confirm("정말 회원 데이터를 삭제하시겠습니까?")){
+			search.t_gubun.value = "userDelete";
+			search.t_no.value = no;
+			search.method = "post";
+			search.action = "Control";
+			search.submit();
+			
+		}
+	}
 </script>
 <body class="admin-page">
     
@@ -108,6 +137,7 @@
      <form name="search">
         <input type="hidden" name="t_gubun">
         <input type="hidden" name="t_nowPage">
+        <input type="hidden" name="t_no">
             <div class="content-wrapper">
                 
                 <div class="page-top-bar">
@@ -120,7 +150,7 @@
                 <div class="toolbar-row">
     
     <div class="left-tools">
-        <button class="btn-primary"><i class="fa-solid fa-plus"></i> Add</button>
+<!--         <button class="btn-primary"><i class="fa-solid fa-plus"></i> Add</button> -->
     </div>
 	
     <div class="right-tools">
@@ -174,8 +204,8 @@
                                 </td>
                                
                                 <td class="actions">
-                                    <button class="btn-icon" onclick ="goYoyakuList('${dto.getId() }')";><i class="fa-solid fa-calendar-check"></i></button>
-                                    <button class="btn-icon" onclick ="goDeleteMember('${dto.getId() }')";><i class="fa-solid fa-trash"></i></button>
+                                    <button type="button"class="btn-icon" onclick ="goYoyakuList('${dto.getId() }')";><i class="fa-solid fa-calendar-check"></i></button>
+                                    <button type="button"class="btn-icon" onclick ="goDeleteMember('${dto.getId() }')";><i class="fa-solid fa-trash"></i></button>
                                 </td>
                             </tr>
                             </c:forEach>
@@ -183,7 +213,7 @@
                         <tfoot>
                         	<tr>
                         		<td colspan='7' class="actions" style='text-align: right'>
-                                    <button class="btn-icon" onclick="goDeleteAll()"><i class="fa-solid fa-trash"> &ensp; 선택 삭제</i></button>
+                                    <button type="button"class="btn-icon" onclick="goDeleteAll()"><i class="fa-solid fa-trash"> &ensp; 선택 삭제</i></button>
                                 </td>
                             </tr>
                         </tfoot>
@@ -191,7 +221,7 @@
                 </div>
 
                 <div class="pagination">
-                    <button class="page-nav" onclick="goListPage('1')"><i class="fa-solid fa-chevron-left"> </i>Previous</button>
+                    <button class="page-nav" onclick="goListPage('${(nowpage-1) lt 1 ? 1 : (nowpage-1)}')"><i class="fa-solid fa-chevron-left"> </i>Previous</button>
                     <div class="page-numbers">
                     	${pageDisplay }
 <!--                         <span onclick="goListPage('1')">1</span> -->
@@ -201,7 +231,7 @@
 <!--                         <span class="dots">...</span> -->
 <!--                         <span>126</span> -->
                     </div>
-                    <button class="page-nav" onclick="goListPage('1')">Next <i class="fa-solid fa-chevron-right"></i></button>
+                    <button class="page-nav" onclick="goListPage('${nowpage+1}')">Next <i class="fa-solid fa-chevron-right"></i></button>
                 </div>
 
             </div>

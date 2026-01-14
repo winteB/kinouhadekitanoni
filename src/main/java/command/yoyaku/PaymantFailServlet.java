@@ -42,7 +42,7 @@ public class PaymantFailServlet extends HttpServlet {
 		String msg = result==1?"결제 실패":"오류 발생";
 		
 		request.setAttribute("t_msg", msg);
-		request.setAttribute("t_url", "index");
+		request.setAttribute("t_url", "Index");
 		
 		RequestDispatcher rd = request.getRequestDispatcher("common_alert.jsp");
 		rd.forward(request, response);

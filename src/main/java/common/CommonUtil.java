@@ -163,16 +163,16 @@ public class CommonUtil {
 		curpage = startpage;
 		while(curpage <= endpage){
 			if(curpage == current_page){
-				strList = strList +"<span class='active' onclick=\"goListPage('"+current_page+"')\">"+current_page+"</span>";
+				strList = strList +"<span class='active' onclick=\"goListPage('"+curpage+"')\">"+curpage+"</span>";
 			} else {
-				strList = strList +"<span onclick=\"goListPage('"+curpage+"')>"+curpage+"</span>";
+				strList = strList +"<span onclick=\"goListPage('"+curpage+"')\">"+curpage+"</span>";
 			}
 			curpage++;
 		}
 		//뒤에 페이지가 더 있는 경우
 		if(total_page > endpage){
 			curpage = total_page;
-			strList = strList + "<span class=\"dots\">...</span><span onclick=\"goListPage('"+curpage+"') >"+curpage+"</span>";
+			strList = strList + "<span class=\"dots\">...</span><span onclick=\"goListPage('"+curpage+"')\" >"+curpage+"</span>";
 		}
 		return strList;
 	}
@@ -219,6 +219,15 @@ public class CommonUtil {
 		
 		HttpSession session = request.getSession();
 		String value= (String)session.getAttribute("sessionId");
+		
+		return value;
+	}
+	
+//	관리자인지 확인하기
+	public static String getSessionLevel(HttpServletRequest request) {
+		
+		HttpSession session = request.getSession();
+		String value= (String)session.getAttribute("sessionLevel");
 		
 		return value;
 	}

@@ -1,0 +1,15 @@
+package command.control;
+
+import javax.servlet.http.HttpServletRequest;
+
+import common.CommonExecute;
+
+public class ControlGraphFish implements CommonExecute {
+
+	@Override
+	public void execute(HttpServletRequest request) {
+		// TODO Auto-generated method stub
+
+	}
+
+}

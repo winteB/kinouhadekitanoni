@@ -14,6 +14,12 @@ public class MemberLogin implements CommonExecute {
 	public void execute(HttpServletRequest request) {
 		MemberDao dao = new MemberDao();
 		
+		HttpSession session = request.getSession(false);
+	    if (session != null) {
+	        session.invalidate(); 
+	    }
+	    session = request.getSession(true);
+	    
 		String id = request.getParameter("t_id");
 		String password = request.getParameter("t_password");
 		
@@ -31,9 +37,9 @@ public class MemberLogin implements CommonExecute {
 			url = "Member";
 		}else {
 			msg = name+"님 로그인 되었습니다.";
-			url = "Index";
+			url = "Cover";
 			
-			HttpSession session = request.getSession();
+			session = request.getSession();
 			
 			session.setAttribute("sessionId", id);
 			session.setAttribute("sessionName", name);
