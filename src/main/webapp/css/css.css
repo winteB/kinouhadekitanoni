@@ -947,7 +947,7 @@ body {
 	    line-height: 1.6;
 	    padding: 20px;
 	}
-	.content-row.input600 {
+	.content-row.input150 {
 		width: 150px;
 		height: 30px;
 		padding: 3px;
@@ -957,6 +957,15 @@ body {
 		height: 30px;
 		padding: 3px;
 	}
+	.title-input {
+	    width: 150px;
+	    height: 16px;
+	    line-height: 16px;
+	    font-size: 11px;
+	    padding: 0 3px;
+	    box-sizing: border-box;
+	}
+	
 	/*중요성 important*/
 	.important{
 		height: 30px;
@@ -2529,4 +2538,5 @@ input.form-input:read-only {
     background-color: #333; /* 활성화 시 어두운 배경 */
     color: #fff;
     border-color: #333;
+}
 }
