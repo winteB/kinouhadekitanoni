@@ -13,6 +13,8 @@ import command.member.MemberDelete;
 import command.member.MemberLogin;
 import command.member.MemberLogout;
 import command.member.MemberMyInfo;
+import command.member.MemberMyYoyaku;
+import command.member.MemberMyYoyakuView; // [중요] import 추가
 import command.member.MemberSave;
 import command.member.MemberUpdate;
 import common.CommonExecute;
@@ -47,7 +49,7 @@ public class Member extends HttpServlet {
 			view = "member/member_login.jsp";
 			// 이미 로그인 된 상태라면 내 정보 페이지로 튕겨내기
 			if(CommonUtil.getSessionInfo(request) != null && !CommonUtil.getSessionInfo(request).equals("")){
-				view = "member/member_myinfo.jsp"; // 혹은 바로 Member?t_gubun=myinfo 로 리다이렉트
+				view = "member/member_myinfo.jsp";
 			}
 		} 
 		// --- [로그인 처리] ---
@@ -104,8 +106,23 @@ public class Member extends HttpServlet {
 			view = "common_alert.jsp";
 		}
 		
+		// ==========================================================
+		//  [내 예약 확인 (List)]
+		// ==========================================================
 		else if(gubun.equals("myyoyaku")) {
+			CommonExecute mem = new MemberMyYoyaku();
+			mem.execute(request);
 			view = "member/member_myyoyaku_list.jsp";
+		}
+		
+		// ==========================================================
+		//  [★필수 추가★] 내 예약 상세 보기 (View)
+		
+		// ==========================================================
+		else if(gubun.equals("myyoyakuView")) {
+			CommonExecute mem = new MemberMyYoyakuView();
+			mem.execute(request);
+			view = "member/member_myyoyaku_view.jsp";
 		}
 		
 		request.setAttribute("sidemenu_active", gubun);

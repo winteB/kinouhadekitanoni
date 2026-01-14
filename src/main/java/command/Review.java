@@ -41,15 +41,49 @@ public class Review extends HttpServlet {
 		
 		ReviewDao dao = new ReviewDao();
 		
-		// 1. 목록 조회 (검색 기능 포함)
+		// 1. 목록 조회 (검색 기능 + 페이징 포함)
 		if(gubun.equals("list")) {
 			String search = request.getParameter("t_search");
 			if(search == null) search = "";
 			
-			List<ReviewDto> list = dao.getReviewList(search);
+			/* ==========================================================
+			 * [페이징 처리 로직 시작]
+			 * ========================================================== */
+			String nowPage = request.getParameter("t_nowPage");
+			int current_page = 0;
+			
+			if(nowPage == null || nowPage.equals("")) current_page = 1;
+			else current_page = Integer.parseInt(nowPage);
+			
+			int total_page = 0;
+			int page_count = 6; // 한 페이지에 보여줄 게시물 수 (카드 형태이므로 8개 정도가 적당)
+			int page_block = 5; // 페이지 번호 블록 개수 (1 2 3 4 5 ...)
+			
+			// 1. 전체 게시물 수 조회
+			int total_count = dao.getTotalCount(search);
+			
+			// 2. 전체 페이지 수 계산
+			total_page = (int)Math.ceil((double)total_count / page_count);
+			
+			// 3. DB 쿼리용 시작/끝 행 계산
+			int start_row = (current_page - 1) * page_count + 1;
+			int end_row = current_page * page_count;
+			
+			// 4. 페이징된 리스트 조회
+			List<ReviewDto> list = dao.getReviewList(search, start_row, end_row);
+			
+			// 5. 페이징 HTML 생성 (CommonUtil 활용)
+			String paging = CommonUtil.getPageSetting(current_page, total_page, page_block);
+			
+			/* ==========================================================
+			 * [페이징 처리 로직 끝]
+			 * ========================================================== */
 			
 			request.setAttribute("t_list", list);
 			request.setAttribute("t_search", search);
+			request.setAttribute("t_paging", paging);      // 페이징 HTML
+			request.setAttribute("t_total_count", total_count); // 전체 개수 (필요시 사용)
+			
 			view = "/review/review_list.jsp";
 		}
 		
@@ -135,7 +169,6 @@ public class Review extends HttpServlet {
 			} else {
 				int result = dao.insertComment(no, session_id, content);
 				if(result == 1) {
-					// [수정] 알림 메시지 설정 및 알림 페이지로 이동
 					request.setAttribute("t_msg", "댓글이 등록되었습니다.");
 					request.setAttribute("t_url", "Review?t_gubun=view&t_no=" + no);
 					view = "/common_alert.jsp";
@@ -153,7 +186,6 @@ public class Review extends HttpServlet {
 			String no = request.getParameter("t_no");
 			int result = dao.deleteComment(c_no);
 			if(result == 1) {
-				// [수정] 삭제 완료 알림 추가
 				request.setAttribute("t_msg", "댓글이 삭제되었습니다.");
 				request.setAttribute("t_url", "Review?t_gubun=view&t_no=" + no);
 				view = "/common_alert.jsp";

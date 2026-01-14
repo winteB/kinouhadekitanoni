@@ -8,9 +8,69 @@
 	
 	<link rel="stylesheet" href="${pageContext.request.contextPath}/css/css.css">
 	
+	<!-- [추가] 페이징 버튼 디자인 CSS -->
+	<style>
+		/* 페이징 컨테이너 */
+		.pagination-area {
+			display: flex;
+			justify-content: center;
+			align-items: center;
+			margin-top: 50px;
+			margin-bottom: 30px;
+			gap: 8px; /* 버튼 사이 간격 */
+		}
+
+		/* 기본 버튼 스타일 (CommonUtil에서 생성되는 <a> 태그 타겟팅) */
+		.pagination-area a {
+			display: inline-flex;
+			justify-content: center;
+			align-items: center;
+			min-width: 36px;
+			height: 36px;
+			padding: 0 5px;
+			border: 1px solid #e2e8f0;
+			background-color: #fff;
+			color: #64748b;
+			text-decoration: none;
+			border-radius: 6px; /* 둥근 모서리 */
+			font-size: 14px;
+			font-weight: 500;
+			transition: all 0.2s ease;
+			box-shadow: 0 1px 2px rgba(0,0,0,0.05);
+		}
+
+		/* 마우스 오버 시 */
+		.pagination-area a:hover {
+			border-color: #cbd5e1;
+			background-color: #f8fafc;
+			color: #0f172a;
+			transform: translateY(-1px); /* 살짝 위로 뜨는 효과 */
+		}
+
+		/* 현재 페이지 (Active) 스타일 */
+		.pagination-area a.active {
+			background-color: #1a1a1a; /* 브랜드 컬러 (검정) */
+			border-color: #1a1a1a;
+			color: #fff;
+			cursor: default;
+			pointer-events: none; /* 클릭 방지 */
+			font-weight: 700;
+		}
+		
+		/* 화살표 아이콘 크기 조정 */
+		.pagination-area a i {
+			font-size: 12px;
+		}
+	</style>
+	
 	<script type="text/javascript">
 		function goWrite() {
 			location.href = "Review?t_gubun=write";
+		}
+		
+		function goListPage(page){
+			var search = "${t_search}";
+			location.href = "Review?t_gubun=list&t_search=" + search + "&t_nowPage=" + page;
 		}
 	</script>
 </head>
@@ -32,7 +92,6 @@
                 <p class="page-desc">niwacan 이용 고객님들의 소중한 후기입니다.</p>
             </div>
 
-            <!-- 카테고리 필터 영역 -->
             <div class="category-filter">
                 <button class="filter-btn ${empty param.t_search ? 'active' : ''}" 
                         onclick="location.href='Review?t_gubun=list'">ALL</button>
@@ -61,16 +120,11 @@
 	                <div class="card-img-box">
 	                	<c:choose>
 	                		<c:when test="${not empty dto.attach and dto.attach ne 'null' and dto.attach ne ''}">
-	                			<!-- 이미지가 있을 때 -->
 	                			<img src="${pageContext.request.contextPath}/attach/review/${dto.attach}" 
 	                			     alt="review image" 
 	                			     style="width: 100%; height: 100%; object-fit: cover; display: block;">
 	                		</c:when>
 	                		<c:otherwise>
-	                    		<!-- 
-	                    			[수정] 이미지가 없을 때: 깔끔한 빈 박스 + 아이콘 
-	                    			배경색(#f8f9fa)과 카메라 아이콘으로 심플하게 표현했습니다.
-	                    		-->
 	                    		<div style="width:100%; height:100%; background:#f8f9fa; display:flex; align-items:center; justify-content:center;">
 	                    			<i class="fa-solid fa-camera" style="font-size:40px; color:#e1e1e1;"></i>
 	                    		</div>
@@ -79,7 +133,6 @@
 	                    <span class="card-badge badge-mint">${dto.target_id}</span>
 	                </div>
 	                
-	                <!-- 제목 -->
 	                <p class="item-title">${dto.title}</p>
 	                
 	                <div class="item-info">
@@ -89,19 +142,15 @@
 		                </p>
 	                </div>
 	                
-	                <!-- 날짜 -->
 	                <p class="item-date">${dto.reg_date}</p>
 	            </a>
             </c:forEach>
             
         </div>
         
-
+		<!-- 페이징 영역 -->
         <div class="pagination-area">
-            <a href="#" class="page-btn prev"><i class="fa-solid fa-chevron-left"></i></a>
-            <a href="#" class="page-btn active">1</a>
-            <span class="page-dots">...</span>
-            <a href="#" class="page-btn next"><i class="fa-solid fa-chevron-right"></i></a>
+        	${t_paging}
         </div>
                         
        <div class="detail-btn-group">
