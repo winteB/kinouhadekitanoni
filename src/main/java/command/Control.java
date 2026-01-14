@@ -148,6 +148,8 @@ public class Control extends HttpServlet {
 			request.setAttribute("t_msg", "관리자 페이지입니다.");
 		}
 		
+		request.setAttribute("sidemenu_active", gubun);
+		
 		RequestDispatcher rd = request.getRequestDispatcher(view);
 		rd.forward(request, response);
 	}
