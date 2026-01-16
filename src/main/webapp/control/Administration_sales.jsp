@@ -16,23 +16,26 @@
 </head>
 <script type="text/javascript">
 	function goGraphCampFish(gubun) {
-		sales.t_gubun.value=gubun;
-		sales.method="post";
-		sales.action="/kinouhadekitanoni/Control";
+		sales.t_gubun.value = gubun;
+		sales.method = "post";
+		sales.action = "/kinouhadekitanoni/Control"; 
 		sales.submit();
 	}
-	f
-</script>
-<body class="admin-page">
- 
-        <input type="hidden" name="gubun">
-       <header class="main-header" id="mainHeader">
-        
-        <nav class="main-nav">
-            <%@include file = "cover2.jsp"%>
-        </nav>
-    </header>
 
+</script>
+
+ 
+		<header class="main-header" id="mainHeader">
+		    
+		    <div class="brand-wrapper">
+		         <%@include file = "cover2.jsp"%>
+		    </div>
+		    
+		    <nav class="main-nav">
+		        </nav>
+		    
+		</header>
+		<body class="admin-page">
     <div class="dashboard-container">
        <%@include file = "control_side_menu.jsp"%>
 
@@ -82,7 +85,8 @@
                                             <c:forEach items="${list}" var="dto" end="6">
                                             <div class="time-row">
                                                 <div class="date-col"><span class="day-name">날짜</span><span class="date-num">${dto.getPaydate()}</span></div>
-                                                <div class="input-group"><span class="input-box placeholder"><span class="date-num">${fn:substring(dto.getStartdate(), 11, 16)}</span></span><span class="input-box placeholder"><span class="date-num">${fn:substring(dto.getEnddate(), 11, 16)}</span></span></div>
+                                                <div class="input-group"><span class="input-box placeholder"><span class="day-name">예약 입실</span><span class="date-num">${fn:substring(dto.getStartdate(), 5, 10)}</span></span>
+                                       			<span class="input-box placeholder"><span class="day-name">예약 퇴실</span><span class="date-num">${fn:substring(dto.getEnddate(), 5, 10)}</span></span></div>
                                                 <div class="total-col"><span class="label-mini">Total</span><span class="time-val"><fmt:formatNumber value="${dto.getPrice()}" currencySymbol="###,###"/>원</span></div>
                                             </div>
                                            </c:forEach>
@@ -95,57 +99,91 @@
         
         <form name="sales">
         	<input type="hidden" name="t_gubun">
-        
-        <div class="toggle-pill">
-			<button type="submit" onclick="javascript:goGraphCampFish('yca')" name="t_gubun" value="yca">캠핑년간</button>
-			<button type="submit" onclick="javascript:goGraphCampFish('yfi')" name="t_gubun" value="yfi">낚시년간</button>
-			<button type="submit" onclick="javascript:goGraphCampFish('wca')" name="t_gubun" value="wca">캠핑주간</button>
-			<button type="submit" onclick="javascript:goGraphCampFish('wfi')" name="t_gubun" value="wfi">낚시주간</button>
-        </div>
         </form>
+			<div class="toggle-pill">
+			    <button type="button" 
+			            <c:if test="${r_gubun eq 'yca' or empty r_gubun}">class="active"</c:if> 
+			            onclick="javascript:goGraphCampFish('yca')">캠핑년간</button>
+			            
+			    <button type="button" 
+			            <c:if test="${r_gubun eq 'yfi'}">class="active"</c:if> 
+			            onclick="javascript:goGraphCampFish('yfi')">낚시년간</button>
+			            
+			    <button type="button" 
+			            <c:if test="${r_gubun eq 'mca'}">class="active"</c:if> 
+			            onclick="javascript:goGraphCampFish('mca')">캠핑주간</button>
+			            
+			    <button type="button" 
+			            <c:if test="${r_gubun eq 'mfi'}">class="active"</c:if> 
+			            onclick="javascript:goGraphCampFish('mfi')">낚시주간</button>
+			</div>
+        
     </div>
     <div class="chart-container">
-        <div class="y-axis"><span>40</span><span>30</span><span>20</span><span>10</span></div>
+        <div class="y-axis"><span>100%</span><span>75%</span><span>50%</span><span>25%</span><span>0%</span></div>
         
-		<div class="bars-wrapper">
+<div class="bars-wrapper">
 
-		  <!-- 주간 -->
-		  <c:if test="${r_gubun eq 'wca' || r_gubun eq 'wfi'}">
-		    <c:set var="labels" value="월,화,수,목,금,토,일" />
-		    <c:forEach items="${graphPercent}" var="p" varStatus="s">
-		      <div class="bar-col">
-		        <div class="bar yellow"
-		             style="height:${p}%;"
-		             title="${graphArray[s.index]}원"></div>
-		        <div class="month-label">
-		          <c:choose>
-		            <c:when test="${s.index==0}">월</c:when>
-		            <c:when test="${s.index==1}">화</c:when>
-		            <c:when test="${s.index==2}">수</c:when>
-		            <c:when test="${s.index==3}">목</c:when>
-		            <c:when test="${s.index==4}">금</c:when>
-		            <c:when test="${s.index==5}">토</c:when>
-		            <c:otherwise>일</c:otherwise>
-		          </c:choose>
-		        </div>
-		      </div>
-		    </c:forEach>
-		  </c:if>
-		
-		  <!-- 년간 -->
-		  <c:if test="${r_gubun eq 'yca' || r_gubun eq 'yfi' || empty r_gubun}">
-		    <c:forEach items="${graphPercent}" var="p" varStatus="s">
-		      <div class="bar-col">
-		        <div class="bar yellow"
-		             style="height:${p}%;"
-		             title="${graphArray[s.index]}원"></div>
-		        <div class="month-label">${s.index + 1}월</div>
-		      </div>
-		    </c:forEach>
-		  </c:if>
-		
-		</div>
-    </div>
+    <c:if test="${not empty graphArray}">
+    
+        <c:forEach items="${graphArray}" var="money" varStatus="st">
+            
+            <c:set var="maxGoal" value="0" />
+              <c:forEach items="${graphArray}" var="m">
+                  <c:if test="${m > maxGoal}">
+                      <c:set var="maxGoal" value="${m}" />
+                  </c:if>
+              </c:forEach>
+              
+              <c:if test="${maxGoal == 0}"><c:set var="maxGoal" value="100000"/></c:if>
+            
+            <c:set var="height" value="0" />
+            <c:if test="${money > 0}">
+                <c:set var="height" value="${(money / maxGoal) * 100}" />
+            </c:if>
+
+            <c:if test="${height > 100}"><c:set var="height" value="100"/></c:if>
+
+            <div class="bar-col">
+                <fmt:formatNumber value="${money}" type="number" var="formattedMoney" />
+                
+                <div class="bar yellow" 
+                     style="height: ${height}%;" 
+                     title="${formattedMoney}원">
+                </div>
+                
+                <div class="month-label">
+                    <c:choose>
+                        <c:when test="${r_gubun eq 'yca' or r_gubun eq 'yfi' or empty r_gubun}">
+                            ${st.count}월
+                        </c:when>
+                        
+                        <c:when test="${r_gubun eq 'mca' or r_gubun eq 'mfi' or empty r_gubun}">
+                             <c:choose>
+                                <c:when test="${st.index == 0}">월</c:when>
+                                <c:when test="${st.index == 1}">화</c:when>
+                                <c:when test="${st.index == 2}">수</c:when>
+                                <c:when test="${st.index == 3}">목</c:when>
+                                <c:when test="${st.index == 4}">금</c:when>
+                                <c:when test="${st.index == 5}">토</c:when>
+                                <c:otherwise>일</c:otherwise>
+                             </c:choose>
+                        </c:when>
+                    </c:choose>
+                </div>
+            </div>
+        </c:forEach>
+    </c:if>
+    
+    <c:if test="${empty graphArray}">
+        <div style="width:100%; text-align:center; padding-top:50px; color:#999;">
+            데이터가 없습니다.
+        </div>
+    </c:if>
+
+</div>
+</div>
+</div>
 </div>
 
 

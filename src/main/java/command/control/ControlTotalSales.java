@@ -14,6 +14,8 @@ public class ControlTotalSales implements CommonExecute {
         ControlSalesDAO dao = new ControlSalesDAO();
         List<ControlSalesDTO> list = dao.getTotalSales();
         
+        String gubun= request.getParameter("t_gubun");
+        
         long campMonth = 0; 
         long fishMonth = 0;
         long campYear = 0;
@@ -23,7 +25,9 @@ public class ControlTotalSales implements CommonExecute {
         String today = CommonUtil.getTodayTime(); 
         String thisYear = today.substring(0, 4);  // "2026"
         String thisMonth = today.substring(5, 7); // "01" (하이픈 위치 고려)
-
+        
+        
+        
         for(ControlSalesDTO dto : list) {
             if(dto.getPaydate() == null) continue;
             
@@ -64,5 +68,6 @@ public class ControlTotalSales implements CommonExecute {
         request.setAttribute("campYear", campYear);
         request.setAttribute("fishYear", fishYear);
         request.setAttribute("list", list);
+        request.setAttribute("t_gubun", gubun);
     }
 }

@@ -29,13 +29,18 @@ public class ControlSalesDAO {
 		String sql="SELECT\r\n"
 				+ "    y.KIND, \r\n"
 				+ "    y.PRICE, \r\n"
-				+ "    to_char(y.PAY_DATE,'yyyy-MM-dd') as PAY_DATE,\r\n"
+				+ "    y.PAY_DATE,\r\n"
 				+ "    NVL(f.FISH_NAME, c.CAM_NAME) AS PLACE_NAME,\r\n"
-				+ "    to_char(y.START_DATE,'yyyy-MM-dd hh24:mi:ss') as START_DATE,\r\n"
-				+ "    to_char(y.END_DATE,'yyyy-MM-dd hh24:mi:ss') as END_DATE\r\n"
+				+ "    y.START_DATE,\r\n"
+				+ "    y.END_DATE,\r\n"
+				+ "    y.user_id,\r\n"
+				+ "    y.paymant\r\n"
+				+ "\r\n"
 				+ "FROM YOYAKU y\r\n"
 				+ "LEFT JOIN FISHING f ON y.SPOT = f.FISH_NO\r\n"
 				+ "LEFT JOIN CAMPING c ON y.SPOT = c.CAM_NO\r\n"
+				+ "\r\n"
+				+ "where y.paymant = 'Y'\r\n"
 				+ "\r\n"
 				+ "ORDER BY y.PAY_DATE DESC";
 		
@@ -56,6 +61,9 @@ public class ControlSalesDAO {
 				dto.setPlacename(rs.getString("PLACE_NAME"));
 				dto.setStartdate(rs.getString("START_DATE"));
 				dto.setEnddate(rs.getString("END_DATE"));
+				dto.setPaymant(rs.getString("paymant"));
+				dto.setUserid(rs.getString("USER_ID"));
+				
 				
 				list.add(dto);
 			}
@@ -79,7 +87,7 @@ public class ControlSalesDAO {
 		List<ControlSalesDTO> list=new ArrayList<ControlSalesDTO>();
 		
 		String sql="SELECT\r\n"
-				+ "    price,pay_date FROM yoyaku WHERE kind=?";
+				+ "    price,pay_date FROM yoyaku WHERE kind=? and paymant = 'Y'";
 		
 		try {
 			conn=db.getConnection();
@@ -90,7 +98,7 @@ public class ControlSalesDAO {
 			while(rs.next()) {
 				dto=new ControlSalesDTO();
 				
-				dto.setPaydate(rs.getString("paydate"));
+				dto.setPaydate(rs.getString("pay_date"));
 				dto.setPrice(rs.getInt("price"));
 				
 				list.add(dto);
@@ -101,7 +109,6 @@ public class ControlSalesDAO {
 		}finally {
 			db.closeDB(conn, pstmt, rs);
 		}
-		
 		
 		return list;
 	}
@@ -114,7 +121,7 @@ public class ControlSalesDAO {
 		List<ControlSalesDTO> list=new ArrayList<ControlSalesDTO>();
 		
 		String sql="SELECT\r\n"
-				+ "    price,pay_date FROM yoyaku WHERE kind=?";
+				+ "    price,pay_date FROM yoyaku WHERE kind=? and paymant = 'Y'";
 		
 		try {
 			conn=db.getConnection();
