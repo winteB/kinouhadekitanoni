@@ -10,17 +10,23 @@ public class QnaView implements CommonExecute {
 
     @Override
     public void execute(HttpServletRequest request) {
-    	QnaDao dao = new QnaDao();
-        // 1. 글 번호 받기
+        QnaDao dao = new QnaDao();
+
         String no = request.getParameter("t_no");
+        String gubun = request.getParameter("t_gubun");
 
-        // 2. 조회수 증가
-        dao.setHitCount(no);
+        if ("view".equals(gubun)) {
+            int result = dao.setHitCount(no);
+            if (result == 0) System.out.println("Qna 조회수 증가 오류!");
 
-        // 3. 상세 조회 (답변 포함)
+            QnaDto nextDto = dao.getNextQna(no);
+            request.setAttribute("nextDto", nextDto);
+
+            QnaDto preDto = dao.getPreQna(no);
+            request.setAttribute("preDto", preDto);
+        }
+
         QnaDto dto = dao.getQnaView(no);
-
-        // 4. request에 담기
         request.setAttribute("dto", dto);
     }
 }

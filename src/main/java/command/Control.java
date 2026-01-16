@@ -13,6 +13,12 @@ import command.control.ControlGraphCamp;
 import command.control.ControlGraphFish;
 import command.control.ControlTotalSales;
 import command.control.ControlUser;
+import command.control.ControlUserDelete;
+import command.control.ControlUserDeleteAll;
+import command.control.ControlYoyaku;
+import command.control.ControlYoyakuCancle;
+import command.control.ReservationCancle;
+import command.control.ReservationComplt;
 import common.CommonExecute;
 import common.CommonUtil;
 
@@ -61,10 +67,20 @@ public class Control extends HttpServlet {
 			view="/control/Administration_main.jsp";
 		}
 		//여기서부터 페이지로 보내는 용도
-		if(gubun.equals("user")) {
+		else if(gubun.equals("user")) {
 			CommonExecute control=new ControlUser();
 			control.execute(request);
 			view="/control/Administration_Membership.jsp";
+		}
+		else if(gubun.equals("userDelete")) {
+			CommonExecute control=new ControlUserDelete();
+			control.execute(request);
+			view="common_alert.jsp";
+		}
+		else if(gubun.equals("userDeleteAll")) {
+			CommonExecute control=new ControlUserDeleteAll();
+			control.execute(request);
+			view="common_alert.jsp";
 		}
 		else if(gubun.equals("sell")) {
 			CommonExecute control=new ControlTotalSales();
@@ -74,7 +90,29 @@ public class Control extends HttpServlet {
 			view="/control/Administration_sales.jsp";
 		}
 		else if(gubun.equals("reservation")) {
-			
+			CommonExecute control=new ControlYoyaku();
+			control.execute(request);
+			view="/control/Administration_reservations.jsp";
+		}
+		else if(gubun.equals("notPayedDelete")) {
+			CommonExecute control=new ControlYoyakuCancle();
+			control.execute(request);
+			control=new ControlYoyaku();
+			control.execute(request);
+			view="/control/Administration_reservations.jsp";
+		}
+		else if(gubun.equals("reservationComplt")) {
+			CommonExecute control=new ReservationComplt();
+			control.execute(request);
+			control=new ControlYoyaku();
+			control.execute(request);
+			view="/control/Administration_reservations.jsp";
+		}
+		else if(gubun.equals("reservationCancle")) {
+			CommonExecute control=new ReservationCancle();
+			control.execute(request);
+			control=new ControlYoyaku();
+			control.execute(request);
 			view="/control/Administration_reservations.jsp";
 		}else if(gubun.equals("yca")) {
 			CommonExecute control=new ControlTotalSales();
@@ -104,14 +142,18 @@ public class Control extends HttpServlet {
 		
 		System.out.println("view = " + view);
 		if(CommonUtil.getSessionInfo(request)==null) {
+			System.out.println("로그인 안됨");
 	    	view = "common_alert.jsp";
 			request.setAttribute("t_url", "Member");
 			request.setAttribute("t_msg", "관리자 페이지입니다.");
-		}else if(CommonUtil.getSessionInfo(request).equals("")){
-	    	view = "common_alert.jsp";
+		}else if(!"top".equals(CommonUtil.getSessionLevel(request))){
+			System.out.println("top 아님");
+			view = "common_alert.jsp";
 			request.setAttribute("t_url", "Member");
 			request.setAttribute("t_msg", "관리자 페이지입니다.");
 		}
+		
+		request.setAttribute("sidemenu_active", gubun);
 		
 		RequestDispatcher rd = request.getRequestDispatcher(view);
 		rd.forward(request, response);

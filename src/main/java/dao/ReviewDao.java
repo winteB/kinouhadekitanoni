@@ -16,55 +16,67 @@ public class ReviewDao {
 	PreparedStatement ps = null;
 	ResultSet rs = null;
 
-	// [1] 목록 조회
-	public List<ReviewDto> getReviewList(String search) {
-		List<ReviewDto> list = new ArrayList<>();
-		
-		String query = "SELECT review_id, title, user_id, target_id, attach, hit, " + 
-					   "to_char(reg_date, 'yyyy-MM-dd HH24:mi') as reg_date, rating " + 
-					   "FROM review ";
-		
-		if(search != null && !search.equals("")) {
-			query += "WHERE target_id LIKE '%" + search + "%' ";
-		}
-		
-		query += "ORDER BY review_id DESC";
-		
-		try {
-			con = DBConnection.getConnection();
-			ps = con.prepareStatement(query);
-			rs = ps.executeQuery();
-			
-			while(rs.next()) {
-				String no 		 = rs.getString("review_id");
-				String title 	 = rs.getString("title");
-				String user_id 	 = rs.getString("user_id");
-				String target_id = rs.getString("target_id");
-				String attach 	 = rs.getString("attach");
-				int hit 		 = rs.getInt("hit");
-				String reg_date  = rs.getString("reg_date");
-				int rating       = rs.getInt("rating");
-				
-				ReviewDto dto = new ReviewDto();
-				dto.setNo(no);
-				dto.setTitle(title);
-				dto.setUser_id(user_id);
-				dto.setTarget_id(target_id);
-				dto.setAttach(attach);
-				dto.setHit(hit);
-				dto.setReg_date(reg_date);
-				dto.setRating(rating);
-				
-				list.add(dto);
+	// [페이징] 전체 게시물 수 구하기
+		public int getTotalCount(String search) {
+			int count = 0;
+			String query = " select count(*) from review " +
+						   " where title like '%"+search+"%' " +
+						   " or target_id like '%"+search+"%' "; // 제목이나 카테고리(타겟ID) 검색
+			try {
+				con = DBConnection.getConnection();
+				ps = con.prepareStatement(query);
+				rs = ps.executeQuery();
+				if(rs.next()) {
+					count = rs.getInt(1);
+				}
+			} catch (Exception e) {
+				e.printStackTrace();
+			} finally {
+				DBConnection.closeDB(con, ps, rs);
 			}
-		} catch (Exception e) {
-			e.printStackTrace();
-		} finally {
-			DBConnection.closeDB(con, ps, rs);
+			return count;
 		}
-		
-		return list;
-	}
+
+		// [페이징] 리스트 조회 (startRow ~ endRow)
+		public List<ReviewDto> getReviewList(String search, int start, int end) {
+			List<ReviewDto> list = new ArrayList<>();
+			String query = " select * from ( " +
+					   "    select rownum rnum, a.* from ( " +
+					   "        select no, title, user_id, target_id, attach, rating, hit, to_char(reg_date, 'yyyy-MM-dd') as reg_date " +
+					   "        from review " +
+					   "        where title like ? or target_id like ? " +
+					   "        order by reg_date desc, no desc " + // [수정] 날짜 내림차순, 같은 날짜면 번호 내림차순
+					   "    ) a " +
+					   " ) where rnum >= ? and rnum <= ? ";
+			
+			try {
+				con = DBConnection.getConnection();
+				ps = con.prepareStatement(query);
+				ps.setString(1, "%"+search+"%");
+				ps.setString(2, "%"+search+"%");
+				ps.setInt(3, start);
+				ps.setInt(4, end);
+				rs = ps.executeQuery();
+				
+				while(rs.next()) {
+					ReviewDto dto = new ReviewDto();
+					dto.setNo(rs.getString("no"));
+					dto.setTitle(rs.getString("title"));
+					dto.setUser_id(rs.getString("user_id"));
+					dto.setTarget_id(rs.getString("target_id"));
+					dto.setAttach(rs.getString("attach"));
+					dto.setRating(rs.getInt("rating"));
+					dto.setHit(rs.getInt("hit"));
+					dto.setReg_date(rs.getString("reg_date"));
+					list.add(dto);
+				}
+			} catch (Exception e) {
+				e.printStackTrace();
+			} finally {
+				DBConnection.closeDB(con, ps, rs);
+			}
+			return list;
+		}
 	
 	// [2] 글 작성
 	public int insertReview(ReviewDto dto) {
@@ -98,8 +110,9 @@ public class ReviewDao {
 		ReviewDto dto = null;
 		String query = "SELECT review_id, title, content, user_id, target_id, attach, hit, rating, " +
 					   "to_char(reg_date, 'yyyy-MM-dd HH24:mi') as reg_date " + 
-					   "FROM review WHERE review_id = ?";
+					   "FROM review WHERE no = ?";
 		
+		System.out.println(query+no);
 		try {
 			con = DBConnection.getConnection();
 			ps = con.prepareStatement(query);

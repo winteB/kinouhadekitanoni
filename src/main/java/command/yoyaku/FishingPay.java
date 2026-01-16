@@ -19,7 +19,7 @@ public class FishingPay implements CommonExecute {
 		String kind       = request.getParameter("t_kind"); 
 		String spot       = request.getParameter("r_spot"); 
 		String river      = request.getParameter("r_river"); 
-		String pay_date   = CommonUtil.getToday();
+		String pay_date   = CommonUtil.getTodayTime();
 		String price      = request.getParameter("r_price"); 
 		String start_date = request.getParameter("r_checkin_date"); 
 		String end_date   = request.getParameter("r_checkout_date"); 

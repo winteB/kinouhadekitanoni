@@ -9,6 +9,8 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import common.CommonUtil;
+
 /**
  * Servlet implementation class Paymant
  */
@@ -48,12 +50,29 @@ public class Paymant extends HttpServlet {
 			view = "cover.jsp";
 		}
 		else if(gubun.equals("camping")) {
-			//성공, 실패 검증 클래스
-			view = "common_alert.jsp";
-		}
-		else if(gubun.equals("fishing")) {
-			//성공, 실패 검증 클래스
-			view = "common_alert.jsp";
+			//예약하러 보내기
+			String kind       = request.getParameter("t_kind"); 
+			
+			String no         = request.getParameter("order_no"); 
+			String user_id    = CommonUtil.getSessionInfo(request); 
+			String user_name  = (String)request.getSession().getAttribute("sessionName");
+			
+			String price      = request.getParameter("r_price"); 
+			String party      = request.getParameter("r_party"); 
+			
+			
+			request.setAttribute("orderNo", no);
+			request.setAttribute("price", price);
+			if(kind.equals("fi")) {
+				request.setAttribute("orderName", "좌대 예약");
+			}else {
+				request.setAttribute("orderName", request.getParameter("r_site")+" 예약");				
+			}
+			request.setAttribute("customerName", user_name);
+			request.setAttribute("successUrl", CommonUtil.getBaseUrl(request)+"/PaymantSuccessServlet");
+			request.setAttribute("failUrl", CommonUtil.getBaseUrl(request)+"/PaymantFailServlet");
+
+			view = "PaymantSuccessServlet";
 		}
 		
 		
