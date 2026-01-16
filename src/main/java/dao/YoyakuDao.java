@@ -355,5 +355,137 @@ public class YoyakuDao {
 		return result;
 	}
 	
+	// [추가] 내 예약 목록 조회 (JOIN 포함)
+		public List<YoyakuDto> getMemberYoyakuList(String userId) {
+			List<YoyakuDto> list = new ArrayList<YoyakuDto>();
+			// 캠핑, 낚시, 회원 테이블을 조인하여 상세 정보를 한 번에 가져옴
+			String sql = "SELECT y.no, y.user_id, y.kind, y.spot, y.river, "
+					+ "       to_char(y.pay_date, 'yyyy-MM-dd') as pay_date, "
+					+ "       y.price, "
+					+ "       to_char(y.start_date, 'yyyy-MM-dd') as start_date, "
+					+ "       to_char(y.end_date, 'yyyy-MM-dd') as end_date, "
+					+ "       y.paymant, y.party, "
+					+ "       m.name as username, "
+					+ "       c.cam_no, c.cam_type, c.cam_name, "
+					+ "       f.fish_no, f.fish_size, f.fish_name "
+					+ "FROM yoyaku y "
+					+ "LEFT JOIN member m ON y.user_id = m.id "
+					+ "LEFT JOIN camping c ON y.spot = c.cam_no "
+					+ "LEFT JOIN fishing f ON y.spot = f.fish_no "
+					+ "WHERE y.user_id = ? "
+					+ "ORDER BY y.start_date DESC";
 
+			try {
+				conn = DBConnection.getConnection();
+				ps = conn.prepareStatement(sql);
+				ps.setString(1, userId);
+				rs = ps.executeQuery();
+
+				while (rs.next()) {
+					String no = rs.getString("no");
+					String uId = rs.getString("user_id");
+					String kind = rs.getString("kind");
+					String spot = rs.getString("spot");
+					String river = rs.getString("river");
+					String payDate = rs.getString("pay_date");
+					String price = rs.getString("price");
+					String startDate = rs.getString("start_date");
+					String endDate = rs.getString("end_date");
+					String paymant = rs.getString("paymant"); 
+					String party = rs.getString("party");
+					
+					// 조인된 추가 정보
+					String username = rs.getString("username");
+					String camNo = rs.getString("cam_no");
+					String camType = rs.getString("cam_type");
+					String camName = rs.getString("cam_name");
+					String fishNo = rs.getString("fish_no");
+					String fishSize = rs.getString("fish_size");
+					String fishName = rs.getString("fish_name");
+
+					// site 변수에 종류별 이름을 담아서 활용 (캠핑이면 캠핑장이름, 낚시면 낚시터이름)
+					String siteName = "";
+					if("ca".equals(kind)) siteName = camName;
+					else if("fi".equals(kind)) siteName = fishName;
+
+					// 전체 생성자 사용 (순서 주의: DTO 필드 순서와 매칭)
+					// (no, user_id, kind, spot, river, pay_date, price, start_date, end_date, party, paymant, 
+					//  username, site, cam_no, cam_type, cam_name, fish_no, fish_size, fish_name)
+					YoyakuDto dto = new YoyakuDto(
+						no, uId, kind, spot, river, payDate, price, startDate, endDate, party, paymant,
+						username, siteName, camNo, camType, camName, fishNo, fishSize, fishName
+					);
+					
+					list.add(dto);
+				}
+			} catch (Exception e) {
+				System.out.println("getMemberYoyakuList 에러");
+				e.printStackTrace();
+			} finally {
+				DBConnection.closeDB(conn, ps, rs);
+			}
+			return list;
+		}
+		
+		// [추가] 예약 상세 정보 조회 (1건)
+		public YoyakuDto getYoyakuDetail(String no) {
+			YoyakuDto dto = null;
+			String sql = "SELECT y.no, y.user_id, y.kind, y.spot, y.river, "
+					+ "       to_char(y.pay_date, 'yyyy-MM-dd') as pay_date, "
+					+ "       y.price, "
+					+ "       to_char(y.start_date, 'yyyy-MM-dd') as start_date, "
+					+ "       to_char(y.end_date, 'yyyy-MM-dd') as end_date, "
+					+ "       y.paymant, y.party, "
+					+ "       m.name as username, "
+					+ "       c.cam_no, c.cam_type, c.cam_name, "
+					+ "       f.fish_no, f.fish_size, f.fish_name "
+					+ "FROM yoyaku y "
+					+ "LEFT JOIN member m ON y.user_id = m.id "
+					+ "LEFT JOIN camping c ON y.spot = c.cam_no "
+					+ "LEFT JOIN fishing f ON y.spot = f.fish_no "
+					+ "WHERE y.no = ?";
+
+			try {
+				conn = DBConnection.getConnection();
+				ps = conn.prepareStatement(sql);
+				ps.setString(1, no);
+				rs = ps.executeQuery();
+
+				if (rs.next()) {
+					String uId = rs.getString("user_id");
+					String kind = rs.getString("kind");
+					String spot = rs.getString("spot");
+					String river = rs.getString("river");
+					String payDate = rs.getString("pay_date");
+					String price = rs.getString("price");
+					String startDate = rs.getString("start_date");
+					String endDate = rs.getString("end_date");
+					String paymant = rs.getString("paymant"); 
+					String party = rs.getString("party");
+					
+					String username = rs.getString("username");
+					String camNo = rs.getString("cam_no");
+					String camType = rs.getString("cam_type");
+					String camName = rs.getString("cam_name");
+					String fishNo = rs.getString("fish_no");
+					String fishSize = rs.getString("fish_size");
+					String fishName = rs.getString("fish_name");
+
+					String siteName = "";
+					if("ca".equals(kind)) siteName = camName;
+					else if("fi".equals(kind)) siteName = fishName;
+
+					dto = new YoyakuDto(
+						no, uId, kind, spot, river, payDate, price, startDate, endDate, party, paymant,
+						username, siteName, camNo, camType, camName, fishNo, fishSize, fishName
+					);
+				}
+			} catch (Exception e) {
+				System.out.println("getYoyakuDetail 에러");
+				e.printStackTrace();
+			} finally {
+				DBConnection.closeDB(conn, ps, rs);
+			}
+			return dto;
+		}
 }

@@ -5,19 +5,6 @@ public class QnaDto {
 					answer, answer_id, answer_date;
 	
 	
-		//상세
-		public QnaDto(String no, String title, String content, String hit, String reg_id, String reg_date, String answer,
-			String answer_id, String answer_date) {
-		this.no = no;
-		this.title = title;
-		this.content = content;
-		this.hit = hit;
-		this.reg_id = reg_id;
-		this.reg_date = reg_date;
-		this.answer = answer;
-		this.answer_id = answer_id;
-		this.answer_date = answer_date;
-	}
 		//수정
 		public QnaDto(String no, String title, String content) {
 			this.no = no;
@@ -59,7 +46,7 @@ public class QnaDto {
 			this.reg_id = reg_id;
 			this.reg_date = reg_date;
 		}
-		//전체생성자
+		//전체생성자, 상세
 		public QnaDto(String no, String title, String content, String hit, String reg_id, String name, String reg_date,
 				String answer, String answer_id, String answer_date) {
 			this.no = no;

@@ -3,6 +3,7 @@ package command.member;
 import javax.servlet.http.HttpServletRequest;
 
 import common.CommonExecute;
+import common.CommonUtil;
 import dao.MemberDao;
 import dto.MemberDto;
 
@@ -14,7 +15,14 @@ public class MemberUpdate implements CommonExecute {
 		
 		String id = request.getParameter("t_id");
 		String name = request.getParameter("t_name");
-		String password = request.getParameter("t_password"); 
+		String password = request.getParameter("t_password");
+		
+		try {
+			password = dao.encryptSHA256(password);
+		}catch (Exception e) {
+			System.out.println("MemberUpdate 비밀번호 암호화 오류");
+		}
+		
 		String age = request.getParameter("t_age"); 
 		String address = request.getParameter("t_address");
 		

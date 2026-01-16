@@ -10,14 +10,14 @@
 
 <script type="text/javascript">
 function goAnswerSave(){
-	if(checkEmpty(answerForm.answer,"답변 입력")) return;
+	if(checkEmpty(answerForm.t_answer,"답변 입력")) return;
 	answerForm.method = "post";
 	answerForm.action = "Qna";
 	answerForm.submit();
 }
 
 function goAnswerUpdate(){
-	if(checkEmpty(answerForm.answer,"답변 입력")) return;
+	if(checkEmpty(answerForm.t_answer,"답변 입력")) return;
 	answerForm.t_gubun.value = "answer_update";
 	answerForm.method = "post";
 	answerForm.action = "Qna";
@@ -67,22 +67,22 @@ function goDelete(){
             <div class="qna-form">
                 <div class="form-row">
                     <label>제목</label>
-                    <input type="text" value="${dto.getTitle()}" readonly>
+                    <input type="text" value="${dto.title}" readonly>
                 </div>
 
                 <div class="form-row">
                     <label>내용</label>
-                    <textarea readonly>${dto.getContent()}</textarea>
+                    <textarea readonly>${dto.content}</textarea>
                 </div>
 
                 <div class="form-row">
                     <label>작성자</label>
-                    <input type="text" value="${dto.getReg_id()}" readonly>
+                    <input type="text" value="${dto.reg_id}" readonly>
                 </div>
 
                 <div class="form-row">
                     <label>작성일</label>
-                    <input type="text" value="${dto.getReg_date()}" readonly>
+                    <input type="text" value="${dto.reg_date}" readonly>
                 </div>
             </div>
 
@@ -91,24 +91,24 @@ function goDelete(){
             <h3>답변</h3>
 
             <c:choose>
-                <c:when test="${not empty dto.getAnswer()}">
+                <c:when test="${not empty dto.answer}">
                     <form name="answerForm">
                         <input type="hidden" name="t_gubun">
-                        <input type="hidden" name="t_no" value="${dto.getNo()}">
+                        <input type="hidden" name="t_no" value="${dto.no}">
 
                         <div class="form-row">
                             <label>답변 내용</label>
-                            <textarea name="answer">${dto.getAnswer()}</textarea>
+                            <textarea name="t_answer">${dto.answer}</textarea>
                         </div>
 
                         <div class="form-row">
                             <label>답변자</label>
-                            <input type="text" value="${dto.getAnswer_id()}" readonly>
+                            <input type="text" value="${dto.answer_id}" readonly>
                         </div>
 
                         <div class="form-row">
                             <label>답변일</label>
-                            <input type="text" value="${dto.getAnswer_date()}" readonly>
+                            <input type="text" value="${dto.answer_date}" readonly>
                         </div>
 
                         <div class="detail-btn-group">
@@ -121,11 +121,11 @@ function goDelete(){
                 <c:otherwise>
                     <form name="answerForm">
                         <input type="hidden" name="t_gubun" value="answer_save">
-                        <input type="hidden" name="t_no" value="${dto.getNo()}">
+                        <input type="hidden" name="t_no" value="${dto.no}">
 
                         <div class="form-row">
                             <label>답변 내용</label>
-                            <textarea name="answer" placeholder="답변을 입력하세요"></textarea>
+                            <textarea name="t_answer" placeholder="답변을 입력하세요"></textarea>
                         </div>
 
                         <div class="detail-btn-group">
@@ -137,7 +137,7 @@ function goDelete(){
 
             <form name="qnaForm">
                 <input type="hidden" name="t_gubun">
-                <input type="hidden" name="t_no" value="${dto.getNo()}">
+                <input type="hidden" name="t_no" value="${dto.no}">
 
                 <div class="detail-btn-group">
                     <a href="Qna" class="btn">목록</a>

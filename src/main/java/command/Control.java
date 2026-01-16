@@ -10,6 +10,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import command.control.ControlGraphCamp;
+import command.control.ControlGraphFish;
 import command.control.ControlTotalSales;
 import command.control.ControlUser;
 import command.control.ControlUserDelete;
@@ -59,8 +60,10 @@ public class Control extends HttpServlet {
 		//여기서부터 페이지로 보내는 용도
 
 		if(gubun.equals("desh")) {
-			
-			
+			CommonExecute control=new ControlTotalSales();
+			control.execute(request);
+			control=new ControlGraphCamp();
+			control.execute(request);
 			view="/control/Administration_main.jsp";
 		}
 		//여기서부터 페이지로 보내는 용도
@@ -82,6 +85,8 @@ public class Control extends HttpServlet {
 		else if(gubun.equals("sell")) {
 			CommonExecute control=new ControlTotalSales();
 			control.execute(request);
+			CommonExecute control1=new ControlGraphCamp();
+			control1.execute(request);
 			view="/control/Administration_sales.jsp";
 		}
 		else if(gubun.equals("reservation")) {
@@ -112,13 +117,13 @@ public class Control extends HttpServlet {
 		}else if(gubun.equals("yca")) {
 			CommonExecute control=new ControlTotalSales();
 			control.execute(request);
-			control=new ControlGraphCamp();
+			control=new ControlGraphFish();
 			control.execute(request);
 			view="/control/Administration_sales.jsp";
 		}else if(gubun.equals("yfi")) {
 			CommonExecute control=new ControlTotalSales();
 			control.execute(request);
-			control=new ControlGraphCamp();
+			control=new ControlGraphFish();
 			control.execute(request);
 			view="/control/Administration_sales.jsp";
 		}else if(gubun.equals("mca")) {
@@ -147,6 +152,8 @@ public class Control extends HttpServlet {
 			request.setAttribute("t_url", "Member");
 			request.setAttribute("t_msg", "관리자 페이지입니다.");
 		}
+		
+		request.setAttribute("sidemenu_active", gubun);
 		
 		RequestDispatcher rd = request.getRequestDispatcher(view);
 		rd.forward(request, response);

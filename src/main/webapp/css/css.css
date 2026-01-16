@@ -66,6 +66,7 @@ body .intro{
 .top-content {
     position: absolute; top: 0; left: 0; width: 100%; height: 100%;
     z-index: 10; pointer-events: none; padding: 40px;
+    background: url('../images/main_img.png') center/cover;
 }
 .brand-title {
     position: absolute; bottom: 20px; right: 40px;
@@ -242,7 +243,7 @@ body .intro{
 
 /* 태그 섹션 */
 .tag-section-wrapper {
-    position: relative; margin: 0 auto; padding: 80px 20px;
+    position: relative; margin: 0 auto; padding: 40px 20px;
     background-color: var(--bg-section); text-align: center;
 }
 .tag-header { display: flex; flex-direction: column; justify-content: center; align-items: center; gap: 10px; margin-bottom: 40px; }
@@ -947,7 +948,7 @@ body {
 	    line-height: 1.6;
 	    padding: 20px;
 	}
-	.content-row.input600 {
+	.content-row.input150 {
 		width: 150px;
 		height: 30px;
 		padding: 3px;
@@ -957,6 +958,15 @@ body {
 		height: 30px;
 		padding: 3px;
 	}
+	.title-input {
+	    width: 150px;
+	    height: 16px;
+	    line-height: 16px;
+	    font-size: 11px;
+	    padding: 0 3px;
+	    box-sizing: border-box;
+	}
+	
 	/*중요성 important*/
 	.important{
 		height: 30px;
@@ -2529,4 +2539,5 @@ input.form-input:read-only {
     background-color: #333; /* 활성화 시 어두운 배경 */
     color: #fff;
     border-color: #333;
+}
 }

@@ -171,7 +171,7 @@ public class QnaDao {
 					answer = "";
 				}
 
-				QnaDto dto = new QnaDto(no, title, "내용", hit, "등록자id", reg_name, reg_date, answer, "", "");
+				QnaDto dto = new QnaDto(no, title, "", hit, "", reg_name, reg_date, answer);
 				list.add(dto);
 			}
 
@@ -244,7 +244,7 @@ public class QnaDao {
 				+ "answer_id='"+dto.getAnswer_id()+"',\r\n"
 				+ "answer_date = to_date('"+dto.getAnswer_date()+"','yyyy-MM-dd hh24:mi:ss')\r\n"
 				+ "where no = '"+dto.getNo()+"'";
-		
+		System.out.println(sql);
 		try {
 			con = DBConnection.getConnection();
 			ps = con.prepareStatement(sql);
