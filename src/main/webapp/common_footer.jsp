@@ -1,7 +1,7 @@
 <%@ page pageEncoding="UTF-8"%>
    <button class="btn-top" onclick="window.scrollTo({top:0, behavior:'smooth'});">↑</button>
         <div class="footer-content">
-            <div class="footer-logo">n<br><span>c</span></div>
+            <div class="footer-logo"><!-- 이부분은 로고사진  --></div>
             <div class="footer-links-group">
                 <div class="link-column">
                     <div class="col-title">アイデアをさがす</div>
@@ -32,5 +32,5 @@
                 <a href="#" class="social-link"><div class="social-icon icon-pint"></div> Pinterest</a>
             </div>
         </div>
-        <div class="footer-bottom"><span>© 2025 niwacan</span></div>
+        <div class="footer-bottom"><span>© 2026 F5</span></div>
     

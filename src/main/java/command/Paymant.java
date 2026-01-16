@@ -10,6 +10,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import common.CommonUtil;
+import dao.YoyakuDao;
 
 /**
  * Servlet implementation class Paymant
@@ -34,8 +35,6 @@ public class Paymant extends HttpServlet {
 
 		String view = "";
 		String gubun = request.getParameter("t_gubun");
-		//gubun 값으로 낚시 예약페이지에서 온 건지 캠핑 예약 페이지에서 온 건지 구분
-		//gubun 값 null/공백 처리
 		if(gubun == null) {
 			gubun = "";
 		}
@@ -49,32 +48,34 @@ public class Paymant extends HttpServlet {
 
 			view = "cover.jsp";
 		}
-		else if(gubun.equals("camping")) {
+		else if(gubun.equals("payAgain")) {
 			//예약하러 보내기
-			String kind       = request.getParameter("t_kind"); 
-			
-			String no         = request.getParameter("order_no"); 
-			String user_id    = CommonUtil.getSessionInfo(request); 
-			String user_name  = (String)request.getSession().getAttribute("sessionName");
-			
-			String price      = request.getParameter("r_price"); 
-			String party      = request.getParameter("r_party"); 
+			String orderNo       = request.getParameter("orderNo"); 
+			String orderName         = request.getParameter("orderName"); 
+			String customerName      = request.getParameter("customerName"); 
+			String price      = request.getParameter("price"); 
 			
 			
-			request.setAttribute("orderNo", no);
+			request.setAttribute("orderNo", orderNo);
 			request.setAttribute("price", price);
-			if(kind.equals("fi")) {
-				request.setAttribute("orderName", "좌대 예약");
-			}else {
-				request.setAttribute("orderName", request.getParameter("r_site")+" 예약");				
-			}
-			request.setAttribute("customerName", user_name);
+			request.setAttribute("orderName", orderName);				
+			request.setAttribute("customerName", customerName);
 			request.setAttribute("successUrl", CommonUtil.getBaseUrl(request)+"/PaymantSuccessServlet");
 			request.setAttribute("failUrl", CommonUtil.getBaseUrl(request)+"/PaymantFailServlet");
 
-			view = "PaymantSuccessServlet";
+			view = "paymant/paymant.jsp";
 		}
-		
+		else if(gubun.equals("cancle")) {
+			String orderNo       = request.getParameter("orderNo"); 
+			YoyakuDao dao = new YoyakuDao();
+			int result = dao.setYoyakuCancle(orderNo);
+			
+			String msg = result==1?"예약 정보가 삭제되었습니다.":"삭제에 실패했습니다.";
+			request.setAttribute("t_msg", msg);
+			request.setAttribute("t_url", "Member");
+			request.setAttribute("t_gubun", "myyoyaku");
+			view = "common_alert_view.jsp";
+		}
 		
 		RequestDispatcher rd = request.getRequestDispatcher(view);
 		rd.forward(request, response);
