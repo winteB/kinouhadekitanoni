@@ -219,7 +219,7 @@ body.admin-page {
 /* (기존) 도넛 차트 */
 .donut-widget { text-align: center; }
 .donut-visual {
-    margin: 20px auto; width: 100px; height: 160px; border-radius: 50%;
+    margin: 20px auto; width: 140px; height: 160px; border-radius: 50%;
     background: conic-gradient(#9D9BFF 0% 60%, #F8D57E 60% 84%, #eee 84% 100%);
     display: flex; justify-content: center; align-items: center;
 }
