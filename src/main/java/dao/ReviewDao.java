@@ -1,10 +1,13 @@
 package dao;
 
+import java.net.Authenticator.RequestorType;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import common.DBConnection;
 import dto.ReviewCommentDto;
@@ -278,5 +281,40 @@ public class ReviewDao {
 		}
 		return result;
 	}
+
+	public Map<String, ReviewDto> getIndexReviewList() {
+		Map<String, ReviewDto> map = new HashMap<String, ReviewDto>();
+		String sql = "SELECT NO, ATTACH, TITLE, TARGET_ID\r\n"
+				+ "FROM (\r\n"
+				+ "    SELECT NO,\r\n"
+				+ "           ATTACH,\r\n"
+				+ "           TITLE,\r\n"
+				+ "           TARGET_ID,\r\n"
+				+ "           ROW_NUMBER() OVER (PARTITION BY TARGET_ID ORDER BY REG_DATE DESC) AS rn\r\n"
+				+ "    FROM review where review.attach is not null\r\n"
+				+ ") t\r\n"
+				+ "WHERE rn = 1";
+		
+		try {
+			con = DBConnection.getConnection();
+			ps = con.prepareStatement(sql);
+			rs = ps.executeQuery();
+			while(rs.next()) {
+				String no		=rs.getString("NO");
+				String attach	=rs.getString("ATTACH");
+				String title	=rs.getString("TITLE");
+				String target_id=rs.getString("TARGET_ID");
+				ReviewDto dto = new ReviewDto(no, title, "id", target_id, attach, 0, "red_date");
+				map.put(target_id, dto);
+			}	
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			DBConnection.closeDB(con, ps, rs);
+		}
+		
+		return map;
+	}
+
 
 }

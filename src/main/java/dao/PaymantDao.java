@@ -83,7 +83,8 @@ public class PaymantDao {
 	public int updatePreYoyaky(String orderId) {
 		int res = 0;
 		String sql = "UPDATE yoyaku\r\n"
-				+ "SET paymant = 'Y'\r\n"
+				+ "SET paymant = 'Y', \r\n"
+				+ "pay_date=TO_DATE('"+CommonUtil.getTodayTime()+"', 'YYYY-MM-DD HH24:MI:SS')\r\n"
 				+ "WHERE no = '"+orderId+"'";
 		System.out.println(sql);
 		try {
