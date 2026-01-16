@@ -50,31 +50,37 @@
 
                 <table class="detail-table">
                     <colgroup>
-                        <col width="15%">
-                        <col width="35%">
-                        <col width="15%">
-                        <col width="35%">
+                        <col width="10%">
+                        <col width="60%">
+                        <col width="20%">
+                        <col width="20%">
+                        <col width="20%">
+                        <col width="10%">
                     </colgroup>
                     <tbody>
                         <tr>
                             <th>제목</th>
-                            <td colspan="2" class="content-row">${dto.getTitle()}</td>
-                            <td class="content-row">${dto.getHit()}
+                            <td <c:if test="${sessionLevel ne 'top'}">  colspan="3" </c:if> info-label>${dto.getTitle()}</td>
                             <c:if test="${sessionLevel eq 'top'}">
                             	&nbsp;&nbsp;
-                            	중요도 : ${dto.getImportant()}
+                            	<th>중요도</th>
+                            	<td>${dto.getImportant()}</td>
                             </c:if>
+                            
+                            <th>조회수</th>
+                            <td info-label>${dto.getHit()}
+                            
                             </td>
                         </tr>
                         <tr>
                            <th>내용</th>
-                            <td colspan="3" class="content-row">
+                            <td colspan="5" class="content-row">
                             	<textarea class="content-row textarea_H250" readonly>${dto.getContent()}</textarea>
                             </td>
                         </tr>
                         <tr>
                         	<th>첨부파일</th>
-                            <td colspan="3" class="image-row">
+                            <td colspan="5" class="image-row">
                             	<c:if test="${not empty dto.getAttach()}">
                             		<a href="FileDownServlet?t_fileDir=notice&t_fileName=${dto.getAttach()}">${dto.getAttach()}</a>
                             	</c:if>
@@ -83,9 +89,9 @@
                         
                          <tr>
                             <th>작성자</th>
-                            <td>${dto.getReg_id()}</td>
+                            <td colspan="1">${dto.getReg_id()}</td>
                             <th>작성일</th>
-                            <td>${dto.getReg_date()}</td>
+                            <td colspan="1">${dto.getReg_date()}</td>
                         </tr>
                     </tbody>
                 </table>
