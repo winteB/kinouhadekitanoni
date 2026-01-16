@@ -1,6 +1,8 @@
 package command;
 
 import java.io.IOException;
+import java.util.List;
+import java.util.Map;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -8,6 +10,10 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+
+import common.CommonExecute;
+import dao.ReviewDao;
+import dto.ReviewDto;
 
 /**
  * Servlet implementation class Index
@@ -43,7 +49,10 @@ public class Index extends HttpServlet {
 		
 		//여기서부터 페이지로 보내는 용도
 		if(gubun.equals("index")) {
-
+			ReviewDao dao = new ReviewDao();
+			Map<String,ReviewDto> map= dao.getIndexReviewList();
+			request.setAttribute("review_map", map);
+			map.get("글램핑");
 			view = "index.jsp";
 		}
 		

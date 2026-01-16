@@ -91,6 +91,27 @@
 			transition: background 0.3s;
 		}
 		.btn-list:hover { background-color: #475569; }
+		.btn-list2 {
+			background-color: #006c88;
+			color: white;
+			padding: 10px 25px;
+			border-radius: 4px;
+			text-decoration: none;
+			font-weight: 500;
+			transition: background 0.3s;
+		}
+		.btn-list2:hover { background-color: #25ff34; }
+		.btn-list3 {
+			background-color: #006c88;
+			color: white;
+			padding: 10px 25px;
+			border-radius: 4px;
+			text-decoration: none;
+			font-weight: 500;
+			transition: background 0.3s;
+		}
+		.btn-list3:hover { background-color: #d44b4b; }
+
 		
 		/* 상태값 스타일 */
 		.status-y { color: #16a34a; font-weight: bold; }
@@ -100,6 +121,19 @@
 		function goList(){
 			location.href="Member?t_gubun=myyoyaku";
 		}
+		function goCancle(){
+			data.t_gubun.value="cancle"
+			data.method="post";
+			data.action="Paymant";
+			data.submit();
+		}
+		function goPayAgain(){
+			data.t_gubun.value="payAgain"
+			data.method="post";
+			data.action="Paymant";
+			data.submit();
+		}
+		
 	</script>
 </head>
 <body>
@@ -112,6 +146,14 @@
 				<c:set var="sidemenu" value="myyoyaku" scope="request"/>
 	            <%@ include file="../yoyaku_side_menu.jsp" %>
 	        </aside>
+	        
+	        <form name="data">
+	        	<input type="hidden" name="orderNo" value="${dto.no}">
+	        	<input type="hidden" name="orderName" value="${dto.kind eq 'fi' ? '좌대 예약' : dto.cam_type.concat(' 예약')}">
+	        	<input type="hidden" name="customerName" value="${sessionName}">
+	        	<input type="hidden" name="price" value="${dto.price}">
+	        	<input type="hidden" name="t_gubun">
+	        </form>
 	        
 	        <main class="main-content">
 	        	<div class="view-container">
@@ -193,7 +235,12 @@
 	        				<tr>
 	        					<th>결제 일자</th>
 	        					<td colspan="3">
-	        						${dto.pay_date}
+	        						<c:if test="${dto.paymant eq 'Y'}">
+	        							${dto.pay_date}
+	        						</c:if>
+	        						<c:if test="${dto.paymant ne 'Y'}">
+	        							-
+	        						</c:if>
 	        					</td>
 	        				</tr>
 	        			</table>
@@ -201,6 +248,10 @@
 	        		
 	        		<!-- 버튼 영역 -->
 	        		<div class="btn-wrap">
+	        			<c:if test="${dto.paymant ne 'Y'}">
+		        			<a href="javascript:goPayAgain()" class="btn-list2">결제하기</a>
+		        			<a href="javascript:goCancle()" class="btn-list3">취소하기</a>
+	        			</c:if>
 	        			<a href="javascript:goList()" class="btn-list">목록으로</a>
 	        		</div>
 
