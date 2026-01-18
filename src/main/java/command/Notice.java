@@ -77,7 +77,7 @@ public class Notice extends HttpServlet {
 			
 		//수정 폼
 		}else if(gubun.equals("updateForm")) {
-			CommonExecute noti = new NoticeUpdate();
+			CommonExecute noti = new NoticeView();
 			noti.execute(request);
 			
 			view = "notice/notice_update.jsp";
