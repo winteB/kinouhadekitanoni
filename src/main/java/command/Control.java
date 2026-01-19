@@ -75,12 +75,12 @@ public class Control extends HttpServlet {
 		else if(gubun.equals("userDelete")) {
 			CommonExecute control=new ControlUserDelete();
 			control.execute(request);
-			view="common_alert.jsp";
+			view="common_alert_view.jsp";
 		}
 		else if(gubun.equals("userDeleteAll")) {
 			CommonExecute control=new ControlUserDeleteAll();
 			control.execute(request);
-			view="common_alert.jsp";
+			view="common_alert_view.jsp";
 		}
 		else if(gubun.equals("sell")) {
 			CommonExecute control=new ControlTotalSales();
