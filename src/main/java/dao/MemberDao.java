@@ -6,6 +6,7 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 
+import common.CommonUtil;
 import common.DBConnection;
 import dto.MemberDto;
 
@@ -238,7 +239,7 @@ public class MemberDao {
 		
 		if(id == null) id = "";
 		
-		String query = " delete from MEMBER where id = '" + id.trim() + "' ";
+		String query = " update MEMBER set EXIT_DATE = to_date('"+CommonUtil.getTodayTime()+"','YYYY-MM-DD hh24:mi:ss') where id = '" + id.trim() + "' ";
 		System.out.println("deleteMember query : " + query);
 		
 		try {

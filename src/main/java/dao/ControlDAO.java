@@ -9,6 +9,7 @@ import java.util.List;
 
 import org.w3c.dom.stylesheets.LinkStyle;
 
+import common.CommonUtil;
 import common.DBConnection;
 import dto.MemberDto;
 
@@ -119,7 +120,7 @@ public class ControlDAO {
 //관리자의 유저 한명 삭제
 	public int deleteUser(String id) {
 		int result = 0;
-		String sql = "DELETE FROM member WHERE id = '"+id+"'";
+		String sql = "update MEMBER set EXIT_DATE = to_date('"+CommonUtil.getTodayTime()+"','YYYY-MM-DD hh24:mi:ss') where id = '" + id.trim() + "' ";
 		
 		System.out.println(sql);
 		try {
@@ -143,7 +144,7 @@ public class ControlDAO {
 			conn = DBConnection.getConnection();
 			
 			for(int i=0;i<id.length;i++) {
-				String sql = "DELETE FROM member WHERE id = '"+id[i]+"'";
+				String sql = "update MEMBER set EXIT_DATE = to_date('"+CommonUtil.getTodayTime()+"','YYYY-MM-DD hh24:mi:ss') where id = '"+id[i]+"'";
 				
 				System.out.println("setOrderStatusUpdate sql : "+sql);
 				pstmt = conn.prepareStatement(sql);
