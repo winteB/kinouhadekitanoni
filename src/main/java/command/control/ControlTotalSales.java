@@ -21,6 +21,7 @@ public class ControlTotalSales implements CommonExecute {
         long campYear = 0;
         long fishYear = 0;
         
+        
         // 오늘 날짜 가져오기 (예: 2026-01-09)
         String today = CommonUtil.getTodayTime(); 
         String thisYear = today.substring(0, 4);  // "2026"
@@ -57,11 +58,10 @@ public class ControlTotalSales implements CommonExecute {
                         fishMonth += dto.getPrice();
                     }
                 }
-                
-                
-                
             }
         }
+        
+        
         
         request.setAttribute("campMonth", campMonth);
         request.setAttribute("fishMonth", fishMonth);

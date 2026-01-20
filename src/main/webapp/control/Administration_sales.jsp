@@ -87,7 +87,7 @@
                                                 <div class="date-col"><span class="day-name">날짜</span><span class="date-num">${dto.getPaydate()}</span></div>
                                                 <div class="input-group"><span class="input-box placeholder"><span class="day-name">예약 입실</span><span class="date-num">${fn:substring(dto.getStartdate(), 5, 10)}</span></span>
                                        			<span class="input-box placeholder"><span class="day-name">예약 퇴실</span><span class="date-num">${fn:substring(dto.getEnddate(), 5, 10)}</span></span></div>
-                                                <div class="total-col"><span class="label-mini">Total</span><span class="time-val"><fmt:formatNumber value="${dto.getPrice()}" currencySymbol="###,###"/>원</span></div>
+                                                	<div class="total-col"><span class="label-mini">Total</span><span class="time-val"><fmt:formatNumber value="${dto.getPrice()}" currencySymbol="###,###"/>원</span></div>
                                             </div>
                                            </c:forEach>
                                         </div>
@@ -102,7 +102,7 @@
         </form>
 			<div class="toggle-pill">
 			    <button type="button" 
-			            <c:if test="${r_gubun eq 'yca' or empty r_gubun}">class="active"</c:if> 
+			            <c:if test="${r_gubun eq 'yca' or empty r_gubun or t_gubun eq 'sell'}">class="active"</c:if> 
 			            onclick="javascript:goGraphCampFish('yca')">캠핑년간</button>
 			            
 			    <button type="button" 
@@ -119,70 +119,76 @@
 			</div>
         
     </div>
-    <div class="chart-container">
-        <div class="y-axis"><span>100%</span><span>75%</span><span>50%</span><span>25%</span><span>0%</span></div>
+    
+    
+    
+<div class="chart-container">
         
-<div class="bars-wrapper">
+        <c:set var="maxGoal" value="0" />
+        <c:if test="${not empty graphArray}">
+            <c:forEach items="${graphArray}" var="m">
+                <c:if test="${m > maxGoal}">
+                    <c:set var="maxGoal" value="${m}" />
+                </c:if>
+            </c:forEach>
+        </c:if>
+        <c:if test="${maxGoal == 0}"><c:set var="maxGoal" value="100000"/></c:if>
 
-    <c:if test="${not empty graphArray}">
-    
-        <c:forEach items="${graphArray}" var="money" varStatus="st">
+
+        <div class="y-axis" style="justify-content: space-between;">
+            <span><fmt:formatNumber value="${maxGoal}" pattern="#,###"/></span>
             
-            <c:set var="maxGoal" value="0" />
-              <c:forEach items="${graphArray}" var="m">
-                  <c:if test="${m > maxGoal}">
-                      <c:set var="maxGoal" value="${m}" />
-                  </c:if>
-              </c:forEach>
-              
-              <c:if test="${maxGoal == 0}"><c:set var="maxGoal" value="100000"/></c:if>
+            <span><fmt:formatNumber value="${maxGoal / 2}" pattern="#,###"/></span>
             
-            <c:set var="height" value="0" />
-            <c:if test="${money > 0}">
-                <c:set var="height" value="${(money / maxGoal) * 100}" />
-            </c:if>
-
-            <c:if test="${height > 100}"><c:set var="height" value="100"/></c:if>
-
-            <div class="bar-col">
-                <fmt:formatNumber value="${money}" type="number" var="formattedMoney" />
-                
-                <div class="bar yellow" 
-                     style="height: ${height}%;" 
-                     title="${formattedMoney}원">
-                </div>
-                
-                <div class="month-label">
-                    <c:choose>
-                        <c:when test="${r_gubun eq 'yca' or r_gubun eq 'yfi' or empty r_gubun}">
-                            ${st.count}월
-                        </c:when>
-                        
-                        <c:when test="${r_gubun eq 'mca' or r_gubun eq 'mfi' or empty r_gubun}">
-                             <c:choose>
-                                <c:when test="${st.index == 0}">월</c:when>
-                                <c:when test="${st.index == 1}">화</c:when>
-                                <c:when test="${st.index == 2}">수</c:when>
-                                <c:when test="${st.index == 3}">목</c:when>
-                                <c:when test="${st.index == 4}">금</c:when>
-                                <c:when test="${st.index == 5}">토</c:when>
-                                <c:otherwise>일</c:otherwise>
-                             </c:choose>
-                        </c:when>
-                    </c:choose>
-                </div>
-            </div>
-        </c:forEach>
-    </c:if>
-    
-    <c:if test="${empty graphArray}">
-        <div style="width:100%; text-align:center; padding-top:50px; color:#999;">
-            데이터가 없습니다.
+            <span>0</span>
         </div>
-    </c:if>
+        
+        
+        <div class="bars-wrapper">
+            <c:if test="${not empty graphArray}">
+                <c:forEach items="${graphArray}" var="money" varStatus="st">
+                    
+                    <c:set var="height" value="0" />
+                    <c:if test="${money > 0}">
+                        <c:set var="height" value="${(money / maxGoal) * 100}" />
+                    </c:if>
+                    <c:if test="${height > 100}"><c:set var="height" value="100"/></c:if>
 
-</div>
-</div>
+                    <div class="bar-col">
+                        <fmt:formatNumber value="${money}" type="number" var="formattedMoney" />
+                        
+                        <div class="bar yellow" 
+                             style="height: ${height}%;" 
+                             title="${formattedMoney}원">
+                        </div>
+                        
+                        <div class="month-label">
+                            <c:choose>
+                                <c:when test="${r_gubun eq 'yca' or r_gubun eq 'yfi' or empty r_gubun or t_gubun eq 'sell'}">
+                                    ${st.count}월
+                                </c:when>
+                                
+                                <c:when test="${r_gubun eq 'mca' or r_gubun eq 'mfi'}">
+                                    <c:if test="${not empty graphLabels}">
+                                        ${graphLabels[st.index]}
+                                    </c:if>
+                                </c:when>
+                            </c:choose>
+                        </div>
+                    </div>
+                </c:forEach>
+            </c:if>
+            
+            <c:if test="${empty graphArray}">
+                <div style="width:100%; text-align:center; padding-top:50px; color:#999;">
+                    데이터가 없습니다.
+                </div>
+            </c:if>
+        </div>
+    </div>
+
+
+
 </div>
 </div>
 
