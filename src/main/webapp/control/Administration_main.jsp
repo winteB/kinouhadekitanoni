@@ -103,15 +103,9 @@
 					                            <div class="bar" style="height: ${height}%;"></div>
 					                            
 					                            <span class="day">
-					                                <c:choose>
-					                                    <c:when test="${st.index == 0}">Mon</c:when>
-					                                    <c:when test="${st.index == 1}">Tue</c:when>
-					                                    <c:when test="${st.index == 2}">Wed</c:when>
-					                                    <c:when test="${st.index == 3}">Thu</c:when>
-					                                    <c:when test="${st.index == 4}">Fri</c:when>
-					                                    <c:when test="${st.index == 5}">Sat</c:when>
-					                                    <c:when test="${st.index == 6}">Sun</c:when>
-					                                </c:choose>
+													<c:if test="${not empty graphLabels}">
+												        ${graphLabels[st.index]}
+												    </c:if>
 					                            </span>
 					                        </div>
 					                    </c:forEach>

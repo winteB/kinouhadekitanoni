@@ -27,7 +27,7 @@
 		view.t_gubun.value = "updateForm";
 		view.method = "post";
 		view.action = "Notice";
-		view.t_gubun.value = "updateForm";
+		view.submit();
 	}
 	function goDelete(){
 		if(confirm("정말 삭제하시겠습니까?")){
@@ -35,6 +35,7 @@
 			view.method = "post";
 			view.action = "Notice";
 			view.submit();
+		}
 	}
 </script>
 <form name="view">

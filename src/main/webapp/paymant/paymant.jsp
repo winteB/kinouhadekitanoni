@@ -34,6 +34,6 @@
 	</script>
 </head>
 <body>
-	
+	아무 곳이나 클릭하십시오.
 </body>
 </html>

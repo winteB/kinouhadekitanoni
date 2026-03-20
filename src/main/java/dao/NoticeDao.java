@@ -151,7 +151,7 @@ public class NoticeDao {
 				+ "from\r\n"
 				+ "    (select min(no) as no\r\n"
 				+ "    from notice\r\n"
-				+ "    where no > '"+no+"') n1, bike_이재열_notice n2\r\n"
+				+ "    where no > '"+no+"') n1, notice n2\r\n"
 				+ "where n1.no = n2.no";
 		
 		try {
@@ -179,7 +179,7 @@ public class NoticeDao {
 				+ "from\r\n"
 				+ "    (select max(no) as no\r\n"
 				+ "    from notice\r\n"
-				+ "    where no < '"+no+"') n1, bike_이재열_notice n2\r\n"
+				+ "    where no < '"+no+"') n1, notice n2\r\n"
 				+ "where n1.no = n2.no";
 		
 		try {
